@@ -1,0 +1,595 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="header-footer::header">
+    <!-- meta data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+</head>
+
+<body>
+<!--[if lte IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+    your browser</a> to improve your experience and security.</p>
+<![endif]-->
+<div th:include="/header-footer::nav"></div>
+
+<!--welcome-hero start -->
+<section id="home" class="welcome-hero">
+    <div class="container">
+        <div class="welcome-hero-txt">
+            <h2>best place to find and explore <br> that all you need </h2>
+            <p>
+                Find Best Place, Restaurant, Hotel, Real State and many more think in just One click
+            </p>
+        </div>
+        <div class="welcome-hero-serch-box">
+            <div class="welcome-hero-form">
+                <div class="single-welcome-hero-form" >
+                    <h3>tour</h3>
+                    <form action="index.html">
+                        <input type="text" placeholder="Ex: hoi an, hue, da nang"/>
+                    </form>
+                </div>
+            </div>
+            <div class="welcome-hero-serch">
+                <button class="welcome-hero-btn" onclick="window.location.href='#'">
+                    search <i data-feather="search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</section><!--/.welcome-hero-->
+<!--welcome-hero end -->
+
+<!--list-topics start -->
+<section id="list-topics" class="list-topics">
+    <div class="container">
+        <div class="list-topics-content">
+            <ul>
+                <li>
+                    <div class="single-list-topics-content">
+                        <div class="single-list-topics-icon">
+                            <i class="flaticon-restaurant"></i>
+                        </div>
+                        <h2><a href="#">resturent</a></h2>
+                        <p>150 listings</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="single-list-topics-content">
+                        <div class="single-list-topics-icon">
+                            <i class="flaticon-travel"></i>
+                        </div>
+                        <h2><a href="#">destination</a></h2>
+                        <p>214 listings</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="single-list-topics-content">
+                        <div class="single-list-topics-icon">
+                            <i class="flaticon-building"></i>
+                        </div>
+                        <h2><a href="#">hotels</a></h2>
+                        <p>185 listings</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="single-list-topics-content">
+                        <div class="single-list-topics-icon">
+                            <i class="flaticon-pills"></i>
+                        </div>
+                        <h2><a href="#">healthcaree</a></h2>
+                        <p>200 listings</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="single-list-topics-content">
+                        <div class="single-list-topics-icon">
+                            <i class="flaticon-transport"></i>
+                        </div>
+                        <h2><a href="#">automotion</a></h2>
+                        <p>120 listings</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div><!--/.container-->
+
+</section><!--/.list-topics-->
+<!--list-topics end-->
+
+<!--works start -->
+<section id="works" class="works">
+    <div class="container">
+        <div class="section-header">
+            <h2>how it works</h2>
+            <p>Learn More about how our website works</p>
+        </div><!--/.section-header-->
+        <div class="works-content">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="single-how-works">
+                        <div class="single-how-works-icon">
+                            <i class="flaticon-lightbulb-idea"></i>
+                        </div>
+                        <h2><a href="#">choose <span> what to</span> do</a></h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmod tempor incididunt ut
+                            laboremagna aliqua.
+                        </p>
+                        <button class="welcome-hero-btn how-work-btn" onclick="window.location.href='#'">
+                            read more
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="single-how-works">
+                        <div class="single-how-works-icon">
+                            <i class="flaticon-networking"></i>
+                        </div>
+                        <h2><a href="#">find <span> what you want</span></a></h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmod tempor incididunt ut
+                            laboremagna aliqua.
+                        </p>
+                        <button class="welcome-hero-btn how-work-btn" onclick="window.location.href='#'">
+                            read more
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="single-how-works">
+                        <div class="single-how-works-icon">
+                            <i class="flaticon-location-on-road"></i>
+                        </div>
+                        <h2><a href="#">explore <span> amazing</span> place</a></h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmod tempor incididunt ut
+                            laboremagna aliqua.
+                        </p>
+                        <button class="welcome-hero-btn how-work-btn" onclick="window.location.href='#'">
+                            read more
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/.container-->
+
+</section><!--/.works-->
+<!--works end -->
+
+<!--explore start -->
+<section id="explore" class="explore">
+    <div class="container">
+        <div class="section-header">
+            <h2>tour</h2>
+            <p>Explore New place, food, culture around the world and many more</p>
+        </div><!--/.section-header-->
+        <div class="explore-content">
+            <div class="row">
+                <div class=" col-md-4 col-sm-6">
+                    <div class="single-explore-item">
+                        <div class="single-explore-img">
+                            <img src="assets/images/explore/hoian.jpeg" alt="explore image">
+                            <div class="single-explore-img-info">
+                                <button onclick="window.location.href='#'">best rated</button>
+                                <div class="single-explore-image-icon-box">
+                                    <ul>
+                                        <li>
+                                            <div class="single-explore-image-icon">
+                                                <i class="fa fa-arrows-alt"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="single-explore-image-icon">
+                                                <i class="fa fa-bookmark-o"></i>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-explore-txt bg-theme-1">
+                            <h2><a href="#">Hoi An</a></h2>
+                            <p class="explore-rating-price">
+                                <a href="#"> 1 people</a>
+                                <span class="explore-price-box">
+											form
+											<span class="explore-price">5$-300$</span>
+										</span>
+                            </p>
+                            <div class="explore-person">
+                                <div class="row">
+
+                                    <div class="col-sm-10">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                            eiusmod tempor incid ut labore et dolore magna aliqua....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="explore-open-close-part">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <button class="close-btn open-btn" onclick="window.location.href='#'">
+                                            booking now
+                                        </button>
+
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="explore-map-icon">
+                                            <a href="#"><i data-feather="map-pin"></i></a>
+                                            <a href="#"><i data-feather="upload"></i></a>
+                                            <a href="#"><i data-feather="heart"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-4 col-sm-6">
+                    <div class="single-explore-item">
+                        <div class="single-explore-img">
+                            <img src="assets/images/explore/danang.jpeg" alt="explore image">
+                            <div class="single-explore-img-info">
+                                <button onclick="window.location.href='#'">best rated</button>
+                                <div class="single-explore-image-icon-box">
+                                    <ul>
+                                        <li>
+                                            <div class="single-explore-image-icon">
+                                                <i class="fa fa-arrows-alt"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="single-explore-image-icon">
+                                                <i class="fa fa-bookmark-o"></i>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-explore-txt bg-theme-1">
+                            <h2><a href="#">Da Nang</a></h2>
+                            <p class="explore-rating-price">
+                                <a href="#"> 1 people</a>
+                                <span class="explore-price-box">
+											form
+											<span class="explore-price">5$-300$</span>
+										</span>
+                            </p>
+                            <div class="explore-person">
+                                <div class="row">
+
+                                    <div class="col-sm-10">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                            eiusmod tempor incid ut labore et dolore magna aliqua....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="explore-open-close-part">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <button class="close-btn open-btn" onclick="window.location.href='#'">
+                                            booking now
+                                        </button>
+
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="explore-map-icon">
+                                            <a href="#"><i data-feather="map-pin"></i></a>
+                                            <a href="#"><i data-feather="upload"></i></a>
+                                            <a href="#"><i data-feather="heart"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-4 col-sm-6">
+                    <div class="single-explore-item">
+                        <div class="single-explore-img">
+                            <img src="assets/images/explore/hue.jpeg" alt="explore image">
+                            <div class="single-explore-img-info">
+                                <button onclick="window.location.href='#'">best rated</button>
+                                <div class="single-explore-image-icon-box">
+                                    <ul>
+                                        <li>
+                                            <div class="single-explore-image-icon">
+                                                <i class="fa fa-arrows-alt"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="single-explore-image-icon">
+                                                <i class="fa fa-bookmark-o"></i>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-explore-txt bg-theme-1">
+                            <h2><a href="#">Hue</a></h2>
+                            <p class="explore-rating-price">
+                                <a href="#"> 1 people</a>
+                                <span class="explore-price-box">
+											form
+											<span class="explore-price">5$-300$</span>
+										</span>
+                            </p>
+                            <div class="explore-person">
+                                <div class="row">
+
+                                    <div class="col-sm-10">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                            eiusmod tempor incid ut labore et dolore magna aliqua....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="explore-open-close-part">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <button class="close-btn open-btn" onclick="window.location.href='#'">
+                                            booking now
+                                        </button>
+
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="explore-map-icon">
+                                            <a href="#"><i data-feather="map-pin"></i></a>
+                                            <a href="#"><i data-feather="upload"></i></a>
+                                            <a href="#"><i data-feather="heart"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-4 col-sm-6">
+                    <div class="single-explore-item">
+                        <div class="single-explore-img">
+                            <img src="assets/images/explore/nhatrang.jpeg" alt="explore image">
+                            <div class="single-explore-img-info">
+                                <button onclick="window.location.href='#'">best rated</button>
+                                <div class="single-explore-image-icon-box">
+                                    <ul>
+                                        <li>
+                                            <div class="single-explore-image-icon">
+                                                <i class="fa fa-arrows-alt"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="single-explore-image-icon">
+                                                <i class="fa fa-bookmark-o"></i>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-explore-txt bg-theme-1">
+                            <h2><a href="#">Nha trang</a></h2>
+                            <p class="explore-rating-price">
+                                <a href="#"> 1 people</a>
+                                <span class="explore-price-box">
+											form
+											<span class="explore-price">5$-300$</span>
+										</span>
+                            </p>
+                            <div class="explore-person">
+                                <div class="row">
+
+                                    <div class="col-sm-10">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                            eiusmod tempor incid ut labore et dolore magna aliqua....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="explore-open-close-part">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <button class="close-btn open-btn" onclick="window.location.href='#'">
+                                            booking now
+                                        </button>
+
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="explore-map-icon">
+                                            <a href="#"><i data-feather="map-pin"></i></a>
+                                            <a href="#"><i data-feather="upload"></i></a>
+                                            <a href="#"><i data-feather="heart"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-4 col-sm-6">
+                    <div class="single-explore-item">
+                        <div class="single-explore-img">
+                            <img src="assets/images/explore/dalat.jpeg" alt="explore image">
+                            <div class="single-explore-img-info">
+                                <button onclick="window.location.href='#'">best rated</button>
+                                <div class="single-explore-image-icon-box">
+                                    <ul>
+                                        <li>
+                                            <div class="single-explore-image-icon">
+                                                <i class="fa fa-arrows-alt"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="single-explore-image-icon">
+                                                <i class="fa fa-bookmark-o"></i>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-explore-txt bg-theme-1">
+                            <h2><a href="#">Da Lat</a></h2>
+                            <p class="explore-rating-price">
+                                <a href="#"> 1 people</a>
+                                <span class="explore-price-box">
+											form
+											<span class="explore-price">5$-300$</span>
+										</span>
+                            </p>
+                            <div class="explore-person">
+                                <div class="row">
+
+                                    <div class="col-sm-10">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                            eiusmod tempor incid ut labore et dolore magna aliqua....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="explore-open-close-part">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <button class="close-btn open-btn" onclick="window.location.href='#'">
+                                            booking now
+                                        </button>
+
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="explore-map-icon">
+                                            <a href="#"><i data-feather="map-pin"></i></a>
+                                            <a href="#"><i data-feather="upload"></i></a>
+                                            <a href="#"><i data-feather="heart"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-4 col-sm-6">
+                    <div class="single-explore-item">
+                        <div class="single-explore-img">
+                            <img src="assets/images/explore/quynhon.jpeg" alt="explore image">
+                            <div class="single-explore-img-info">
+                                <button onclick="window.location.href='#'">best rated</button>
+                                <div class="single-explore-image-icon-box">
+                                    <ul>
+                                        <li>
+                                            <div class="single-explore-image-icon">
+                                                <i class="fa fa-arrows-alt"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="single-explore-image-icon">
+                                                <i class="fa fa-bookmark-o"></i>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-explore-txt bg-theme-1">
+                            <h2><a href="#">Quy Nhon</a></h2>
+                            <p class="explore-rating-price">
+                                <a href="#"> 1 people</a>
+                                <span class="explore-price-box">
+											form
+											<span class="explore-price">5$-300$</span>
+										</span>
+                            </p>
+                            <div class="explore-person">
+                                <div class="row">
+
+                                    <div class="col-sm-10">
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                            eiusmod tempor incid ut labore et dolore magna aliqua....
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="explore-open-close-part">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <button class="close-btn open-btn" onclick="window.location.href='#'">
+                                            booking now
+                                        </button>
+
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="explore-map-icon">
+                                            <a href="#"><i data-feather="map-pin"></i></a>
+                                            <a href="#"><i data-feather="upload"></i></a>
+                                            <a href="#"><i data-feather="heart"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div><!--/.container-->
+
+</section><!--/.explore-->
+<!--explore end -->
+
+<!--subscription strat -->
+<section id="contact" class="subscription">
+    <div class="container">
+        <div class="subscribe-title text-center">
+            <h2>
+                do you want to add your business listing with us?
+            </h2>
+            <p>
+                Listrace offer you to list your business with us and we very much able to promote your Business.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="subscription-input-group">
+                    <form action="#">
+                        <input type="email" class="subscription-input-form" placeholder="Enter your email here">
+                        <button class="appsLand-btn subscribe-btn" onclick="window.location.href='#'">
+                            creat account
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section><!--/subscription-->
+<!--subscription end -->
+
+<div th:replace="/header-footer::footer"></div>
+<footer th:replace="/header-footer::footer-libs"></footer>
+
+</body>
+
+</html>
