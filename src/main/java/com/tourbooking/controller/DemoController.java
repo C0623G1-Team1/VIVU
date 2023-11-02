@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class DemoController {
-    @GetMapping("/")
+    @GetMapping
     public String doSth(){
         return "home-page";
     }
