@@ -10,4 +10,7 @@ import javax.persistence.GeneratedValue;
 @RequestMapping("/account")
 public class AccountController {
 //    comment
+    public String showHomePage(){
+        return "home";
+    }
 }
