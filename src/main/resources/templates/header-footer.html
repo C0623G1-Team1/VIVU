@@ -57,6 +57,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="https://cdn.ckeditor.com/4.17.0/standard/ckeditor.js"></script>
+
 </head>
 <body>
 <div class="header" th:fragment="nav">
@@ -75,7 +76,7 @@
 
                     <!-- Start Header Navigation -->
                     <div class="navbar-header">
-                        <a th:href="@{/}"><img style="margin-top: 16px" src="assets/images/welcome-hero/LogoVivu.png" width="200px" height="200px" alt="LOGO"></a>
+                        <a th:href="@{/}"><img style="margin-top: 16px" src="/assets/images/welcome-hero/LogoVivu.png" width="200px" height="200px" alt="LOGO"></a>
 
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                             <i class="fa fa-bars"></i>
@@ -91,7 +92,7 @@
                             <li class="scroll"><a href="#explore">Chuyến Đi</a></li>
                             <li class="scroll"><a href="#explore">Về Chúng Tôi</a></li>
                             <li class="scroll"><a href="#contact">Liên Hệ</a></li>
-                            <li class="scroll"><a th:href="@{/tour/create}" >Thành Viên</a></li>
+                            <li><a th:href="@{/tour/create}">Thành Viên</a></li>
                         </ul><!--/.nav -->
                     </div><!-- /.navbar-collapse -->
                 </div><!--/.container-->
@@ -187,6 +188,10 @@
     <script src="/assets/js/custom.js"></script>
 
 </footer>
-
+<script>
+    function doSth() {
+        alert("a");
+    }
+</script>
 </body>
 </html>

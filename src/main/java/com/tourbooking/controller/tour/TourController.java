@@ -7,16 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/tour")
 public class TourController {
     @Autowired
     private ITourService tourService;
-
-    @GetMapping()
-    public ModelAndView showTour() {
-        return new ModelAndView("home-page", "tourList", tourService.showList());
-    }
 
     @GetMapping("/create")
     public ModelAndView showCreateForm() {
