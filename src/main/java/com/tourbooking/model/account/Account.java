@@ -9,10 +9,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 @Entity
 public class Account {
     @Id
@@ -32,11 +28,103 @@ public class Account {
     @Column(columnDefinition = "bit(1) default 1")
     private boolean isEnabled;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
+
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "account")
     private Set<Tour> tour;
+
+    public Account() {
+    }
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getAccountEmail() {
+        return accountEmail;
+    }
+
+    public void setAccountEmail(String accountEmail) {
+        this.accountEmail = accountEmail;
+    }
+
+    public String getAccountPassword() {
+        return accountPassword;
+    }
+
+    public void setAccountPassword(String accountPassword) {
+        this.accountPassword = accountPassword;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public String getEmployeePhone() {
+        return employeePhone;
+    }
+
+    public void setEmployeePhone(String employeePhone) {
+        this.employeePhone = employeePhone;
+    }
+
+    public int getEmployeeGender() {
+        return employeeGender;
+    }
+
+    public void setEmployeeGender(int employeeGender) {
+        this.employeeGender = employeeGender;
+    }
+
+    public String getEmployeeImg() {
+        return employeeImg;
+    }
+
+    public void setEmployeeImg(String employeeImg) {
+        this.employeeImg = employeeImg;
+    }
+
+    public String getEmployeeIdCard() {
+        return employeeIdCard;
+    }
+
+    public void setEmployeeIdCard(String employeeIdCard) {
+        this.employeeIdCard = employeeIdCard;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Set<Tour> getTour() {
+        return tour;
+    }
+
+    public void setTour(Set<Tour> tour) {
+        this.tour = tour;
+    }
 }

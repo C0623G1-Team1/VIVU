@@ -8,10 +8,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 @Entity
 @Table(name = "role")
 public class Role {
@@ -23,4 +19,31 @@ public class Role {
     private String roleName;
     @ManyToMany(mappedBy = "roles")
     private Set<Account> accounts;
+
+    public Role() {
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
 }

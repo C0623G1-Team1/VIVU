@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="header-footer::header">
+  <!-- meta data -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+
+</head>
+<body>
+<div th:include="/header-footer::nav"></div>
+<div class="container">
+  <h1>Thông tin cá nhân</h1>
+  <fieldset>
+    <legend>Thông tin chi tiết</legend>
+    <img th:src="${account.employeeImg}" class="img-fluid" th:alt="${account.employeeName}">
+    <div>
+      <label>Họ và tên:</label>
+      <label th:text="${account.employeeName}"></label>
+    </div>
+    <div>
+      <label>Email:</label>
+      <label th:text="${account.accountEmail}"></label>
+    </div>
+    <div>
+      <label>Giới tính:</label>
+      <label th:text="${account.employeeGender}"></label>
+    </div>
+    <div>
+    <label>Căn cước công dân:</label>
+    <label th:text="${account.employeeIdCard}"></label>
+  </div>
+    <div>
+      <label>Số điện thoại:</label>
+      <label th:text="${account.employeePhone}"></label>
+    </div>
+  </fieldset>
+</div>
+
+
+<div th:replace="/header-footer::footer"></div>
+<footer th:replace="/header-footer::footer-libs"></footer>
+
+</body>
+</html>
