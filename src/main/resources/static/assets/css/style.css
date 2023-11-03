@@ -11,8 +11,9 @@
 	box-sizing:border-box;
 }
 body{
-	font-family: 'Poppins', sans-serif;
-	font-size:14px;
+	font-family: 'Muli', sans-serif;
+    font-weight: 700;
+	font-size:15px;
 	color:#a09e9c;
     text-transform:initial;
     max-width:1920px;
@@ -32,14 +33,14 @@ a,a:hover,a:active,a:focus {
 h1,h2,h3,h4,h5,h6 { 
 	margin: 0;
 	color:#343a3f;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
     text-transform: capitalize;
 }
 p {
 	margin: 0;
 	color:#767f86;
-	font-size:14px;
+	font-size:15px;
     line-height: 1.8;
     text-transform: initial;
 }
@@ -54,7 +55,7 @@ ul li {
 	
 }
 select,input,textarea,button{box-shadow:none;outline:0!important;}
-button {background: transparent;border: 0;font-size: 12px;}
+button {background: transparent;border: 0;font-size: 15px;}
 
 html,body{height: 100%;}
 
@@ -494,7 +495,7 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 .single-explore-txt.bg-theme-5 .explore-rating{background: #ff7a40;}
 
 .explore-rating-price,.explore-rating-price a {
-    font-size: 12px;
+    font-size: 15px;
     color: #777f85;
     text-transform: capitalize;
     font-weight: 400;

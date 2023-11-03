@@ -200,20 +200,13 @@
                                 <p class="explore-rating-price">
                                     <a href="#" th:text="${tour.tourAvailableSeat} + ' people'"></a>
                                     <span class="explore-price-box">
-											price
-											<span class="explore-price"
-                                                  th:text="${tour.adultPrice} + ' for audult'"></span> -
-											<span class="explore-price"
-                                                  th:text="${tour.childPrice} + ' for child'"></span>
-										</span>
+											Price
+											<span class="explore-price" th:text="${tour.adultPrice} + ' - ' + ${tour.childPrice}"></span>
+                                    </span>
                                 </p>
                                 <div class="explore-person">
                                     <div class="row">
-                                        <div class="col-sm-10">
-                                            <p th:text="${tour.tourDescription}">
-
-                                            </p>
-                                        </div>
+                                        <div class="col-sm-10"></div>
                                     </div>
                                 </div>
                                 <div class="explore-open-close-part">

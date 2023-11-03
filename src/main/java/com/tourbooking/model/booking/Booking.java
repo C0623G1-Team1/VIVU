@@ -28,10 +28,11 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "promotion_id", referencedColumnName = "promotion_id")
     private Promotion promotion;
+
     @Column(columnDefinition = "bit(1) default 0",name = "is_deleted")
     private boolean isDeleted;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tour_id", referencedColumnName = "tour_id")
     private Tour tour;
 
