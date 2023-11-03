@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header-footer::header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:include="/header-footer::nav"></div>
+
+<div class="container mt-3 border border-3 rounded p-2">
+    <form class="mx-4" method="post" th:object="${blog}">
+        <div class="mb-3">
+            <!--        <label for="id" class="form-label">Product ID: </label>-->
+            <input type="hidden" class="form-control" placeholder="Enter ID" id="id" th:field="*{id}">
+            <input type="hidden" class="form-control" placeholder="" id="date" th:field="*{date}" th:text="${localDate}">
+        </div>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title: </label>
+            <input type="text" class="form-control" placeholder="Enter title" id="title" th:field="*{title}">
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Blog image: </label>
+            <input type="text" class="form-control" placeholder="Enter image" id="image" th:field="*{image}">
+        </div>
+        <div class="mb-3">
+            <label for="category">Category: </label>
+            <select id="category" th:field="*{category}">
+                <option th:each="c : ${categories}" th:value="${c.categoryId}" th:text="${c.name}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="author" class="form-label">Author:</label>
+            <input type="text" class="form-control" placeholder="Enter author" id="author"
+                   th:field="*{author}">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Blog Content:</label>
+            <textarea class="form-control" placeholder="Enter content" id="content" rows="4" cols="50" th:field="*{content}">
+            </textarea>
+        </div>
+        <div id="editor"></div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-dark my-3">Post</button>
+        </div>
+
+    </form>
+</div>
+
+<div th:replace="/header-footer::footer"></div>
+<footer th:replace="/header-footer::footer-libs"></footer>
+</body>
+</html>
