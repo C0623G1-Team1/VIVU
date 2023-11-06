@@ -54,4 +54,9 @@ public class TourController {
         return "redirect:/";
     }
 
+    @GetMapping("/booking/{id}")
+    public ModelAndView showBooking(@PathVariable Integer id, Model model) {
+        return new ModelAndView("booking", "tour", tourService.findById(id).get());
+    }
+
 }
