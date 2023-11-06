@@ -37,7 +37,10 @@
 
 <!--                <h2>Giá từ <span th:text="${numberFormat.format(tour.adultPrice)}"></span></h2>-->
                 <div id="book">
-                    <a href="">ĐẶT VÉ</a>
+                    <form action="/booking">
+                        <input type="hidden" th:value="${tour.id}" name="idTour">
+                        <input class="btn btn-primary" type="submit" value="Booking">
+                    </form>
                 </div>
             </div>
         </div>
