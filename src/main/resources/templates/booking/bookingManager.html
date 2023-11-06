@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="../static/css/truongnq.css">
+    <link rel="stylesheet" href="../libs/fontawesome/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body{
+            background: #86daa8;
+        }
+        .dashboard{
+            position: fixed;
+            margin-top:25px;
+            background: #1c7430;
+            width: 300px;
+            height: 1100px;
+            border-radius: 30px;
+        }
+        .dashboard-one{
+            background: #86cfda;
+            width: 250px;
+            height: 100px;
+            border-radius: 30px;
+            position: relative;
+            margin: 0 auto;
+            top: 50px;
+        }
+        .table-one{
+            width: 100%;
+            height: fit-content;
+            background: white;
+            border-radius: 10px;
+        }
+        table{
+            margin: 20px 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="dashboard">
+                <div class="dashboard-one">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+
+            <div class="header-content mt-5">
+                <div class="hello">
+                    <h3>Đơn hàng</h3>
+                </div>
+            </div>
+            <div class="header-content mt-2">
+                <div>
+                    <form th:action="@{/findCustomer}">
+                        <div>
+                            <div class="mb-3" style="width: 300px">
+                                <label for="exampleInputPassword30" class="form-label" style="font-weight: bold">Tìm kiếm khách hàng</label>
+                                <div  style="display: flex">
+                                    <div>
+                                        <input type="text" class="form-control" id="exampleInputPassword30" name="phone" placeholder="Nhập số điện thoại">
+                                    </div>
+                                    <div class="ms-2">
+                                        <input class="btn btn-primary" type="submit" value="Tìm">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="hello" style="font-weight: bold">
+                <p>Danh sách đơn hàng</p>
+            </div>
+            <div class="mt-4 body-content-2">
+                <div class="table-one">
+                    <table class="text-center">
+                        <thead>
+                        <tr>
+                            <th style="width: 70px"  scope="col">#</th>
+                            <th style="width: 250px" scope="col">Khách hàng</th>
+                            <th style="width: 330px" scope="col">Số điện thoại</th>
+                            <th style="width: 200px; margin-right: 20px" class="text-center" scope="col">Thao tác</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr style="height: 55px" th:each="l, loop:${list}">
+                            <th scope="row" th:text="${loop.count}"></th>
+                            <td th:text="${l.name}"></td>
+                            <td th:text="${l.phone}"></td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a th:href="@{booking/{id}/detail(id=${l.id})}" class="btn btn-primary" role="button">XEM</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a th:attr="onclick=|sendInfor('${l.id}')|" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning" role="button">Hủy</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div style="color: black; margin-left: 380px" >
+                <a role="button" class="btn btn-primary" th:href="@{/list(page=${list.number - 1})}"
+                   th:if="${list.hasPrevious()}">Previous</a>
+
+                <span th:text="${list.number + 1}"></span>
+                <span th:text="${list.totalPages}"></span>
+
+                <a role="button" class="btn btn-primary" th:href="@{/list(page=${list.number+1})}"
+                   th:if="${list.hasNext()}">Next</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/booking/delete">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><b>HỦY ĐƠN HÀNG</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn hủy không
+                        <span style="color: red" id="name"></span></p>
+                    <input type="text" hidden="hidden" name="id" id="id">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">KHÔNG</button>
+                    <button type="submit" class="btn btn-primary">CÓ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function sendInfor(id){
+        document.getElementById("id").value=id;
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>
