@@ -4,10 +4,13 @@ import com.tourbooking.model.tour.Tour;
 import com.tourbooking.service.tour.ITourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/tour")
@@ -27,7 +30,10 @@ public class TourController {
     }
 
     @GetMapping("/view/{id}")
-    public ModelAndView showDetail(@PathVariable Integer id) {
+    public ModelAndView showDetail(@PathVariable Integer id, Model model) {
+        Locale locale = new Locale("vi", "VN");
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
+        model.addAttribute(numberFormat);
         return new ModelAndView("tour-view", "tour", tourService.findById(id).get());
     }
 

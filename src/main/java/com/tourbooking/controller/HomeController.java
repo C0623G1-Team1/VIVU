@@ -21,4 +21,9 @@ public class HomeController {
         List<Tour> tourList = tourService.showList();
         return new ModelAndView("home-page", "tourList", tourList);
     }
+
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login-form";
+    }
 }

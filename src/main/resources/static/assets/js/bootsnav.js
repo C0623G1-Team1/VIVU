@@ -14,7 +14,7 @@
     
     var bootsnav = {
         initialize: function() {
-            // this.event();
+            this.event();
             this.hoverDropdown();
             this.navbarSticky();
             this.navbarScrollspy();

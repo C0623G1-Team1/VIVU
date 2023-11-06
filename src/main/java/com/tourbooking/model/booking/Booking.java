@@ -1,8 +1,11 @@
 package com.tourbooking.model.booking;
 
 import com.tourbooking.model.tour.Tour;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
+import java.util.Date;
 
 @Entity
 public class Booking {
@@ -17,7 +20,9 @@ public class Booking {
     @Column(name = "customer_email")
     private String email;
     @Column(name = "booking_date")
-    private String date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @FutureOrPresent
+    private Date date;
     @Column(name = "adult_quantity")
     private Integer adultQuantity;
     @Column(name = "children_quantity")
@@ -71,11 +76,11 @@ public class Booking {
         this.email = email;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

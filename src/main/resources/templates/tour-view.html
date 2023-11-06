@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header-footer::header">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div th:include="/header-footer::nav"></div>
+<div id="tour_detail" class="container">
+    <h1 id="tour-name" th:text="${tour.tourName}"></h1>
+    <p><i class='bx bxs-star' style='color:#f8b300'  ></i><i class='bx bxs-star' style='color:#f8b300'  ></i><i class='bx bxs-star' style='color:#f8b300'  ></i><i class='bx bxs-star' style='color:#f8b300'  ></i> 4.9/5 trong 295 Đánh Giá</p>
+    <div class="tour_img" style="text-align: center">
+        <img th:src="@{${tour.tourImage}}" alt="explore image">
+    </div>
+    <div class="tour_description d-flex">
+        <div id="overview" class=" col-lg-7">
+            <p id="hight-light">Điểm nhấn hành trình</p>
+            <hr>
+            <p th:utext="${tour.tourDescription}"></p>
+        </div>
+        <div id="tour-information" class="col-lg-5">
+            <div id="board">
+                <p class="tour-name" th:text="${tour.tourName}"></p>
+                <hr>
+                <p>Ngày khởi hành: <span th:text="${tour.startDate}"></span></p>
+                <hr>
+                <p>Ngày kết thúc: <span th:text="${tour.endDate}"></span></p>
+                <hr>
+                <p>Hướng dẫn viên: <span th:text="${tour.tourAvailableSeat}"></span></p>
+                <hr>
+                <p>Số lượng: <span th:text="${tour.tourAvailableSeat}"></span> người</p>
+                <hr>
+                <p>Giá người lớn: <span th:text="${tour.adultPrice}"></span></p>
+                <hr>
+                <p>Giá trẻ em: <span th:text="${tour.childPrice}"></span></p>
+                <hr>
 
+<!--                <h2>Giá từ <span th:text="${numberFormat.format(tour.adultPrice)}"></span></h2>-->
+                <div id="book">
+                    <a href="">ĐẶT VÉ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="/header-footer::footer"></div>
+<footer th:replace="/header-footer::footer-libs"></footer>
 </body>
 </html>

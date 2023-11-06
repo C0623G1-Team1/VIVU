@@ -21,7 +21,7 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Tour description: </label>
-            <textarea type="text" class="form-control" id="description" rows="4" cols="50" th:field="*{tourDescription}">
+            <textarea class="form-control" id="description" rows="4" cols="50" th:field="*{tourDescription}">
             </textarea>
         </div>
         <div class="mb-3">
@@ -30,11 +30,11 @@
         </div>
         <div class="mb-3">
             <label for="startDate" class="form-label">Start date:</label>
-            <input type="text" class="form-control" id="startDate" th:field="*{startDate}">
+            <input type="date" class="form-control" id="startDate" th:field="*{startDate}">
         </div>
         <div class="mb-3">
             <label for="endDate" class="form-label">End date:</label>
-            <input type="text" class="form-control" id="endDate" th:field="*{endDate}">
+            <input type="date" class="form-control" id="endDate" th:field="*{endDate}">
         </div>
         <div class="mb-3">
             <label for="seat" class="form-label">Available seat:</label>

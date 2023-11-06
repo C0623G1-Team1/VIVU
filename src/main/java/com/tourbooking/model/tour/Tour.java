@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
+import java.util.Date;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -20,16 +23,28 @@ public class Tour {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tour_id")
     private int id;
+
     private String tourName;
+
     @Column(columnDefinition = "LONGTEXT")
     private String tourDescription;
+
     private int tourAvailableSeat;
+
     @Column(columnDefinition = "LONGTEXT")
     private String tourImage;
-    private String startDate;
-    private String endDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @FutureOrPresent
+    private Date startDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @FutureOrPresent
+    private Date endDate;
+
     @Column(columnDefinition = "bit(1) default 0")
     private boolean isDeleted;
+
     private Long adultPrice;
     private Long childPrice;
 

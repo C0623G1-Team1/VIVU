@@ -20,9 +20,9 @@
     <div class="container">
         <div class="welcome-hero-txt">
             <h2>best place to find and explore <br> that all you need </h2>
-            <p>
-                Find Best Place, Restaurant, Hotel, Real State and many more think in just One click
-            </p>
+<!--            <p>-->
+<!--                Find Best Place, Restaurant, Hotel, Real State and many more think in just One click-->
+<!--            </p>-->
         </div>
         <div class="welcome-hero-serch-box">
             <div class="welcome-hero-form">
@@ -173,8 +173,8 @@
             <div class="row">
                 <th:block th:each="tour : ${tourList}">
                     <div class=" col-md-4 col-sm-6" th:unless="${tourList.isEmpty()}">
-
-                        <div class="single-explore-item">
+                        <a th:href="@{/tour/view/{id}(id=${tour.id})}">
+                        <div id="tour" class="single-explore-item">
                             <div class="single-explore-img">
                                 <img th:src="@{${tour.tourImage}}" alt="explore image">
                                 <div class="single-explore-img-info">
@@ -204,9 +204,10 @@
 											<span class="explore-price" th:text="${tour.adultPrice} + ' - ' + ${tour.childPrice}"></span>
                                     </span>
                                 </p>
+<!--                                <span th:utext="${#strings.abbreviate(tour.tourDescription, 235)}"></span>-->
                                 <div class="explore-person">
                                     <div class="row">
-                                        <div class="col-sm-10"></div>
+
                                     </div>
                                 </div>
                                 <div class="explore-open-close-part">
@@ -225,11 +226,9 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-
-
+                        </a>
                     </div>
                 </th:block>
             </div>
