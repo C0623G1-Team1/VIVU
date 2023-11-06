@@ -7,53 +7,60 @@
 </head>
 <body>
 <div th:include="/header-footer::nav"></div>
+<div id="create-tour" class="container mt-3 border border-3 rounded p-2">
+    <h1>CHỈNH SỬA THÔNG TIN CHUYẾN ĐI</h1>
+    <div id="board">
+        <form class="mx-4" th:action="@{/tour/update/{id}}" method="post" th:object="${tour}">
+            <div >
+                <!--        <label for="id" class="form-label">Product ID: </label>-->
+                <input type="hidden" class="form-control" placeholder="Enter ID" id="id" th:field="*{id}">
+                <!--            <input type="hidden" class="form-control" placeholder="" id="date" th:field="*{date}" th:text="${localDate}">-->
+            </div>
+            <div class="div-element">
+                <label for="name" class="form-label">Điểm tham quan: </label>
+                <input type="text" class="form-control" id="name" th:field="*{tourName}">
+            </div>
 
-<div class="container mt-3 border border-3 rounded p-2">
-    <form class="mx-4" th:action="@{/tour/update/{id}}" method="post" th:object="${tour}">
-        <div class="mb-3">
-            <!--        <label for="id" class="form-label">Product ID: </label>-->
-            <input type="hidden" class="form-control" placeholder="Enter ID" id="id" th:field="*{id}">
-            <!--            <input type="hidden" class="form-control" placeholder="" id="date" th:field="*{date}" th:text="${localDate}">-->
-        </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">Tour name: </label>
-            <input type="text" class="form-control" id="name" th:field="*{tourName}">
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Tour description: </label>
-            <textarea class="form-control" id="description" th:field="*{tourDescription}">
-            </textarea>
-        </div>
-        <div class="mb-3">
-            <label for="image" class="form-label">Tour image: </label>
-            <input type="text" class="form-control" id="image" th:field="*{tourImage}">
-        </div>
-        <div class="mb-3">
-            <label for="startDate" class="form-label">Start date:</label>
-            <input type="date" class="form-control" id="startDate" th:field="*{startDate}">
-        </div>
-        <div class="mb-3">
-            <label for="endDate" class="form-label">End date:</label>
-            <input type="date" class="form-control" id="endDate" th:field="*{endDate}">
-        </div>
-        <div class="mb-3">
-            <label for="seat" class="form-label">Available seat:</label>
-            <input type="number" class="form-control" id="seat" th:field="*{tourAvailableSeat}">
-        </div>
-        <div class="mb-3">
-            <label for="adultPrice" class="form-label"> Adult price: </label>
-            <input type="number" class="form-control" id="adultPrice" th:field="*{adultPrice}">
-        </div>
-        <div class="mb-3">
-            <label for="childPrice" class="form-label">Child price :</label>
-            <input type="number" class="form-control" id="childPrice" th:field="*{childPrice}">
-        </div>
-        <div id="editor"></div>
-        <div class="text-center">
-            <button type="submit" class="btn btn-outline-dark my-3">Lưu thay đổi</button>
-        </div>
-    </form>
+            <div class="div-element in-one-line">
+                <div>
+                    <label for="startDate" class="form-label">Ngày khởi hành:</label>
+                    <input type="date" class="form-control" id="startDate" th:field="*{startDate}">
+                </div>
+                <div>
+                    <label for="endDate" class="form-label">Ngày kết thúc:</label>
+                    <input type="date" class="form-control" id="endDate" th:field="*{endDate}">
+                </div>
+                <div>
+                    <label for="seat" class="form-label">Số lượng (người):</label>
+                    <input type="number" class="form-control" id="seat" th:field="*{tourAvailableSeat}">
+                </div>
+                <div>
+                    <label for="adultPrice" class="form-label"> Giá vé người lớn: </label>
+                    <input type="number" class="form-control" id="adultPrice" th:field="*{adultPrice}">
+                </div>
+                <div>
+                    <label for="childPrice" class="form-label">Giá vé trẻ em:</label>
+                    <input type="number" class="form-control" id="childPrice" th:field="*{childPrice}">
+                </div>
+            </div>
+
+            <div class="div-element">
+                <label for="description" class="form-label">Mô tả chi tiết: </label>
+                <textarea class="form-control" id="description" th:field="*{tourDescription}"></textarea>
+            </div>
+
+            <div class="div-element">
+                <label for="image" class="form-label">Hình ảnh: </label>
+                <input type="text" class="form-control" id="image" th:field="*{tourImage}">
+            </div>
+
+            <div id="create-btn" class="text-center">
+                <button type="submit" class="btn btn-outline-dark my-3">LƯU THAY ĐỔI</button>
+            </div>
+        </form>
+    </div>
 </div>
+
 <script>
     CKEDITOR.replace("description")
 </script>
