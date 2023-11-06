@@ -37,10 +37,12 @@ public class Tour {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @FutureOrPresent
+    @Column(columnDefinition = "DATE")
     private Date startDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @FutureOrPresent
+    @Column(columnDefinition = "DATE")
     private Date endDate;
 
     @Column(columnDefinition = "bit(1) default 0")

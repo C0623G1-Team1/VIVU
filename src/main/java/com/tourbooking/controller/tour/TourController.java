@@ -53,7 +53,8 @@ public class TourController {
         Locale locale = new Locale("vi", "VN");
         NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
         model.addAttribute(numberFormat);
-        return new ModelAndView("tour-view", "tour", tourService.findById(id).get());
+        Tour tour =  tourService.findById(id).get();
+        return new ModelAndView("tour-view", "tour", tour);
     }
 
     @GetMapping("/update/{id}")

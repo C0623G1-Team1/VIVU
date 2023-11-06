@@ -62,7 +62,7 @@ public class BookingController {
         tourDto.setStartDate(startDate);
         String endDate= String.valueOf(tour.getEndDate());
         tourDto.setEndDate(endDate);
-        tourDto.setTourImage(tour.getTourImage());
+//        tourDto.setTourImage(tour.getTourImage());
         tourDto.setTourName(tour.getTourName());
         return tourDto;
     }
@@ -134,7 +134,7 @@ public class BookingController {
     public String showBookingDetail(Model model, @PathVariable int id){
         Booking booking=bookingService.findById(id);
         Tour tour=tourService.findById(booking.getTour().getId()).get();
-        model.addAttribute("img",tour.getTourImage());
+//        model.addAttribute("img",tour.getTourImage());
         model.addAttribute("booking",booking);
         long total=tour.getAdultPrice()*booking.getAdultQuantity()+tour.getChildPrice()* booking.getChildrenQuantity();
         model.addAttribute("total",total+"");

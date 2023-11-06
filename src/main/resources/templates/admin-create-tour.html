@@ -16,7 +16,7 @@
 <div id="create-tour" class="container mt-3 border border-3 rounded p-2">
     <h1>THÊM MỚI CHUYẾN ĐI</h1>
     <div id="board">
-        <form class="mx-4" method="post" th:object="${tour}">
+        <form class="mx-4" method="post" th:object="${tour}" id="submit-form">
             <div class="mb-3">
                 <!--        <label for="id" class="form-label">Product ID: </label>-->
                 <input type="hidden" class="form-control" placeholder="Enter ID" id="id" th:field="*{id}">

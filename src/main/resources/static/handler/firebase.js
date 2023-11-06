@@ -57,7 +57,7 @@ const previewImages = (fileArr) => {
         const check = (typeof file !== "string" && file);
         if (file) {
             imgTag += `
-            <span class="col-4 row" style="position: relative" id="drop-${index}">
+            <span class="col-lg-4" style="position: relative" id="drop-${index}">
                 <figure class="figure">
                   <img
                     src="${check && file ? URL.createObjectURL(file) : file}"
