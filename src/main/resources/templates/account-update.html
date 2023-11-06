@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="header-footer::header">
+    <!-- meta data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+</head>
+
+<body>
+<div th:include="/header-footer::nav"></div>
+
+
+<div class="container" style="background-color: #e0e5e9">
+    <div class="inner row">
+        <div class="col col-lg-8">
+            <div>
+                <h3 style="margin-top: 20px; margin-bottom: 20px; text-align: center" >Chỉnh sửa thông tin nhân viên</h3>
+            </div>
+            <form th:object="${accountDto}" th:action="@{/account/{id}/update(id=${updateId})}" method="post">
+                <div class="col col-lg-2">
+                    <div class="image-holder">
+                        <img th:src="*{employeeImg}" alt="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Họ và tên nhân viên:</label>
+                    <input type="text" placeholder="Họ và tên nhân viên..." class="form-control" th:field="*{employeeName}">
+                    <p th:if="${#fields.hasErrors('employeeName')}"
+                       th:errors="*{employeeName}" style="color: red">Name error</p>
+                </div>
+                <div class="form-group">
+                    <fieldset>
+                        <label>Giới tính:</label><br>
+                        <input th:type="radio" th:name="gender" th:value="0" label="Male" th:field="*{employeeGender}"/>Nữ<br>
+                        <input th:type="radio" th:name="gender" th:value="1" label="Female" th:field="*{employeeGender}"/>Nam<br>
+                        <input th:type="radio" th:name="gender" th:value="2" label="LGBT" th:field="*{employeeGender}"/>LGBT<br>
+                    </fieldset>
+                    <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+                </div>
+                <div class="form-group">
+                    <label>Căn cước công dân:</label>
+                    <input type="text" placeholder="Số CCCD..." class="form-control" th:field="*{employeeIdCard}">
+                    <p th:if="${#fields.hasErrors('employeeIdCard')}"
+                       th:errors="*{employeeIdCard}" style="color: red">Name error</p>
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <input type="text" placeholder="Số điện thoại..." class="form-control" th:field="*{employeePhone}">
+                    <p th:if="${#fields.hasErrors('employeePhone')}"
+                       th:errors="*{employeePhone}" style="color: red">Name error</p>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="text" placeholder="Email nhân viên (tên tài khoản)..." class="form-control"
+                           th:field="*{accountEmail}">
+                    <p th:if="${#fields.hasErrors('accountEmail')}"
+                       th:errors="*{accountEmail}" style="color: red">Name error</p>
+                    <i class="zmdi zmdi-email"></i>
+                </div>
+<!--                <div class="form-group">-->
+<!--                    <label>Mật khẩu</label>-->
+<!--                    <input type="text" placeholder="Nhập lại mật khẩu..." class="form-control" th:field="*{accountPassword}">-->
+<!--                    <p th:if="${#fields.hasErrors('accountPassword')}"-->
+<!--                       th:errors="*{accountPassword}" style="color: red">Name error</p>-->
+<!--                    <i class="zmdi zmdi-lock"></i>-->
+<!--                </div>-->
+                <div class="form-group">
+                    <label>Link ảnh chân dung</label>
+                    <input type="text" placeholder="Link ảnh chân dung..." class="form-control" th:field="*{employeeImg}">
+                    <p th:if="${#fields.hasErrors('employeeImg')}"
+                       th:errors="*{employeeImg}">Name error</p>
+                </div>
+                <button type="submit" style="background-color: #ff545a" class="btn btn-outline-danger">Cập nhật thông tin
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="/header-footer::footer"></div>
+<footer th:replace="/header-footer::footer-libs"></footer>
+</body>
+</html>

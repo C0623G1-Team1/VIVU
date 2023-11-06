@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Set;
 
 @Entity
@@ -15,6 +16,8 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
     private int accountId;
+    @Email(message = "Vui lòng nhập đúng email." )
+    @Column(unique = true)
     private String accountEmail;
     private String accountPassword;
     private String employeeName;
@@ -31,7 +34,7 @@ public class Account {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
-
+    @Column(columnDefinition = "int default 2")
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "account")

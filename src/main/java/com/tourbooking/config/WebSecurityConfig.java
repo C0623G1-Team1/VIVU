@@ -44,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/tour/create", "/tour/read", "/tour/update", "/tour/delete",
                         "/booking/read", "/booking/delete", "/booking/view").hasRole("ADMIN");
 
+
         http.authorizeRequests().and().rememberMe()
                 .tokenRepository(persistentTokenRepository())
                 .tokenValiditySeconds(1*24*60*60);
