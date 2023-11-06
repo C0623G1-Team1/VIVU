@@ -1,7 +1,10 @@
 package com.tourbooking.controller.tour;
 
+import com.tourbooking.model.tour.Image;
 import com.tourbooking.model.tour.Tour;
+import com.tourbooking.model.tour.TourDTO;
 import com.tourbooking.service.tour.ITourService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -20,12 +24,27 @@ public class TourController {
 
     @GetMapping("/create")
     public ModelAndView showCreateForm() {
-        return new ModelAndView("admin-create-tour", "tour", new Tour());
+        TourDTO tourDTO = new TourDTO();
+        List<String> initList = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            initList.add("");
+        }
+        tourDTO.setImageUrls(initList);
+        return new ModelAndView("admin-create-tour", "tour", tourDTO);
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Tour tour) {
-        tourService.create(tour);
+    public String create(@ModelAttribute TourDTO tour) {
+        Tour tour1 = new Tour();
+        BeanUtils.copyProperties(tour,tour1);
+        List<Image> list = new ArrayList<>();
+        for (String s: tour.getImageUrls()) {
+            if(!"undefined".equals(s)){
+                list.add(new Image(s,tour1));
+            }
+        }
+        tour1.setImageUrls(list);
+        tourService.create(tour1);
         return "redirect:/";
     }
 
