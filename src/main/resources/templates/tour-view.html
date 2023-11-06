@@ -37,7 +37,7 @@
 
 <!--                <h2>Giá từ <span th:text="${numberFormat.format(tour.adultPrice)}"></span></h2>-->
                 <div id="book">
-                    <a href="">ĐẶT VÉ</a>
+                    <a th:href="@{/tour/booking/{id}(id=${tour.id})}">ĐẶT VÉ</a>
                 </div>
             </div>
         </div>
