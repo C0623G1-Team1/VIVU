@@ -106,8 +106,8 @@
     transition: 1s;
 }
 
-.input-box input:focus~label,
-.input-box input:valid~label {
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
     top: -5px;
 }
 
@@ -142,7 +142,7 @@
     margin-right: 3px;
 }
 
-#login-btn button{
+#login-btn button {
     width: 60%;
     height: 40px;
     color: white;
@@ -168,7 +168,7 @@
     padding: 45px;
 }
 
-#tour_description #board{
+#tour_description #board {
     position: sticky;
     top: 50px;
 }
@@ -176,7 +176,7 @@
 #board {
     border: 1px solid rgb(221, 221, 221);
     border-radius: 20px;
-    padding: 47px;
+    padding: 40px;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 }
 
@@ -207,4 +207,36 @@
 
 #book a:hover {
     box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+}
+
+#create-btn button {
+    width: 40%;
+    height: 40px;
+    color: #413f3f;
+    background-color: transparent;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1.4em;
+    font-weight: 500;
+    transition: 0.5s ease;
+    margin-top: 30px;
+    letter-spacing: 3px;
+    border: 2px solid rgba(65, 63, 63, 0.58);
+}
+
+#create-btn button:hover {
+    background-color: #FF3B5F;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    border: none;
+    outline: none;
+    color: white;
+}
+#create-tour h1 {
+    margin: 25px 0;
+}
+
+.in-one-line {
+    display: flex;
+    /*align-items: center;*/
+    justify-content: space-between;
 }
