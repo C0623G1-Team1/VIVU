@@ -27,17 +27,18 @@
         <div class="welcome-hero-serch-box">
             <div class="welcome-hero-form">
                 <div class="single-welcome-hero-form">
-                    <h3>tour</h3>
+                    <h3>Điểm đến</h3>
                     <form action="index.html">
-                        <input type="text" placeholder="Ex: hoi an, hue, da nang"/>
+                        <input type="text" />
                     </form>
                 </div>
+                <div class="welcome-hero-serch">
+                    <button class="welcome-hero-btn" onclick="window.location.href='#'">
+                        Tìm kiếm <i data-feather="search"></i>
+                    </button>
+                </div>
             </div>
-            <div class="welcome-hero-serch">
-                <button class="welcome-hero-btn" onclick="window.location.href='#'">
-                    search <i data-feather="search"></i>
-                </button>
-            </div>
+
         </div>
     </div>
 
@@ -99,70 +100,7 @@
     </div><!--/.container-->
 
 </section><!--/.list-topics-->
-<!--list-topics end-->
 
-<!--works start -->
-<!--<section id="works" class="works">-->
-<!--    <div class="container">-->
-<!--        <div class="section-header">-->
-<!--            <h2>how it works</h2>-->
-<!--            <p>Learn More about how our website works</p>-->
-<!--        </div>&lt;!&ndash;/.section-header&ndash;&gt;-->
-<!--        <div class="works-content">-->
-<!--            <div class="row">-->
-<!--                <div class="col-md-4 col-sm-6">-->
-<!--                    <div class="single-how-works">-->
-<!--                        <div class="single-how-works-icon">-->
-<!--                            <i class="flaticon-lightbulb-idea"></i>-->
-<!--                        </div>-->
-<!--                        <h2><a href="#">choose <span> what to</span> do</a></h2>-->
-<!--                        <p>-->
-<!--                            Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmod tempor incididunt ut-->
-<!--                            laboremagna aliqua.-->
-<!--                        </p>-->
-<!--                        <button class="welcome-hero-btn how-work-btn" onclick="window.location.href='#'">-->
-<!--                            read more-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-4 col-sm-6">-->
-<!--                    <div class="single-how-works">-->
-<!--                        <div class="single-how-works-icon">-->
-<!--                            <i class="flaticon-networking"></i>-->
-<!--                        </div>-->
-<!--                        <h2><a href="#">find <span> what you want</span></a></h2>-->
-<!--                        <p>-->
-<!--                            Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmod tempor incididunt ut-->
-<!--                            laboremagna aliqua.-->
-<!--                        </p>-->
-<!--                        <button class="welcome-hero-btn how-work-btn" onclick="window.location.href='#'">-->
-<!--                            read more-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-4 col-sm-6">-->
-<!--                    <div class="single-how-works">-->
-<!--                        <div class="single-how-works-icon">-->
-<!--                            <i class="flaticon-location-on-road"></i>-->
-<!--                        </div>-->
-<!--                        <h2><a href="#">explore <span> amazing</span> place</a></h2>-->
-<!--                        <p>-->
-<!--                            Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmod tempor incididunt ut-->
-<!--                            laboremagna aliqua.-->
-<!--                        </p>-->
-<!--                        <button class="welcome-hero-btn how-work-btn" onclick="window.location.href='#'">-->
-<!--                            read more-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>&lt;!&ndash;/.container&ndash;&gt;-->
-
-<!--</section>&lt;!&ndash;/.works&ndash;&gt;-->
-<!--works end -->
-
-<!--explore start -->
 <section id="explore" class="explore">
     <div class="container">
         <div class="section-header">
@@ -176,9 +114,9 @@
                         <a th:href="@{/tour/view/{id}(id=${tour.id})}">
                         <div id="tour" class="single-explore-item">
                             <div class="single-explore-img">
-                                <img th:src="@{${tour.tourImage}}" alt="explore image">
+                                <img th:src="@{${tour.imageUrls.get(0).getUrl()}}" alt="explore image">
                                 <div class="single-explore-img-info">
-                                    <button onclick="window.location.href='#'">best rated</button>
+                                    <button onclick="window.location.href='#'">đánh giá cao</button>
                                     <div class="single-explore-image-icon-box">
                                         <ul>
                                             <li>
@@ -198,10 +136,10 @@
                             <div class="single-explore-txt bg-theme-1">
                                 <h2 th:text="${tour.tourName}"></h2>
                                 <p class="explore-rating-price">
-                                    <a href="#" th:text="${tour.tourAvailableSeat} + ' people'"></a>
+                                    <a th:text="'Số lượng còn trống: ' + ${tour.tourAvailableSeat} + ' chỗ'"></a>
                                     <span class="explore-price-box">
-											Price
-											<span class="explore-price" th:text="${tour.adultPrice} + ' - ' + ${tour.childPrice}"></span>
+											Giá từ
+											<span class="explore-price" th:text="${#numbers.formatInteger(tour.childPrice, 3, 'COMMA')} + ' VNĐ - ' + ${#numbers.formatInteger(tour.adultPrice, 3,'COMMA')} + ' VNĐ'"></span>
                                     </span>
                                 </p>
                                 <div class="explore-person">
@@ -213,7 +151,7 @@
                                     <div class="row">
                                         <div class="col-sm-5">
                                             <button class="close-btn open-btn" onclick="window.location.href='#'">
-                                                booking now
+                                                Đặt vé ngay
                                             </button>
                                         </div>
                                         <div class="col-sm-7">
@@ -225,6 +163,16 @@
                                         </div>
                                     </div>
                                 </div>
+<!--                                <div class="row">-->
+<!--                                    <div class="col-sm-5">-->
+<!--                                    </div>-->
+<!--                                    <div class="col-sm-7">-->
+<!--                                        <div class="explore-map-admin-icon">-->
+<!--                                            <a th:href=""><i class='bx bxs-edit'></i></a>-->
+<!--                                            <a th:href=""><i class='bx bx-message-square-x'></i></a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                             </div>
                         </div>
                         </a>
@@ -233,7 +181,6 @@
             </div>
         </div>
     </div><!--/.container-->
-
 </section><!--/.explore-->
 <!--explore end -->
 

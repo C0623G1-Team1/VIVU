@@ -10,9 +10,18 @@
     <h1 id="tour-name" th:text="${tour.tourName}"></h1>
     <p><i class='bx bxs-star' style='color:#f8b300'  ></i><i class='bx bxs-star' style='color:#f8b300'  ></i><i class='bx bxs-star' style='color:#f8b300'  ></i><i class='bx bxs-star' style='color:#f8b300'  ></i> 4.9/5 trong 295 Đánh Giá</p>
     <div class="tour_img" style="text-align: center">
-        <img th:src="@{${tour.tourImage}}" alt="explore image">
+<!--        <div id="first-col-img" class="col-lg-6">-->
+<!--            <img th:src="@{${tour.imageUrls.get(0).getUrl}}" alt="explore image">-->
+<!--        </div>-->
+<!--        <div id="second-col-img" class="col-lg-3">-->
+
+<!--        </div>-->
+<!--        <div id="third-col-img" class="col-lg-3">-->
+
+<!--        </div>-->
+        <img th:src="@{${tour.imageUrls.get(0).getUrl}}" alt="explore image">
     </div>
-    <div class="tour_description d-flex">
+    <div class="row tour_description d-flex">
         <div id="overview" class=" col-lg-7">
             <p id="hight-light">Điểm nhấn hành trình</p>
             <hr>
@@ -22,20 +31,19 @@
             <div id="board">
                 <p class="tour-name" th:text="${tour.tourName}"></p>
                 <hr>
-                <p>Ngày khởi hành: <span th:text="${tour.startDate}"></span></p>
+                <p>Ngày khởi hành: <span th:text="${#dates.format(tour.startDate, 'dd-MM-yyyy')}"></span></p>
                 <hr>
-                <p>Ngày kết thúc: <span th:text="${tour.endDate}"></span></p>
+                <p>Ngày kết thúc: <span th:text="${#dates.format(tour.endDate, 'dd-MM-yyyy')}"></span></p>
                 <hr>
                 <p>Hướng dẫn viên: <span th:text="${tour.tourAvailableSeat}"></span></p>
                 <hr>
-                <p>Số lượng: <span th:text="${tour.tourAvailableSeat}"></span> người</p>
+                <p>Số lượng còn trống: <span th:text="${tour.tourAvailableSeat}"></span> chỗ</p>
                 <hr>
-                <p>Giá người lớn: <span th:text="${tour.adultPrice}"></span></p>
+                <p>Giá người lớn: <span th:text="${#numbers.formatInteger(tour.adultPrice, 3,'COMMA')}"></span> VNĐ</p>
                 <hr>
-                <p>Giá trẻ em: <span th:text="${tour.childPrice}"></span></p>
+                <p>Giá trẻ em: <span th:text="${#numbers.formatInteger(tour.childPrice, 3, 'COMMA')}"></span> VNĐ</p>
                 <hr>
-
-<!--                <h2>Giá từ <span th:text="${numberFormat.format(tour.adultPrice)}"></span></h2>-->
+<!--                <h2>Giá từ <span th:text="${#numbers.formatInteger(tour.adultPrice, 3, 'COMMA')}"></span></h2>-->
                 <div id="book">
                     <a th:href="@{/tour/booking/{id}(id=${tour.id})}">ĐẶT VÉ</a>
                 </div>

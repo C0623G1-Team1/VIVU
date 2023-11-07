@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -31,15 +32,17 @@ public class Tour {
 
     private int tourAvailableSeat;
 
-    @Column(columnDefinition = "LONGTEXT")
-    private String tourImage;
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    private List<Image> imageUrls;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @FutureOrPresent
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @FutureOrPresent
+    @Column(columnDefinition = "DATE")
     private Date startDate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @FutureOrPresent
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @FutureOrPresent
+    @Column(columnDefinition = "DATE")
     private Date endDate;
 
     @Column(columnDefinition = "bit(1) default 0")

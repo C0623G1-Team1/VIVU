@@ -10,12 +10,13 @@
 <div id="create-tour" class="container mt-3 border border-3 rounded p-2">
     <h1>CHỈNH SỬA THÔNG TIN CHUYẾN ĐI</h1>
     <div id="board">
-        <form class="mx-4" th:action="@{/tour/update/{id}}" method="post" th:object="${tour}">
-            <div >
+        <form class="mx-4" method="post" th:object="${tour}" id="submit-form">
+            <div class="mb-3">
                 <!--        <label for="id" class="form-label">Product ID: </label>-->
                 <input type="hidden" class="form-control" placeholder="Enter ID" id="id" th:field="*{id}">
                 <!--            <input type="hidden" class="form-control" placeholder="" id="date" th:field="*{date}" th:text="${localDate}">-->
             </div>
+
             <div class="div-element">
                 <label for="name" class="form-label">Điểm tham quan: </label>
                 <input type="text" class="form-control" id="name" th:field="*{tourName}">
@@ -38,6 +39,7 @@
                     <label for="adultPrice" class="form-label"> Giá vé người lớn: </label>
                     <input type="number" class="form-control" id="adultPrice" th:field="*{adultPrice}">
                 </div>
+
                 <div>
                     <label for="childPrice" class="form-label">Giá vé trẻ em:</label>
                     <input type="number" class="form-control" id="childPrice" th:field="*{childPrice}">
@@ -49,13 +51,25 @@
                 <textarea class="form-control" id="description" th:field="*{tourDescription}"></textarea>
             </div>
 
-            <div class="div-element">
-                <label for="image" class="form-label">Hình ảnh: </label>
-                <input type="text" class="form-control" id="image" th:field="*{tourImage}">
-            </div>
+            <!--            Upload ảnh-->
+            <div class="mb-3">
+                <div hidden th:each="book, itemStat : *{imageUrls}">
+                    <input th:field="*{imageUrls[__${itemStat.index}__]}" th:id="'image-' + ${itemStat.index}"/>
+                </div>
 
+                <div class="form-outline mb-4">
+                    <input class="form-control" accept=".png, .jpg, .jpeg" style="display: none" type="file"
+                           id="input-ref" multiple onchange="handlePreviewImage(this)"/>
+                    <button class="btn btn-outline-primary" type="button"
+                            onclick="document.getElementById('input-ref').click();">Chọn tệp
+                    </button>
+
+                    <!--                <input class="form-control" type="file" id="input-ref" multiple onchange="handlePreviewImage(this)"/>-->
+                </div>
+                <div id="preview-root"></div>
+            </div>
             <div id="create-btn" class="text-center">
-                <button type="submit" class="btn btn-outline-dark my-3">LƯU THAY ĐỔI</button>
+                <button type="submit" id="btn-upload" class="btn btn-outline-dark my-3">LƯU THAY ĐỔI</button>
             </div>
         </form>
     </div>

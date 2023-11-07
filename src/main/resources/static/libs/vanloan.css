@@ -10,6 +10,20 @@
 
 #tour img {
     height: 250px;
+    border-radius: 20px 20px 0 0;
+}
+
+. element.style {
+}
+#tour {
+    height: 500px;
+}
+.single-explore-img {
+    border-radius: 20px 20px 0 0;
+}
+
+.single-explore-item {
+    border-radius: 20px;
 }
 
 #tour-name {
@@ -21,7 +35,7 @@
 }
 
 #tour_detail p {
-    margin-bottom: 22px;
+    /*margin-bottom: 22px;*/
 }
 
 #tour_detail {
@@ -162,15 +176,13 @@
     border: none;
     outline: none;
 }
-
+.row.tour_description.d-flex {
+    display: flex;
+}
 #tour-information {
     margin-top: 20px;
     padding: 45px;
-}
-
-#tour_description #board {
-    position: sticky;
-    top: 50px;
+    position: relative !important;
 }
 
 #board {
@@ -178,8 +190,13 @@
     border-radius: 20px;
     padding: 40px;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    position: sticky;
+    top: 125px !important;
 }
 
+#board hr {
+    margin: 15px 0;
+}
 .tour-name {
     color: #FF3B5F;
     font-weight: bold;
@@ -259,4 +276,11 @@
 
 #board form {
     padding: 15px;
+}
+
+
+/*img tour view*/
+#first-col-img {
+    border-radius: 20px 0 0 20px;
+    width: 100%;
 }

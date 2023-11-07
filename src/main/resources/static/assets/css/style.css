@@ -248,14 +248,22 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     margin-top: 25px;
 }
 
-.welcome-hero-serch-box{margin-top: 78px;display: flex;}
+.welcome-hero-serch-box{
+    margin-top: 78px;
+    display: flex;
+    justify-content: center;
+}
+
 .welcome-hero-form {
     display: flex;
-    background: #fff;
+    justify-content: space-between;
+    background: #ffffffa8;
     height: 70px;
-    border-radius: 3px;
-    width: 85%;
+    border-radius: 50px;
+    width: 71%;
+    text-wrap: nowrap;
 }
+
 .single-welcome-hero-form {
     position: relative;
     display: flex;
@@ -264,6 +272,7 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     width: 50%;
     padding: 0 30px;
 }
+
 .single-welcome-hero-form input {
     margin-left: 10px;
     height: 70px;
@@ -288,20 +297,25 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     justify-content:  center;
     align-items:  center;
     font-size:  14px;
-    color:  #fff;
-    width:  170px;
-    height:  70px;
-    background:  #ff545a;
+    color:  black;
+    width:  140px;
+    height:  55px;
+    background:  white;
     text-transform:  capitalize;
-    margin-left:  30px;
-    border-radius: 3px;
+    border-radius: 50px;
     -webkit-transition: 0.3s linear; 
     -moz-transition: 0.3s linear; 
     -ms-transition: 0.3s linear; 
     -o-transition: 0.3s linear; 
     transition: 0.3s linear;
 }
-.welcome-hero-btn:hover{/*background: #fd4043;*/background: #f43032;}
+
+.welcome-hero-serch {
+    margin-left: 214px;
+    padding: 7px;
+}
+
+.welcome-hero-btn:hover{/*background: #fd4043;*/background: #FF3B5F;color: white}
 
 .welcome-hero-btn svg {
     width:  14px;
@@ -327,11 +341,11 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     width: 205px;
     height: 170px;
     background:#fff;
-    border-radius: 3px;
+    border-radius: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
     box-shadow: 0 0px 10px rgba(71,71,71,.2);
-    -webkit-transition: .3s linear; 
+    -webkit-transition: .3s linear;
     -moz-transition:.3s linear; 
     -ms-transition:.3s linear; 
     -o-transition:.3s linear;
@@ -409,10 +423,10 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
         7. Explore
 --------------------------------------*/
 .explore{
-    padding:117px 0 95px;
+    padding:60px 0 95px;
     background: #f8fafb;
 }
-.explore-content{margin-top: 78px;}
+.explore-content{margin-top: 35px;}
 
 .single-explore-item {
     background: #fff;
@@ -497,7 +511,7 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 .explore-rating-price,.explore-rating-price a {
     font-size: 15px;
     color: #777f85;
-    text-transform: capitalize;
+    text-transform: none;
     font-weight: 400;
     margin: 15px 0 20px;
 }
@@ -516,10 +530,10 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 .explore-price {color: #f63138;}
 .explore-price-box {
     display: inline-block;
-    padding: 0 10px;
-    margin: 0 8px;
-    border-left: 1px solid #dde0e4;
-    border-right: 1px solid #dde0e4;
+    /*padding: 0 10px;*/
+    /*margin: 0 8px;*/
+    /*border-left: 1px solid #dde0e4;*/
+    /*border-right: 1px solid #dde0e4;*/
 }
 .explore-person {
     padding-bottom: 28px;
@@ -550,6 +564,20 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 .single-explore-txt.bg-theme-2 .explore-map-icon a svg:hover{color: #00c437;}
 .single-explore-item:hover{box-shadow: 0 10px 20px rgba(21,19,19,.2);}
 
+.explore-map-admin-icon {
+    text-align: right;
+}
+
+.explore-map-admin-icon a {
+    width: 12px;
+    height: 14px;
+    margin-left: 23px;
+    color: #767f86;
+}
+.explore-map-admin-icon a:hover {
+    color: #ff545a;
+}
+footer-menu
 /*-------------------------------------
         8. Reviews
 --------------------------------------*/
@@ -815,6 +843,9 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
 /*-------------------------------------
         12. Footer
 --------------------------------------*/
+.footer img {
+    width: 100%;
+}
 .footer-menu {padding: 45px 0;}
 .footer-menu .navbar-header{padding:0;}
 .footer-menu .navbar-header a.navbar-brand,.footer-menu.footer-menu .navbar-header a.navbar-brand:hover,.footer-menu .navbar-header a.navbar-brand:focus{
@@ -844,7 +875,7 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     font-weight: 400;
     text-transform: capitalize;
 }
-.footer-social {text-align: right;}
+.footer-social {text-align: left;}
 .footer-social .fa-phone:before {
     position: relative;
     top: 2px;
