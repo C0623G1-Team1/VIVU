@@ -270,6 +270,14 @@
     width: 100%;
 }
 
+#date input {
+    width: 500px;
+}
+
+#price input {
+    width: 325px;
+}
+
 .div-element {
     margin-bottom: 20px;
 }

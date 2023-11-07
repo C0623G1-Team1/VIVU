@@ -22,7 +22,7 @@ public class TourDTO {
     private int id;
 
     @NotEmpty(message = "Không được để trống")
-//    @Pattern(regexp = "^[a-zA-Z0-9 ]+$", message = "Tên không được chứa các ký tự đặc biệt (@ ; , . = - + , ….)")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]+$", message = "Tên không được chứa các ký tự đặc biệt (@ ; , . = - + , ….)")
     private String tourName;
 
     @NotEmpty(message = "Không được để trống")
