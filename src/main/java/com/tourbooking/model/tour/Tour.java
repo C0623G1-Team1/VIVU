@@ -57,5 +57,4 @@ public class Tour {
 
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     private Set<Booking> booking;
-
 }
