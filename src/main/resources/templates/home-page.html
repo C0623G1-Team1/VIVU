@@ -219,8 +219,8 @@
 
 </section><!--/subscription-->
 <!--subscription end -->
-<p id="mess" hidden>AAAAAAAAAAAAAAAAA</p>
-<button id="first">Click me</button>
+<p id="mess" th:text="${mess}" ></p>
+<button id="first" hidden>Click me</button>
 <div th:replace="/header-footer::footer"></div>
 <footer th:replace="/header-footer::footer-libs"></footer>
 <!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>-->

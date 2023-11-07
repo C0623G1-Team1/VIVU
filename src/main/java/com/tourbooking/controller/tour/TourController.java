@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.text.NumberFormat;
@@ -39,21 +40,30 @@ public class TourController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("tour") TourDTO tour, BindingResult bindingResult, Model model) {
+    public String create(@Valid @ModelAttribute("tour") TourDTO tour, BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
         if (bindingResult.hasFieldErrors()) {
+            List<String> strings = tour.getImageUrls();
+            for (int i = strings.size() - 1; i >= 0; i--) {
+                if ("undefined".equals(strings.get(i))) {
+                    strings.remove(i);
+                }
+            }
             return "admin-create-tour";
         } else {
             Tour tour1 = new Tour();
-            BeanUtils.copyProperties(tour,tour1);
+            BeanUtils.copyProperties(tour, tour1);
             List<Image> list = new ArrayList<>();
-            for (String s: tour.getImageUrls()) {
-                if(!"undefined".equals(s)){
-                    list.add(new Image(s,tour1));
+            for (String s : tour.getImageUrls()) {
+                if (!"undefined".equals(s)) {
+                    list.add(new Image(s, tour1));
                 }
             }
             tour1.setImageUrls(list);
             tourService.create(tour1);
+            redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công");
             return "redirect:/";
+
         }
     }
 
@@ -86,7 +96,7 @@ public class TourController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@ModelAttribute TourDTO tour) {
+    public String update(@ModelAttribute TourDTO tour, RedirectAttributes redirectAttributes) {
         iImageService.deleteById(tour.getId());
         Tour tour1 = new Tour();
         BeanUtils.copyProperties(tour, tour1);
@@ -98,6 +108,7 @@ public class TourController {
         }
         tour1.setImageUrls(list);
         tourService.create(tour1);
+        redirectAttributes.addFlashAttribute("mess", "Cập nhật thành công");
         return "redirect:/";
     }
 
