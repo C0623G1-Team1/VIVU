@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        .background{
+            background-color: darkgray;
+        }
+        .email {
+            margin: 80px auto;
+            width: 700px;
+            height: 400px;
+            background-color: white;
+            border-radius: 20px;
+        }
+        .img-one{
+            top: 20px;
+            text-align: center;
+        }
+        .img-style{
+            border-radius: 120px;
+            height: 100px;
+            align-content: center;
+            position: relative;
+            top: 30px;
+        }
+        .text-thank{
+            position: relative;
+            top: 10px;
+            text-align: center;
+            font-size: 28px;
+            font-family: Quicksand;
+            font-weight: 600;
+            color: rgba(29, 38, 32, 0.83);
+        }
+        .button-return{
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="background">
+<div>
+    <div class="email">
+        <div class="img-one" >
+            <img class="img-style" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQeBJS2JY_LU8Lu2aPIcNkeukcsLeFJniJaPixOyRDUomNJvW9C" alt="">
+        </div>
+        <div>
+            <p class="text-thank" >Đơn đặt tour của quý khách hiện đã được xác nhận!</p>
+        </div>
+        <div>
+            <p class="text-thank" >Quý khách vui lòng kiểm tra email để nhận vé</p>
+        </div>
+        <div >
+            <div style="position: relative;  top: 50px" class="button-return">
+                <a th:href="@{/}" role="button" class="btn btn-primary" >Trang chủ</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
