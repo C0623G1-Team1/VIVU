@@ -553,6 +553,15 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ff545a;}
     text-transform: capitalize;
 }
 .close-btn.open-btn {color: #00c437;}
+
+.explore-map-icon a {
+    margin-left: 10px;
+}
+
+.explore-map-icon a:hover {
+    color: #FF3B5F;
+}
+
 .explore-map-icon{text-align: right;}
 .explore-map-icon a svg {
     width: 12px;

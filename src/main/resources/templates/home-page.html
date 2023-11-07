@@ -20,16 +20,16 @@
     <div class="container">
         <div class="welcome-hero-txt">
             <h2>best place to find and explore <br> that all you need </h2>
-<!--            <p>-->
-<!--                Find Best Place, Restaurant, Hotel, Real State and many more think in just One click-->
-<!--            </p>-->
+            <!--            <p>-->
+            <!--                Find Best Place, Restaurant, Hotel, Real State and many more think in just One click-->
+            <!--            </p>-->
         </div>
         <div class="welcome-hero-serch-box">
             <div class="welcome-hero-form">
                 <div class="single-welcome-hero-form">
                     <h3>Điểm đến</h3>
                     <form action="index.html">
-                        <input type="text" />
+                        <input type="text"/>
                     </form>
                 </div>
                 <div class="welcome-hero-serch">
@@ -112,69 +112,76 @@
                 <th:block th:each="tour : ${tourList}">
                     <div class=" col-md-4 col-sm-6" th:unless="${tourList.isEmpty()}">
                         <a th:href="@{/tour/view/{id}(id=${tour.id})}">
-                        <div id="tour" class="single-explore-item">
-                            <div class="single-explore-img">
-                                <img th:src="@{${tour.imageUrls.get(0).getUrl()}}" alt="explore image">
-                                <div class="single-explore-img-info">
-                                    <button onclick="window.location.href='#'">đánh giá cao</button>
-                                    <div class="single-explore-image-icon-box">
-                                        <ul>
-                                            <li>
-                                                <div class="single-explore-image-icon">
-                                                    <i class="fa fa-arrows-alt"></i>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="single-explore-image-icon">
-                                                    <i class="fa fa-bookmark-o"></i>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-explore-txt bg-theme-1">
-                                <h2 th:text="${tour.tourName}"></h2>
-                                <p class="explore-rating-price">
-                                    <a th:text="'Số lượng còn trống: ' + ${tour.tourAvailableSeat} + ' chỗ'"></a>
-                                    <span class="explore-price-box">
-											Giá từ
-											<span class="explore-price" th:text="${#numbers.formatInteger(tour.childPrice, 3, 'COMMA')} + ' VNĐ - ' + ${#numbers.formatInteger(tour.adultPrice, 3,'COMMA')} + ' VNĐ'"></span>
-                                    </span>
-                                </p>
-                                <div class="explore-person">
-                                    <div class="row">
-<!--                                        <span th:utext="${#strings.abbreviate(tour.tourDescription, 100)}"></span>-->
-                                    </div>
-                                </div>
-                                <div class="explore-open-close-part">
-                                    <div class="row">
-                                        <div class="col-sm-5">
-                                            <button class="close-btn open-btn" onclick="window.location.href='#'">
-                                                Đặt vé ngay
-                                            </button>
+                            <div id="tour" class="single-explore-item">
+                                <div class="single-explore-img">
+                                    <img th:src="@{${tour.imageUrls.get(0).getUrl()}}" alt="explore image">
+                                    <div class="single-explore-img-info">
+                                        <button onclick="window.location.href='#'">đánh giá cao</button>
+                                        <div class="single-explore-image-icon-box">
+                                            <ul>
+                                                <li>
+                                                    <div class="single-explore-image-icon">
+                                                        <i class="fa fa-arrows-alt"></i>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="single-explore-image-icon">
+                                                        <i class="fa fa-bookmark-o"></i>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <div class="col-sm-7">
-                                            <div class="explore-map-icon">
-                                                <a href="#"><i data-feather="map-pin"></i></a>
-                                                <a href="#"><i data-feather="upload"></i></a>
-                                                <a href="#"><i data-feather="heart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="single-explore-txt bg-theme-1">
+                                    <h2 th:text="${tour.tourName}"></h2>
+                                    <p class="explore-rating-price">
+                                        <a th:text="'Số lượng còn trống: ' + ${tour.tourAvailableSeat} + ' chỗ'"></a>
+                                        <span class="explore-price-box">
+											Giá từ:
+											<span class="explore-price"
+                                                  th:text="${#numbers.formatInteger(tour.childPrice, 3, 'COMMA')} + ' VNĐ - ' + ${#numbers.formatInteger(tour.adultPrice, 3,'COMMA')} + ' VNĐ'"></span>
+                                    </span>
+                                    </p>
+                                    <div class="explore-person">
+                                        <div class="row">
+                                            <!--                                        <span th:utext="${#strings.abbreviate(tour.tourDescription, 100)}"></span>-->
+                                        </div>
+                                    </div>
+                                    <div class="explore-open-close-part">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <button class="close-btn open-btn" onclick="window.location.href='#'">
+                                                    Xem chi tiết
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-7">
+<!--                                                <div class="explore-map-icon">-->
+<!--                                                    <a href="#"><i data-feather="map-pin"></i></a>-->
+<!--                                                    <a href="#"><i data-feather="upload"></i></a>-->
+<!--                                                    <a href="#"><i data-feather="heart"></i></a>-->
+<!--                                                </div>-->
+                                                <div class="explore-map-icon">
+                                                    <a th:href="@{/tour/update/{id}(id=${tour.id})}"><i class='bx bxs-edit'></i></a>
+                                                    <a th:href="@{/}"><i class='bx bx-message-square-x'></i></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-<!--                                <div class="row">-->
-<!--                                    <div class="col-sm-5">-->
-<!--                                    </div>-->
-<!--                                    <div class="col-sm-7">-->
-<!--                                        <div class="explore-map-admin-icon">-->
-<!--                                            <a th:href=""><i class='bx bxs-edit'></i></a>-->
-<!--                                            <a th:href=""><i class='bx bx-message-square-x'></i></a>-->
+<!--                                    <div class="admin-function">-->
+<!--                                        <div class="row">-->
+<!--                                            <div class="col-sm-5">-->
+<!--                                            </div>-->
+<!--                                            <div class="col-sm-7">-->
+<!--                                                <div class="explore-map-admin-icon">-->
+<!--                                                    <a th:href="@{/}"><i class='bx bxs-edit'></i></a>-->
+<!--                                                    <a th:href="@{/}"><i class='bx bx-message-square-x'></i></a>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
 <!--                                        </div>-->
 <!--                                    </div>-->
-<!--                                </div>-->
+                                </div>
                             </div>
-                        </div>
                         </a>
                     </div>
                 </th:block>

@@ -226,6 +226,11 @@
     box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 }
 
+/*create-tour*/
+.form-text {
+    margin-top: 5px;
+}
+
 #create-btn button {
     width: 30%;
     height: 40px;

@@ -8,9 +8,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,18 +36,22 @@ public class TourController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute TourDTO tour) {
-        Tour tour1 = new Tour();
-        BeanUtils.copyProperties(tour,tour1);
-        List<Image> list = new ArrayList<>();
-        for (String s: tour.getImageUrls()) {
-            if(!"undefined".equals(s)){
-                list.add(new Image(s,tour1));
+    public String create(@Valid @ModelAttribute("tour") TourDTO tour, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasFieldErrors()) {
+            return "admin-create-tour";
+        } else {
+            Tour tour1 = new Tour();
+            BeanUtils.copyProperties(tour,tour1);
+            List<Image> list = new ArrayList<>();
+            for (String s: tour.getImageUrls()) {
+                if(!"undefined".equals(s)){
+                    list.add(new Image(s,tour1));
+                }
             }
+            tour1.setImageUrls(list);
+            tourService.create(tour1);
+            return "redirect:/";
         }
-        tour1.setImageUrls(list);
-        tourService.create(tour1);
-        return "redirect:/";
     }
 
     @GetMapping("/view/{id}")

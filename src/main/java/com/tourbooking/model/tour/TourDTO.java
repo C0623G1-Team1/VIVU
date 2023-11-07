@@ -19,37 +19,36 @@ import java.util.Set;
 @Getter
 @Setter
 public class TourDTO {
-    @NotEmpty
-    @Pattern(regexp = "^[a-zA-Z0-9 ]+$", message = "Tên không được chứa các ký tự đặc biệt (@ ; , . = - + , ….)")
+    private int id;
+
+    @NotEmpty(message = "Không được để trống")
+//    @Pattern(regexp = "^[a-zA-Z0-9 ]+$", message = "Tên không được chứa các ký tự đặc biệt (@ ; , . = - + , ….)")
     private String tourName;
 
-    @NotEmpty
+    @NotEmpty(message = "Không được để trống")
     private String tourDescription;
 
-    @NotEmpty
-    @Min(20)
-    @Max(50)
-    @Pattern(regexp = "^/d+{2}$", message = "Phải có tối thiểu 20 và tối đa 50 khách tham quan")
+    @NotNull(message = "Không được để trống")
+    @Min(value = 20, message = "Tối thiểu 20 và tối đa 50 khách tham quan")
+    @Max(value = 50, message = "Tối thiểu 20 và tối đa 50 khách tham quan")
     private Integer tourAvailableSeat;
 
-    @NotEmpty
+//    @NotEmpty(message = "Không được để trống")
     private List<String> imageUrls;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @FutureOrPresent
-    @Pattern(regexp = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$", message = "Thời gian khởi hành và kết thúc phải là ngày ở hiện tại hoặc tương lai")
+    @FutureOrPresent(message = "Thời gian phải là ngày ở hiện tại hoặc tương lai")
     private Date startDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @FutureOrPresent
-    @Pattern(regexp = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$", message = "Thời gian khởi hành và kết thúc phải là ngày ở hiện tại hoặc tương lai")
+    @FutureOrPresent(message = "Thời gian phải là ngày ở hiện tại hoặc tương lai")
     private Date endDate;
 
-    @NotEmpty
-    @Pattern(regexp = "^/d+$", message = "Giá phải là số và không chứa các ký tự đặc biệt")
+    @NotNull(message = "Không được để trống")
+//    @Pattern(regexp = "^/d+$", message = "Giá phải là số và không chứa các ký tự đặc biệt")
     private Long adultPrice;
 
-    @NotEmpty
-    @Pattern(regexp = "^/d+$", message = "Giá phải là số và không chứa các ký tự đặc biệt")
+    @NotNull(message = "Không được để trống")
+//    @Pattern(regexp = "^/d+$", message = "Giá phải là số và không chứa các ký tự đặc biệt")
     private Long childPrice;
 }
