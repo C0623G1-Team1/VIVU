@@ -12,6 +12,7 @@
 </head>
 
 <body>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <div th:include="/header-footer::nav"></div>
 
@@ -113,8 +114,13 @@
                     <div class=" col-md-4 col-sm-6" th:unless="${tourList.isEmpty()}">
                         <a th:href="@{/tour/view/{id}(id=${tour.id})}">
                             <div id="tour" class="single-explore-item">
+
+                                <!--                                image-->
                                 <div class="single-explore-img">
-                                    <img th:src="@{${tour.imageUrls.get(0).getUrl()}}" alt="explore image">
+                                    <th:block th:unless="${tour.imageUrls.isEmpty()}">
+                                        <img th:src="@{${tour.imageUrls.get(0).getUrl()}}" alt="explore image">
+                                    </th:block>
+
                                     <div class="single-explore-img-info">
                                         <button onclick="window.location.href='#'">đánh giá cao</button>
                                         <div class="single-explore-image-icon-box">
@@ -133,53 +139,48 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!--                                Tour name -->
                                 <div class="single-explore-txt bg-theme-1">
-                                    <h2 th:text="${tour.tourName}"></h2>
+                                        <h2 style="height: 8rem" th:text="${tour.tourName}"></h2>
+
+
+<!--                                    seats + price-->
                                     <p class="explore-rating-price">
-                                        <a th:text="'Số lượng còn trống: ' + ${tour.tourAvailableSeat} + ' chỗ'"></a>
+                                        <th:block th:if="${tour.tourAvailableSeat} <= 10">
+                                            <a>Số lượng còn trống: </a>
+                                            <a style="color: red" th:text="${tour.tourAvailableSeat} + ' chỗ'"></a>
+                                        </th:block>
+                                        <th:block th:if="${tour.tourAvailableSeat} > 10">
+                                            <a>Số lượng còn trống: </a>
+                                            <a th:text="${tour.tourAvailableSeat} + ' chỗ'"></a>
+                                        </th:block>
                                         <span class="explore-price-box">
-											Giá từ:
+											Giá từ
 											<span class="explore-price"
                                                   th:text="${#numbers.formatInteger(tour.childPrice, 3, 'COMMA')} + ' VNĐ - ' + ${#numbers.formatInteger(tour.adultPrice, 3,'COMMA')} + ' VNĐ'"></span>
                                     </span>
                                     </p>
-                                    <div class="explore-person">
-                                        <div class="row">
-                                            <!--                                        <span th:utext="${#strings.abbreviate(tour.tourDescription, 100)}"></span>-->
-                                        </div>
-                                    </div>
                                     <div class="explore-open-close-part">
                                         <div class="row">
                                             <div class="col-sm-5">
                                                 <button class="close-btn open-btn" onclick="window.location.href='#'">
-                                                    Xem chi tiết
+                                                    Đặt vé ngay
                                                 </button>
                                             </div>
                                             <div class="col-sm-7">
-<!--                                                <div class="explore-map-icon">-->
-<!--                                                    <a href="#"><i data-feather="map-pin"></i></a>-->
-<!--                                                    <a href="#"><i data-feather="upload"></i></a>-->
-<!--                                                    <a href="#"><i data-feather="heart"></i></a>-->
-<!--                                                </div>-->
-                                                <div class="explore-map-icon">
-                                                    <a th:href="@{/tour/update/{id}(id=${tour.id})}"><i class='bx bxs-edit'></i></a>
+                                                <!--                                                <div class="explore-map-icon">-->
+                                                <!--                                                    <a href="#"><i data-feather="map-pin"></i></a>-->
+                                                <!--                                                    <a href="#"><i data-feather="upload"></i></a>-->
+                                                <!--                                                    <a href="#"><i data-feather="heart"></i></a>-->
+                                                <!--                                                </div>-->
+                                                <div class="explore-map-admin-icon">
+                                                    <a th:href="@{/}"><i class='bx bxs-edit'></i></a>
                                                     <a th:href="@{/}"><i class='bx bx-message-square-x'></i></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-<!--                                    <div class="admin-function">-->
-<!--                                        <div class="row">-->
-<!--                                            <div class="col-sm-5">-->
-<!--                                            </div>-->
-<!--                                            <div class="col-sm-7">-->
-<!--                                                <div class="explore-map-admin-icon">-->
-<!--                                                    <a th:href="@{/}"><i class='bx bxs-edit'></i></a>-->
-<!--                                                    <a th:href="@{/}"><i class='bx bx-message-square-x'></i></a>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
                                 </div>
                             </div>
                         </a>
@@ -187,7 +188,7 @@
                 </th:block>
             </div>
         </div>
-    </div><!--/.container-->
+    </div>
 </section><!--/.explore-->
 <!--explore end -->
 
@@ -218,10 +219,31 @@
 
 </section><!--/subscription-->
 <!--subscription end -->
-
+<p id="mess" hidden>AAAAAAAAAAAAAAAAA</p>
+<button id="first">Click me</button>
 <div th:replace="/header-footer::footer"></div>
 <footer th:replace="/header-footer::footer-libs"></footer>
+<!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    (function doSth() {
+        let str = document.getElementById("mess").textContent;
+        // console.log(str);
+        if (str) {
+            showMess(str)
+        }
+    })();
 
+    function showMess(str) {
+        Swal.fire({
+            title: "Good job!",
+            text: str,
+            icon: "success",
+            width: "30%"
+        })
+    }
+
+</script>
 </body>
 
 </html>

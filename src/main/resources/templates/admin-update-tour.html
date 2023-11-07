@@ -53,7 +53,7 @@
 
             <!--            Upload ảnh-->
             <div class="mb-3">
-                <div hidden th:each="book, itemStat : *{imageUrls}">
+                <div hidden  th:each="book, itemStat : *{imageUrls}">
                     <input th:field="*{imageUrls[__${itemStat.index}__]}" th:id="'image-' + ${itemStat.index}"/>
                 </div>
 
@@ -88,7 +88,9 @@
 <footer th:replace="/header-footer::footer-libs"></footer>
 <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
-<script src="../handler/firebase.js"></script>
-<script type="module" src="../handler/upload.js"></script>
+
+<script src="/handler/firebase.js"></script>
+<script type="module" src="/handler/upload.js"></script>
+
 </body>
 </html>

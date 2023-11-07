@@ -3,6 +3,7 @@ package com.tourbooking.controller.tour;
 import com.tourbooking.model.tour.Image;
 import com.tourbooking.model.tour.Tour;
 import com.tourbooking.model.tour.TourDTO;
+import com.tourbooking.service.image.IImageService;
 import com.tourbooking.service.tour.ITourService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ import java.util.Locale;
 public class TourController {
     @Autowired
     private ITourService tourService;
+    @Autowired
+    private IImageService iImageService;
 
     @GetMapping("/create")
     public ModelAndView showCreateForm() {
@@ -59,18 +62,42 @@ public class TourController {
         Locale locale = new Locale("vi", "VN");
         NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
         model.addAttribute(numberFormat);
-        Tour tour =  tourService.findById(id).get();
+        Tour tour = tourService.findById(id).get();
         return new ModelAndView("tour-view", "tour", tour);
     }
 
     @GetMapping("/update/{id}")
     public ModelAndView showUpdateForm(@PathVariable Integer id) {
-        return new ModelAndView("admin-update-tour", "tour", tourService.findById(id).get());
+        TourDTO tourDTO = new TourDTO();
+        Tour tour = tourService.findById(id).get();
+        BeanUtils.copyProperties(tour, tourDTO);
+        List<String> initList = new ArrayList<>();
+        for (Image image : tour.getImageUrls()) {
+            initList.add(image.getUrl());
+        }
+        if (initList.size() < 6) {
+            int additionSize = 6 - initList.size();
+            for (int i = 0; i < additionSize; i++) {
+                initList.add("");
+            }
+        }
+        tourDTO.setImageUrls(initList);
+        return new ModelAndView("admin-update-tour", "tour", tourDTO);
     }
 
     @PostMapping("/update/{id}")
-    public String update(@ModelAttribute Tour tour) {
-        tourService.create(tour);
+    public String update(@ModelAttribute TourDTO tour) {
+        iImageService.deleteById(tour.getId());
+        Tour tour1 = new Tour();
+        BeanUtils.copyProperties(tour, tour1);
+        List<Image> list = new ArrayList<>();
+        for (String s : tour.getImageUrls()) {
+            if (!"undefined".equals(s)) {
+                list.add(new Image(s, tour1));
+            }
+        }
+        tour1.setImageUrls(list);
+        tourService.create(tour1);
         return "redirect:/";
     }
 
