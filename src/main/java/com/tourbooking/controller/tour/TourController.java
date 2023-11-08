@@ -125,7 +125,12 @@ public class TourController {
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
-        tourService.delete(id);
+        int count = tourService.showBookedTour(id);
+        if (count>0) {
+
+        } else {
+            tourService.delete(id);
+        }
         return "redirect:/";
     }
 

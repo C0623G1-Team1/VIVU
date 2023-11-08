@@ -31,12 +31,16 @@
                     <input type="date" class="form-control" id="startDate" th:field="*{startDate}">
                     <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('startDate')}"
                          th:errors="*{startDate}"></div>
+                    <div style="color: #d81212e8" id="start" class="form-text"></div>
+
                 </div>
                 <div>
                     <label for="endDate" class="form-label">Ngày kết thúc:</label>
                     <input type="date" class="form-control" id="endDate" th:field="*{endDate}">
                     <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('endDate')}"
                          th:errors="*{endDate}"></div>
+                    <div style="color: #d81212e8" id="end" class="form-text"></div>
+
                 </div>
                 <button onclick="checkDate()" type="button"><span> Chọn hướng dẫn viên </span></button>
             </div>
@@ -111,6 +115,9 @@
             <div id="create-btn" class="text-center">
                 <button type="submit" id="btn-upload" class="btn btn-outline-dark my-3">LƯU THAY ĐỔI</button>
             </div>
+            <div style="display: none" id="modal-btn"
+                 class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            </div>
         </form>
     </div>
 </div>
@@ -162,6 +169,6 @@
 
 <script src="/handler/firebase.js"></script>
 <script type="module" src="/handler/upload.js"></script>
-<script src="../libs/loan.js"></script>
+<script src="/libs/loan.js"></script>
 </body>
 </html>

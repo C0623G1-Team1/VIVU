@@ -18,6 +18,7 @@ public interface IEmployeeRepository extends JpaRepository<Account, Integer> {
             "select c.account_id\n" +
             "from `account` c \n" +
             "join tour t on c.account_id = t.account_id\n" +
-            "where t.start_date between :startDate and :endDate or t.end_date  between :startDate and :endDate )", nativeQuery = true)
+            "where t.start_date between :startDate and :endDate or t.end_date  between :startDate and :endDate ) " +
+            "and account.account_id <> 1 and account.is_enabled = 1", nativeQuery = true)
      List<IAccountDTO> getListEmployee(Date startDate, Date endDate);
 }

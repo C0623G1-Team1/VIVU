@@ -1,5 +1,4 @@
-
-    function checkDate() {
+function checkDate() {
     let startDate = document.getElementById("startDate").value;
     let endDate = document.getElementById("endDate").value;
     let curDate = new Date();
@@ -12,33 +11,33 @@
     endDateError.innerText = "";
 
     switch (true) {
-    case !startDate && !endDate:
-    startDateError.innerText = "Vui lòng nhập ngày khơi hành";
-    endDateError.innerText = "Vui lòng nhập ngày kết thúc";
-    return;
-    case !startDate && endDate < curDate:
-    startDateError.innerText = "Vui lòng nhập ngày khơi hành";
-    endDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
-    return;
-    case !endDate && startDate < curDate:
-    startDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
-    endDateError.innerText = "Vui lòng nhập ngày kết thúc";
-    return;
-    case  startDate < curDate && endDate < curDate:
-    startDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
-    endDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
-    return;
-    case startDate < curDate:
-    startDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
-    return;
-    case startDate > endDate:
-    endDateError.innerText = "Vui lòng nhập ngày khởi hành lớn hơn ngày kết thúc";
-    return;
-}
+        case !startDate && !endDate:
+            startDateError.innerText = "Vui lòng nhập ngày khơi hành";
+            endDateError.innerText = "Vui lòng nhập ngày kết thúc";
+            return;
+        case !startDate && endDate < curDate:
+            startDateError.innerText = "Vui lòng nhập ngày khơi hành";
+            endDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
+            return;
+        case !endDate && startDate < curDate:
+            startDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
+            endDateError.innerText = "Vui lòng nhập ngày kết thúc";
+            return;
+        case  startDate < curDate && endDate < curDate:
+            startDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
+            endDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
+            return;
+        case startDate < curDate:
+            startDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
+            return;
+        case startDate > endDate:
+            endDateError.innerText = "Vui lòng nhập ngày khởi hành lớn hơn ngày kết thúc";
+            return;
+    }
     showEmployeeList(startDate, endDate);
 }
 
-    function showEmployeeList(startDate, endDate) {
+function showEmployeeList(startDate, endDate) {
     $.ajax({
         url: `http://localhost:8080/show-list-employee?startDate=${startDate}&endDate=${endDate}`,
         type: "GET",
@@ -62,7 +61,7 @@
     document.getElementById("modal-btn").click();
 }
 
-    function bindingValue(id, name,phone,email) {
+function bindingValue(id, name, phone, email) {
     document.getElementById("employeeName").value = name;
     document.getElementById("accountId").value = id;
     document.getElementById("employeePhone").value = phone;

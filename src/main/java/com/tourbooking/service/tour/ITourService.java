@@ -17,4 +17,6 @@ public interface ITourService {
     Optional<Tour> findById(Integer id);
 
     void delete(Integer id);
+
+    int showBookedTour(Integer id);
 }

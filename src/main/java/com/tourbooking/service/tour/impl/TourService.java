@@ -37,6 +37,11 @@ public class TourService implements ITourService {
 
     @Override
     public void delete(Integer id) {
-        tourRepository.deleteById(id);
+        tourRepository.deleteTour(id);
+    }
+
+    @Override
+    public int showBookedTour(Integer id) {
+        return tourRepository.showBookedTour(id);
     }
 }

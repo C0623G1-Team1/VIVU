@@ -140,12 +140,11 @@
                                     </div>
                                 </div>
 
-                                <!--                                Tour name -->
+                                <!-- Tour name -->
                                 <div class="single-explore-txt bg-theme-1">
                                     <h2 style="height: 8rem" th:text="${tour.tourName}"></h2>
 
-
-                                    <!--                                    seats + price-->
+                                    <!--seats + price-->
                                     <p class="explore-rating-price">
                                         <th:block th:if="${tour.tourAvailableSeat} <= 10">
                                             <a>Số lượng còn trống: </a>
@@ -175,9 +174,15 @@
                                                 <!--                                                    <a href="#"><i data-feather="heart"></i></a>-->
                                                 <!--                                                </div>-->
                                                 <div class="explore-map-admin-icon">
-                                                    <a th:href="@{/tour/update/{id}(id=${tour.id})}"><i
-                                                            class='bx bxs-edit'></i></a>
-                                                    <a th:href="@{/}"><i class='bx bx-message-square-x'></i></a>
+                                                    <a th:href="@{/tour/update/{id}(id=${tour.id})}">
+                                                        <i class='bx bxs-edit'></i>
+                                                    </a>
+                                                    <div id="modal-btn"
+                                                         class="btn" data-toggle="modal"
+                                                         data-target="#myModal" th:attr="onclick=|sendInf('${tour.id}','${tour.tourName}')|">
+                                                        <i class='bx bx-message-square-x'></i>
+                                                    </div>
+                                                    <!--                                                    <a th:href="@{/tour/delete/{id}(id=${tour.id})}"><i class='bx bx-message-square-x'></i></a>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -195,13 +200,31 @@
            th:href="@{/(page=${tourList.number - 1})}"><i class='bx bx-left-arrow-alt'></i></a>
         <span th:text="${tourList.number + 1}"></span>
         <a class="text-decoration-none text-dark" th:if="${tourList.hasNext()}"
-           th:href="@{/(page=${tourList.number + 1})}"><i class='bx bx-right-arrow-alt' ></i></a>
+           th:href="@{/(page=${tourList.number + 1})}"><i class='bx bx-right-arrow-alt'></i></a>
     </div>
 </section><!--/.explore-->
 <!--explore end -->
 
 
-
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Xác nhận xóa chuyến đi</h4>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa chuyến đi <span id="nameDel" class="text-danger"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--subscription strat -->
 <section id="contact" class="subscription">
@@ -255,6 +278,12 @@
         })
     }
 
+</script>
+<script>
+    function sendInf(id, tourName) {
+        document.getElementById("nameDel").innerText = tourName;
+        document.getElementById("idDel").href = "/delete/" + id;
+    }
 </script>
 </body>
 
