@@ -23,7 +23,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.Currency;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/booking")
@@ -85,7 +89,7 @@ public class BookingController {
         tourDto.setTourAvailableSeat(tour.getTourAvailableSeat());
         String endDate= String.valueOf(tour.getEndDate());
         tourDto.setEndDate(endDate);
-//        tourDto.setTourImage(tour.getTourImage());
+        tourDto.setTourImage(tour.getImageUrls().get(0).getUrl());
         tourDto.setTourName(tour.getTourName());
         return tourDto;
     }
@@ -147,7 +151,8 @@ public class BookingController {
             booking.setCustomerIdCard(newBookingDto.getCustomerIdCard());
             booking.setPromotion(promotionService.findByCode(newBookingDto.getPromotionCode()));
             bookingService.createBooking(booking);
-            emailSenderService.sendEmail(newBookingDto.getEmail(),"VIVU","Cảm ơn bạn đã đặt tour");
+            String total=getTotal(booking,tourService.findById(newBookingDto.getTourId()).get());
+            emailSenderService.sendEmail(newBookingDto.getEmail(),"ĐẶT TOUR THÀNH CÔNG","Cảm ơn bạn đã đặt tour", booking, total);
         } else {
             model.addAttribute("result","THANH TOÁN THẤT BẠI! VUI LÒNG THỬ LẠI");
         }
@@ -162,12 +167,25 @@ public class BookingController {
     public String showBookingDetail(Model model, @PathVariable int id){
         Booking booking=bookingService.findById(id);
         Tour tour=tourService.findById(booking.getTour().getId()).get();
-//        model.addAttribute("img",tour.getTourImage());
+        model.addAttribute("img",tour.getImageUrls().get(0).getUrl());
         model.addAttribute("booking",booking);
-        long total=tour.getAdultPrice()*booking.getAdultQuantity()+tour.getChildPrice()* booking.getChildrenQuantity();
-        model.addAttribute("total",total+"");
+        model.addAttribute("total",getTotal(booking,tour));
         return "/booking/booking-detail";
     }
+
+    private static String getTotal(Booking booking, Tour tour) {
+        long total= tour.getAdultPrice()* booking.getAdultQuantity()+ tour.getChildPrice()* booking.getChildrenQuantity();
+        Locale locale = new Locale("vi", "VN");
+        Currency currency = Currency.getInstance("VND");
+
+        DecimalFormatSymbols df = DecimalFormatSymbols.getInstance(locale);
+        df.setCurrency(currency);
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+        numberFormat.setCurrency(currency);
+        String sum=numberFormat.format(total);
+        return sum;
+    }
+
     @GetMapping("/delete")
     public String deleteBooking(@RequestParam int id){
         bookingService.delete(id);
