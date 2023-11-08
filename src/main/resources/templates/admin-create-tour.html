@@ -3,6 +3,7 @@
 <head th:replace="header-footer::header">
     <meta charset="UTF-8">
     <title>Title</title>
+
     <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
 </head>
 <body>
@@ -44,23 +45,31 @@
                     <input type="date" class="form-control" id="endDate" th:field="*{endDate}">
                     <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('endDate')}"
                          th:errors="*{endDate}"></div>
-
                     <div style="color: #d81212e8" id="end" class="form-text"></div>
                 </div>
-                <button onclick="checkDate()" type="button">Click</button>
+                <button onclick="checkDate()" type="button"><span> Chọn hướng dẫn viên </span></button>
             </div>
 
             <!--            Binding Value Employee-->
-            <div class="div-element in-one-line">
+            <div id="employeeInf" class="div-element in-one-line">
                 <div>
-                    <label for="startDate" class="form-label">Tên nhân viên:</label>
+                    <label for="employeeName" class="form-label">Tên hướng dẫn viên :</label>
                     <input type="text" class="form-control" readonly id="employeeName">
-                    <input type="text" class="form-control" readonly th:field="*{accountId}" id="accountId">
+                    <input type="hidden" class="form-control" readonly th:field="*{accountId}" id="accountId">
                     <!--                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('startDate')}"-->
                     <!--                         th:errors="*{startDate}"></div>-->
                     <!--                    <div style="color: #d81212e8" id="start" class="form-text"></div>-->
                 </div>
+                <div>
+                    <label for="employeePhone" class="form-label">Số điện thoại :</label>
+                    <input type="text" class="form-control" readonly id="employeePhone">
+                </div>
+                <div>
+                    <label for="employeeEmail" class="form-label">Email :</label>
+                    <input type="text" class="form-control" readonly id="employeeEmail">
+                </div>
             </div>
+
 
             <div id="price" class="div-element in-one-line">
                 <div>
@@ -139,6 +148,7 @@
                         <th>Tên nhân viên</th>
                         <th>Số điện thoại</th>
                         <th>Email</th>
+                        <th>Chon</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -161,75 +171,6 @@
 <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
 <script src="../handler/firebase.js"></script>
 <script type="module" src="../handler/upload.js"></script>
-<script>
-    function checkDate() {
-        let startDate = document.getElementById("startDate").value;
-        let endDate = document.getElementById("endDate").value;
-        let curDate = new Date();
-        curDate = curDate.toISOString().split('T')[0];
-        console.log(curDate);
-        let startDateError = document.getElementById("start");
-        let endDateError = document.getElementById("end");
-        let stringStartError = "Vui lòng nhập ngày khởi hành";
-        let stringEndError = "Vui lòng nhập ngày kết thúc";
-        startDateError.innerText = "";
-        endDateError.innerText = "";
-
-        switch (true) {
-            case !startDate && !endDate:
-                startDateError.innerText = "Vui lòng nhập ngày khơi hành";
-                endDateError.innerText = "Vui lòng nhập ngày kết thúc";
-                return;
-            case !startDate && endDate < curDate:
-                startDateError.innerText = "Vui lòng nhập ngày khơi hành";
-                endDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
-                return;
-            case !endDate && startDate < curDate:
-                startDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
-                endDateError.innerText = "Vui lòng nhập ngày kết thúc";
-                return;
-            case  startDate < curDate && endDate < curDate:
-                startDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
-                endDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
-                return;
-            case startDate < curDate:
-                startDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
-                return;
-            case startDate > endDate:
-                endDateError.innerText = "Vui lòng nhập ngày khởi hành lớn hơn ngày kết thúc";
-                return;
-        }
-        showEmployeeList(startDate, endDate);
-    }
-
-    function showEmployeeList(startDate, endDate) {
-        $.ajax({
-            url: `http://localhost:8080/show-list-employee?startDate=${startDate}&endDate=${endDate}`,
-            type: "GET",
-            dataType: "json",
-            success: function (data) {
-                $("tbody").empty();
-                let tr = [];
-                for (let i = 0; i < data.length; i++) {
-                    tr.push("<tr>");
-                    tr.push("<td>" + (i + 1) + "</td>");
-                    // tr.push("<td>" + data[i].accountId + "</td>");
-                    tr.push("<td>" + data[i].employeeName + "</td>");
-                    tr.push("<td>" + data[i].phoneNumber + "</td>");
-                    tr.push("<td>" + data[i].email + "</td>");
-                    tr.push(`<td><button type="button" class="btn btn-default" data-dismiss="modal" onclick="bindingValue(${data[i].accountId},'${data[i].employeeName}')">Chọn</button></td>`);
-                    tr.push("</tr>");
-                }
-                $("table").append(tr.join(""));
-            }
-        })
-        document.getElementById("modal-btn").click();
-    }
-
-    function bindingValue(id, name) {
-        document.getElementById("employeeName").value = name;
-        document.getElementById("accountId").value = id;
-    }
-</script>
+<script src="../libs/loan.js"></script>
 </body>
 </html>

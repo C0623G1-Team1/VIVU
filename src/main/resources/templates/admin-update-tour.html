@@ -38,7 +38,29 @@
                     <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('endDate')}"
                          th:errors="*{endDate}"></div>
                 </div>
+                <button onclick="checkDate()" type="button"><span> Chọn hướng dẫn viên </span></button>
             </div>
+
+            <!--            Binding Value Employee-->
+            <div id="employeeInf" class="div-element in-one-line">
+                <div>
+                    <label for="employeeName" class="form-label">Tên hướng dẫn viên :</label>
+                    <input type="text" class="form-control" readonly id="employeeName">
+                    <input type="hidden" class="form-control" readonly th:field="*{accountId}" id="accountId">
+                    <!--                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('startDate')}"-->
+                    <!--                         th:errors="*{startDate}"></div>-->
+                    <!--                    <div style="color: #d81212e8" id="start" class="form-text"></div>-->
+                </div>
+                <div>
+                    <label for="employeePhone" class="form-label">Số điện thoại :</label>
+                    <input type="text" class="form-control" readonly id="employeePhone">
+                </div>
+                <div>
+                    <label for="employeeEmail" class="form-label">Email :</label>
+                    <input type="text" class="form-control" readonly id="employeeEmail">
+                </div>
+            </div>
+
             <div id="price" class="div-element in-one-line">
                 <div>
                     <label for="seat" class="form-label">Số lượng (người):</label>
@@ -91,8 +113,38 @@
             </div>
         </form>
     </div>
-
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <table border="1" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Số thứ tự</th>
+                        <th>Tên nhân viên</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Chon</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     CKEDITOR.replace("description")
@@ -110,6 +162,6 @@
 
 <script src="/handler/firebase.js"></script>
 <script type="module" src="/handler/upload.js"></script>
-
+<script src="../libs/loan.js"></script>
 </body>
 </html>
