@@ -1,10 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header-footer::header">
     <meta charset="UTF-8">
     <title>Title</title>
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
 </head>
 <body>
+<div th:include="/header-footer::nav"></div>
+<div id="create-tour" class="container mt-3 border border-3 rounded p-2">
+    <h1>CHỈNH SỬA THÔNG TIN CHUYẾN ĐI</h1>
+    <div id="board">
+        <form class="mx-4" method="post" th:object="${tour}" id="submit-form">
+            <div class="mb-3">
+                <!--        <label for="id" class="form-label">Product ID: </label>-->
+                <!--                <input type="hidden" class="form-control" placeholder="Enter ID" id="id" th:field="*{id}">-->
+                <!--            <input type="hidden" class="form-control" placeholder="" id="date" th:field="*{date}" th:text="${localDate}">-->
+            </div>
 
+            <div class="div-element">
+                <label for="name" class="form-label">Điểm tham quan: </label>
+                <input type="text" class="form-control" id="name" th:field="*{tourName}">
+                <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('tourName')}"
+                     th:errors="*{tourName}">Tour name
+                </div>
+            </div>
+
+            <div id="date" class="div-element in-one-line">
+                <div>
+                    <label for="startDate" class="form-label">Ngày khởi hành:</label>
+                    <input type="date" class="form-control" id="startDate" th:field="*{startDate}">
+                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('startDate')}"
+                         th:errors="*{startDate}"></div>
+                </div>
+                <div>
+                    <label for="endDate" class="form-label">Ngày kết thúc:</label>
+                    <input type="date" class="form-control" id="endDate" th:field="*{endDate}">
+                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('endDate')}"
+                         th:errors="*{endDate}"></div>
+                </div>
+                <button onclick="checkDate()" type="button"><span> Chọn hướng dẫn viên </span></button>
+            </div>
+
+            <!--            Binding Value Employee-->
+            <div id="employeeInf" class="div-element in-one-line">
+                <div>
+                    <label for="employeeName" class="form-label">Tên hướng dẫn viên :</label>
+                    <input type="text" class="form-control" readonly id="employeeName">
+                    <input type="hidden" class="form-control" readonly th:field="*{accountId}" id="accountId">
+                    <!--                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('startDate')}"-->
+                    <!--                         th:errors="*{startDate}"></div>-->
+                    <!--                    <div style="color: #d81212e8" id="start" class="form-text"></div>-->
+                </div>
+                <div>
+                    <label for="employeePhone" class="form-label">Số điện thoại :</label>
+                    <input type="text" class="form-control" readonly id="employeePhone">
+                </div>
+                <div>
+                    <label for="employeeEmail" class="form-label">Email :</label>
+                    <input type="text" class="form-control" readonly id="employeeEmail">
+                </div>
+            </div>
+
+            <div id="price" class="div-element in-one-line">
+                <div>
+                    <label for="seat" class="form-label">Số lượng (người):</label>
+                    <input type="number" class="form-control" id="seat" th:field="*{tourAvailableSeat}">
+                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('tourAvailableSeat')}"
+                         th:errors="*{tourAvailableSeat}"></div>
+                </div>
+                <div>
+                    <label for="adultPrice" class="form-label"> Giá vé người lớn: </label>
+                    <input type="number" class="form-control" id="adultPrice" th:field="*{adultPrice}">
+                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('adultPrice')}"
+                         th:errors="*{adultPrice}"></div>
+                </div>
+
+                <div>
+                    <label for="childPrice" class="form-label">Giá vé trẻ em:</label>
+                    <input type="number" class="form-control" id="childPrice" th:field="*{childPrice}">
+                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('childPrice')}"
+                         th:errors="*{childPrice}"></div>
+                </div>
+            </div>
+
+            <div class="div-element">
+                <label for="description" class="form-label">Mô tả chi tiết: </label>
+                <textarea class="form-control" id="description" th:field="*{tourDescription}"></textarea>
+                <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('tourDescription')}"
+                     th:errors="*{tourDescription}"></div>
+            </div>
+
+            <!--            Upload ảnh-->
+            <div class="mb-3">
+                <div hidden th:each="book, itemStat : *{imageUrls}">
+                    <input th:field="*{imageUrls[__${itemStat.index}__]}" th:id="'image-' + ${itemStat.index}"/>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input class="form-control" accept=".png, .jpg, .jpeg" style="display: none" type="file"
+                           id="input-ref" multiple onchange="handlePreviewImage(this)"/>
+                    <button class="btn btn-outline-primary" type="button"
+                            onclick="document.getElementById('input-ref').click();">Chọn tệp
+                    </button>
+
+                    <!--                <input class="form-control" type="file" id="input-ref" multiple onchange="handlePreviewImage(this)"/>-->
+                </div>
+                <div id="preview-root"></div>
+                <!--                <div style="color: darkred" class="form-text" th:if="${#fields.hasErrors('imageUrls')}" th:errors="*{imageUrls}"></div>-->
+            </div>
+            <div id="create-btn" class="text-center">
+                <button type="submit" id="btn-upload" class="btn btn-outline-dark my-3">LƯU THAY ĐỔI</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <table border="1" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Số thứ tự</th>
+                        <th>Tên nhân viên</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Chon</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    CKEDITOR.replace("description")
+</script>
+<!--<form action="/ckeditor/save" method="post">-->
+<!--    <textarea id="editor" name="content" th:value="${content}"></textarea>-->
+
+<!--    <button type="submit">Save</button>-->
+<!--</form>-->
+<!--<div th:utext="${content}"></div>-->
+<div th:replace="/header-footer::footer"></div>
+<footer th:replace="/header-footer::footer-libs"></footer>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+
+<script src="/handler/firebase.js"></script>
+<script type="module" src="/handler/upload.js"></script>
+<script src="../libs/loan.js"></script>
 </body>
 </html>

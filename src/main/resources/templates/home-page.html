@@ -12,6 +12,7 @@
 </head>
 
 <body>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <div th:include="/header-footer::nav"></div>
 
@@ -20,24 +21,23 @@
     <div class="container">
         <div class="welcome-hero-txt">
             <h2>best place to find and explore <br> that all you need </h2>
-<!--            <p>-->
-<!--                Find Best Place, Restaurant, Hotel, Real State and many more think in just One click-->
-<!--            </p>-->
+
         </div>
         <div class="welcome-hero-serch-box">
             <div class="welcome-hero-form">
                 <div class="single-welcome-hero-form">
-                    <h3>tour</h3>
+                    <h3>Điểm đến</h3>
                     <form action="index.html">
-                        <input type="text" placeholder="Ex: hoi an, hue, da nang"/>
+                        <input type="text"/>
                     </form>
                 </div>
+                <div class="welcome-hero-serch">
+                    <button class="welcome-hero-btn" onclick="window.location.href='#'">
+                        Tìm kiếm <i data-feather="search"></i>
+                    </button>
+                </div>
             </div>
-            <div class="welcome-hero-serch">
-                <button class="welcome-hero-btn" onclick="window.location.href='#'">
-                    search <i data-feather="search"></i>
-                </button>
-            </div>
+
         </div>
     </div>
 
@@ -99,70 +99,7 @@
     </div><!--/.container-->
 
 </section><!--/.list-topics-->
-<!--list-topics end-->
 
-<!--works start -->
-<!--<section id="works" class="works">-->
-<!--    <div class="container">-->
-<!--        <div class="section-header">-->
-<!--            <h2>how it works</h2>-->
-<!--            <p>Learn More about how our website works</p>-->
-<!--        </div>&lt;!&ndash;/.section-header&ndash;&gt;-->
-<!--        <div class="works-content">-->
-<!--            <div class="row">-->
-<!--                <div class="col-md-4 col-sm-6">-->
-<!--                    <div class="single-how-works">-->
-<!--                        <div class="single-how-works-icon">-->
-<!--                            <i class="flaticon-lightbulb-idea"></i>-->
-<!--                        </div>-->
-<!--                        <h2><a href="#">choose <span> what to</span> do</a></h2>-->
-<!--                        <p>-->
-<!--                            Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmod tempor incididunt ut-->
-<!--                            laboremagna aliqua.-->
-<!--                        </p>-->
-<!--                        <button class="welcome-hero-btn how-work-btn" onclick="window.location.href='#'">-->
-<!--                            read more-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-4 col-sm-6">-->
-<!--                    <div class="single-how-works">-->
-<!--                        <div class="single-how-works-icon">-->
-<!--                            <i class="flaticon-networking"></i>-->
-<!--                        </div>-->
-<!--                        <h2><a href="#">find <span> what you want</span></a></h2>-->
-<!--                        <p>-->
-<!--                            Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmod tempor incididunt ut-->
-<!--                            laboremagna aliqua.-->
-<!--                        </p>-->
-<!--                        <button class="welcome-hero-btn how-work-btn" onclick="window.location.href='#'">-->
-<!--                            read more-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-4 col-sm-6">-->
-<!--                    <div class="single-how-works">-->
-<!--                        <div class="single-how-works-icon">-->
-<!--                            <i class="flaticon-location-on-road"></i>-->
-<!--                        </div>-->
-<!--                        <h2><a href="#">explore <span> amazing</span> place</a></h2>-->
-<!--                        <p>-->
-<!--                            Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmod tempor incididunt ut-->
-<!--                            laboremagna aliqua.-->
-<!--                        </p>-->
-<!--                        <button class="welcome-hero-btn how-work-btn" onclick="window.location.href='#'">-->
-<!--                            read more-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>&lt;!&ndash;/.container&ndash;&gt;-->
-
-<!--</section>&lt;!&ndash;/.works&ndash;&gt;-->
-<!--works end -->
-
-<!--explore start -->
 <section id="explore" class="explore">
     <div class="container">
         <div class="section-header">
@@ -174,57 +111,7 @@
                 <th:block th:each="tour : ${tourList}">
                     <div class=" col-md-4 col-sm-6" th:unless="${tourList.isEmpty()}">
                         <a th:href="@{/tour/view/{id}(id=${tour.id})}">
-                        <div id="tour" class="single-explore-item">
-                            <div class="single-explore-img">
-                                <img th:src="@{${tour.tourImage}}" alt="explore image">
-                                <div class="single-explore-img-info">
-                                    <button onclick="window.location.href='#'">best rated</button>
-                                    <div class="single-explore-image-icon-box">
-                                        <ul>
-                                            <li>
-                                                <div class="single-explore-image-icon">
-                                                    <i class="fa fa-arrows-alt"></i>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="single-explore-image-icon">
-                                                    <i class="fa fa-bookmark-o"></i>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-explore-txt bg-theme-1">
-                                <h2 th:text="${tour.tourName}"></h2>
-                                <p class="explore-rating-price">
-                                    <a href="#" th:text="${tour.tourAvailableSeat} + ' people'"></a>
-                                    <span class="explore-price-box">
-											Price
-											<span class="explore-price" th:text="${tour.adultPrice} + ' - ' + ${tour.childPrice}"></span>
-                                    </span>
-                                </p>
-<!--                                <span th:utext="${#strings.abbreviate(tour.tourDescription, 235)}"></span>-->
-                                <div class="explore-person">
-                                    <div class="row">
 
-                                    </div>
-                                </div>
-                                <div class="explore-open-close-part">
-                                    <div class="row">
-                                        <div class="col-sm-5">
-                                            <button class="close-btn open-btn" onclick="window.location.href='#'">
-                                                booking now
-                                            </button>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <div class="explore-map-icon">
-                                                <a href="#"><i data-feather="map-pin"></i></a>
-                                                <a href="#"><i data-feather="upload"></i></a>
-                                                <a href="#"><i data-feather="heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
 <!--                                    đăng nhập-->
                                     <div class="row">
                                         <div sec:authorize="isAuthenticated()">
@@ -238,18 +125,97 @@
                                         </div>
                                     </div>
 
+                            <div id="tour" class="single-explore-item">
+
+                                <!--                                image-->
+                                <div class="single-explore-img">
+                                    <th:block th:unless="${tour.imageUrls.isEmpty()}">
+                                        <img th:src="@{${tour.imageUrls.get(0).getUrl()}}" alt="explore image">
+                                    </th:block>
+
+                                    <div class="single-explore-img-info">
+                                        <button onclick="window.location.href='#'">đánh giá cao</button>
+                                        <div class="single-explore-image-icon-box">
+                                            <ul>
+                                                <li>
+                                                    <div class="single-explore-image-icon">
+                                                        <i class="fa fa-arrows-alt"></i>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="single-explore-image-icon">
+                                                        <i class="fa fa-bookmark-o"></i>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--                                Tour name -->
+                                <div class="single-explore-txt bg-theme-1">
+                                    <h2 style="height: 8rem" th:text="${tour.tourName}"></h2>
+
+
+                                    <!--                                    seats + price-->
+                                    <p class="explore-rating-price">
+                                        <th:block th:if="${tour.tourAvailableSeat} <= 10">
+                                            <a>Số lượng còn trống: </a>
+                                            <a style="color: red" th:text="${tour.tourAvailableSeat} + ' chỗ'"></a>
+                                        </th:block>
+                                        <th:block th:if="${tour.tourAvailableSeat} > 10">
+                                            <a>Số lượng còn trống: </a>
+                                            <a th:text="${tour.tourAvailableSeat} + ' chỗ'"></a>
+                                        </th:block>
+                                        <span class="explore-price-box">
+											Giá từ
+											<span class="explore-price"
+                                                  th:text="${#numbers.formatInteger(tour.childPrice, 3, 'COMMA')} + ' VNĐ - ' + ${#numbers.formatInteger(tour.adultPrice, 3,'COMMA')} + ' VNĐ'"></span>
+                                    </span>
+                                    </p>
+                                    <div class="explore-open-close-part">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <button class="close-btn open-btn" onclick="window.location.href='#'">
+                                                    Đặt vé ngay
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-7">
+<!--                                                Chua dang nhap-->
+                                                <!--                                                <div class="explore-map-icon">-->
+                                                <!--                                                    <a href="#"><i data-feather="map-pin"></i></a>-->
+                                                <!--                                                    <a href="#"><i data-feather="upload"></i></a>-->
+                                                <!--                                                    <a href="#"><i data-feather="heart"></i></a>-->
+                                                <!--                                                </div>-->
+<!--                                                sua, xoa cua admin-->
+                                                <div class="explore-map-admin-icon">
+                                                    <a th:href="@{/tour/update/{id}(id=${tour.id})}">
+                                                        <i class='bx bxs-edit'></i></a>
+                                                    <a th:href="@{/}"><i class='bx bx-message-square-x'></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </a>
                     </div>
                 </th:block>
             </div>
         </div>
-    </div><!--/.container-->
-
+    </div>
+    <div id="pagination" class="text-center">
+        <a class="text-decoration-none text-dark" th:if="${tourList.hasPrevious()}"
+           th:href="@{/(page=${tourList.number - 1})}"><i class='bx bx-left-arrow-alt'></i></a>
+        <span th:text="${tourList.number + 1}"></span>
+        <a class="text-decoration-none text-dark" th:if="${tourList.hasNext()}"
+           th:href="@{/(page=${tourList.number + 1})}"><i class='bx bx-right-arrow-alt' ></i></a>
+    </div>
 </section><!--/.explore-->
 <!--explore end -->
+
+
+
 
 <!--subscription strat -->
 <section id="contact" class="subscription">
@@ -278,10 +244,32 @@
 
 </section><!--/subscription-->
 <!--subscription end -->
-
+<p id="mess" th:text="${mess}"></p>
+<button id="first" hidden>Click me</button>
 <div th:replace="/header-footer::footer"></div>
 <footer th:replace="/header-footer::footer-libs"></footer>
+<!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    (function doSth() {
+        let str = document.getElementById("mess").textContent;
+        document.getElementById("mess").innerText = "";
+        // console.log(str);
+        if (str) {
+            showMess(str)
+        }
+    })();
 
+    function showMess(str) {
+        Swal.fire({
+            title: "Good job!",
+            text: str,
+            icon: "success",
+            width: "40%"
+        })
+    }
+
+</script>
 </body>
 
 </html>

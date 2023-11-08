@@ -4,6 +4,8 @@ import com.tourbooking.model.tour.Tour;
 import com.tourbooking.repository.tour.ITourRepository;
 import com.tourbooking.service.tour.ITourService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,11 @@ public class TourService implements ITourService {
     @Override
     public List<Tour> showList() {
         return tourRepository.findAll();
+    }
+
+    @Override
+    public Page<Tour> showList(Pageable pageable) {
+        return tourRepository.findAll(pageable);
     }
 
     @Override

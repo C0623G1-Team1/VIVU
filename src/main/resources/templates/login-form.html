@@ -20,6 +20,7 @@
     <div class="container">
         <div class="welcome-hero-txt">
             <div id="login-form">
+
                 <form method="post">
                     <h1>ĐĂNG NHẬP</h1>
                     <div th:if="${param.error}">
@@ -27,6 +28,7 @@
                             <span style="color: #f13e24ba">Email đăng nhập hoặc mật khẩu không đúng!</span>
                         </div>
                     </div>
+
                     <div class="input-box">
                         <span class="icon"><i class='bx bxs-user'></i></span>
                         <input type="text" name="username" id="username" required>
@@ -41,7 +43,7 @@
                         <label for="remember"><input type="checkbox" name="" id="remember"> Nhớ mật khẩu </label>
                     </div>
                     <div id="login-btn">
-                        <button  type="submit" class="login-btn">Đăng nhập</button>
+                        <button type="submit" class="login-btn">Đăng nhập</button>
                     </div>
 
                 </form>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        .infor {
+            width: 100%;
+            height: 100%;
+            color: black;
+            font-size: 28px;
+            font-family: Inter;
+            font-weight: 400;
+            word-wrap: break-word;
+        }
+
+        .infor-2 {
+            color: black;
+            font-size: 22px;
+            font-family: Inter;
+            font-weight: 300;
+            word-wrap: break-word;
+        }
+
+        .infor-3 {
+            color: rgba(0, 0, 0, 0.63);
+            font-size: 20px;
+            font-family: Inter;
+            font-weight: 400;
+            word-wrap: break-word
+        }
+
+        .picture {
+            border-radius: 20px;
+        }
+        .book {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .book a {
+            font-weight: bold;
+            font-size: 1em;
+            text-align: center;
+            color: white;
+            padding: 16px;
+            width: 200px;
+            border-radius: 40px;
+            border: none;
+            outline: none;
+            background-color: #FF3B5F;
+            letter-spacing: 2px;
+        }.book input {
+            font-weight: bold;
+            font-size: 1em;
+            text-align: center;
+            color: white;
+            padding: 9px;
+            width: 200px;
+            border-radius: 40px;
+            border: none;
+            outline: none;
+            background-color: #FF3B5F;
+            letter-spacing: 2px;
+        }
+    </style>
+
+</head>
+<body class="body">
+<div class="container">
+    <div style="margin-left: 20px; margin-top: 20px">
+        <a role="button" style="font-family: Inter;background-color: #302f33; color: white; font-size: 30px" class="btn" th:href="@{/tour/view/1}">Quay lại</a>
+    </div>
+    <form th:object="${tourDto}">
+        <input type="hidden" th:field="*{adultPrice}" id="priceAdult">
+        <input type="hidden" th:field="*{childPrice}" id="priceChildren">
+        <input type="hidden" th:field="*{id}" id="tourId">
+    </form>
+    <form th:object="${bookingDto}" action="/booking/add" method="post">
+        <div class="row">
+            <div class="col-lg-6">
+                <div style="margin:20px 20px;">
+                    <div style="border: #c4c2c2; border-width: 1px; border-style: solid; border-radius: 20px">
+                        <div style="margin: 20px 20px 0 20px">
+                            <div style="display: flex">
+                                <div class="infor">
+                                    Giá tốt.
+                                </div>
+                                <div>
+                                    <img style="width: 50px; height: 50px"
+                                         src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ682oMkL-I8vHb9txmoo_J4yniLQ-fSaFoSkM70dLCMBF5j6cu"/>
+                                </div>
+                            </div>
+                            <div style="color: #696363; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+                                Ưu đãi dành cho bạn. Nhập mã để nhận ngay ưu đãi
+                            </div>
+                            <div style="margin-top: 20px; margin-bottom: 20px; color: #FF3B5F; font-size: 23px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+                                #ABCD
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px">
+                        <div>
+                            <div class="infor">
+                                Thông tin chuyến đi của bạn
+                            </div>
+                            <div>
+                                <div style="margin: 10px 0 20px 30px">
+                                    <div class="infor-2">
+                                        Thời gian
+                                    </div>
+                                    <div style="color: rgba(0, 0, 0, 0.63); font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+                                        <div th:text="${tourDto.startDate}+' - '+${tourDto.endDate}">
+<!--                                        <div th:text="${#dates.format(tourDto.startDate, 'dd/MM/yyyy')}">-->
+                                            Ngày khởi hành - Ngày kết thúc
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="margin: 20px 0 20px 30px">
+                                    <input type="hidden" th:field="*{tourId}">
+                                    <div style="display: flex">
+                                        <div class="infor-2">
+                                            <p>Số lượng còn lại </p>
+                                        </div>
+                                        <div class="infor-2" style="font-weight: bold; color: #066a9d;margin-left: 15px">
+                                            <h4 th:text="${amoutRemain + ' vé'}" th:value="${amoutRemain}" ></h4>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="adultQuantity" class="form-label infor-2">
+                                            Số lượng người lớn</label>
+                                        <input type="text" class="form-control" id="adultQuantity"
+                                               placeholder="Nhập số lượng" th:field="*{adultQuantity}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="margin: 20px 0 20px 30px">
+                                    <div class="mb-3">
+                                        <label for="childrenQuantity" class="form-label infor-2">Số
+                                            lượng trẻ em</label>
+                                        <input type="text" class="form-control" id="childrenQuantity"
+                                               placeholder="Nhập số lượng" th:field="*{childrenQuantity}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="margin: 20px 0 20px 30px">
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword3" class="form-label">
+                                            <div class="infor-2">Mã giảm giá</div>
+                                        </label>
+                                        <input type="text" class="form-control" id="exampleInputPassword3"
+                                               placeholder="Nhập mã giảm giá (nếu có)"
+                                               th:field="*{promotionCode}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <div>
+                            <div class="infor">
+                                Thông tin liên hệ
+                            </div>
+                            <div style="margin-left: 30px; margin-top: 15px">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">
+                                        <div class="infor-2">Họ và tên</div>
+                                    </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{name}"
+                                           placeholder="Nhập họ và tên" required>
+                                </div>
+                                <span style="color: red" th:if="${#fields.hasErrors('name')}"
+                                      th:errors="*{name}"></span>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">
+                                        <div class="infor-2">Email</div>
+                                    </label>
+                                    <input type="email" class="form-control" id="exampleInputPassword1"
+                                           th:field="*{email}"
+                                           placeholder="Nhập email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword2" class="form-label">
+                                        <div class="infor-2">Số điện thoại</div>
+                                    </label>
+                                    <input type="number" class="form-control" id="exampleInputPassword2"
+                                           th:field="*{phone}"
+                                           placeholder="Nhập số điện thoại" required>
+                                    <span style="color: red" th:if="${#fields.hasErrors('phone')}"
+                                          th:errors="*{phone}"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="idCard" class="form-label">
+                                        <div class="infor-2">Số căn cước công dân</div>
+                                    </label>
+                                    <input type="number" class="form-control" id="idCard"
+                                           th:field="*{customerIdCard}"
+                                           placeholder="Nhập số căn cước công dân" required>
+                                    <span style="color: red" th:if="${#fields.hasErrors('customerIdCard')}"
+                                          th:errors="*{customerIdCard}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-6">
+                <div style="width: 600px; position: fixed;margin-top:20px; background: white; border-radius: 29px; border: 1px #C7C2C2 solid; backdrop-filter: blur(4px)">
+                    <div style="display: flex; margin: 20px 20px;">
+                        <div style="height: 180px">
+                            <img class="picture" style="width: 280px; height:auto"
+                                 th:src="${tourDto.getTourImage()}">
+                        </div>
+                        <div style="margin: 20px 20px">
+                            <h3 style="font-weight: bold" class="infor" th:text="${tourDto.tourName}"> </h3>
+                        </div>
+                    </div>
+                    <hr class="mx-3">
+                    <div style="margin: 20px 20px">
+                        <div class="infor">
+                            Chi tiết thanh toán
+                        </div>
+                        <div>
+                            <div>
+                                <div style="display: flex;margin: 10px 0 20px 30px">
+                                    <div class="infor-2">
+                                        Tổng giá vé người lớn
+                                    </div>
+                                    <div class="ms-5">
+                                        <h3 class="infor-2" id="totalAdult"></h3>
+                                    </div>
+                                </div>
+                                <div style="display: flex;margin: 10px 0 20px 30px">
+                                    <div class="infor-2">
+                                        Tổng giá vé người lớn
+                                    </div>
+                                    <div class="ms-5">
+                                        <h3 class="infor-2" id="totalChildren"></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mx-3">
+                    <div style="height: 100px; display: flex;margin: 20px 20px">
+                        <div class="infor" style="width: 300px">
+                            Thành tiền
+                        </div>
+                        <div>
+                            <h3 id="total"></h3>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="height: 100px; text-align: center;">
+                            <div class="book" style="position: relative;">
+                                <input th:if="${link==null}" style="font-family: Inter;background-color: #1ba4da; color: white; font-size: 30px" class="btn" type="submit" id="pay" value="Đặt tour">
+                                <a th:if="${link!=null}" id="hidden" role="button" style="font-family: Inter;background-color: #32a923; color: white; font-size: 30px;text-decoration: none"   th:href="@{${link}}">Thanh toán</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="amount" id="sum">
+    </form>
+</div>
+<!-- Button trigger modal -->
+<button type="button" hidden class="btn btn-primary" id="modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <tbody>
+            <tr>
+                <td style="margin:0;padding:0">
+                    <table border="0" align="center" cellspacing="0" cellpadding="0" style="background-color:transparent;padding:0;margin:0 auto;max-width:650px;border-radius:8px">
+                        <tbody>
+                        <tr>
+                            <td style="height:32px;line-height:32px">
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height:32px;line-height:32px">
+                                &nbsp;
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table border="0" cellspacing="0" align="center" cellpadding="0" style="" id="">
+                        <tbody>
+                        <tr>
+                            <td style="height:24px;line-height:24px;margin:0;padding:0">
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr style="text-align:center">
+                            <td style="padding:0;padding-left:24px;padding-right:24px;padding-top:12px;font-size:20px;font-weight:bold;color:#cc0000">
+                                <p style="margin:0;padding:0">
+                                    Số lượng bạn chọn vượt quá số vé còn lại
+                                </p>
+                            </td>
+                        </tr>
+                        <tr style="text-align:center">
+                            <td style="padding:0;padding-left:24px;padding-right:24px;padding-top:12px;font-size:20px;font-weight:bold;color:#0b48b6">
+                                <p style="margin:0;padding:0">
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height:24px;line-height:24px;margin:0;padding:0">
+                                &nbsp;
+                            </td>
+                        </tr>
+
+                        <tr style="text-align:center">
+                            <td>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+
+        </div>
+    </div>
+</div>
+<input type="hidden" th:value="${amoutRemain}" id="amoutRemain">
+<input type="hidden" th:value="${sumBooking}" id="sumBooking">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let priceAdult;
+        let priceChildren;
+        let adultQuantity;
+        let childrenQuantity;
+        let totalAdult = 0;
+        let totalChildren = 0;
+        let total;
+        $("input").click(function () {
+            priceAdult = $("#priceAdult").val();
+            priceChildren = $("#priceChildren").val();
+            adultQuantity = $("#adultQuantity").val();
+            childrenQuantity = $("#childrenQuantity").val();
+            totalAdult = priceAdult * adultQuantity;
+            totalChildren = priceChildren * childrenQuantity;
+            total = totalAdult * 1 + totalChildren * 1;
+            // console.log(totalAdult);
+            totalAdult = totalAdult.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+            document.getElementById("totalAdult").innerText = totalAdult;
+            totalChildren = totalChildren.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+
+            document.getElementById("totalChildren").innerText = totalChildren;
+            total = total.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+
+            document.getElementById("total").innerText = total;
+            let numberInput = $("#adultQuantity").val()*1;
+            let number2 = $("#childrenQuantity").val()*1;
+            let sum=numberInput+number2;
+            document.getElementById("sum").value=sum;
+            console.log(sum)
+        })
+        let amountRemain=$("#amoutRemain").val()*1;
+        let sumBooking=$("#sumBooking").val()*1;
+        if(amountRemain<sumBooking){
+            $("#modal-btn").trigger('click')
+            console.log(amountRemain)
+            console.log(sumBooking)
+        }
+    })
+</script>
+<script>
+    $("#pay").click(function () {
+        // let numberPre = $("#amoutRemain").val()*1;
+        let numberInput = $("#adultQuantity").val()*1;
+        let number2 = $("#childrenQuantity").val()*1;
+        let sum=numberInput+number2;
+        // console.log(numberPre)
+        // console.log(numberInput)
+        // if(numberInput > numberPre){
+        //     $("#modal-btn").trigger('click')
+        // }
+        // if(number2 > numberPre){
+        //     $("#modal-btn").trigger('click')
+        // }
+        // if(sum > numberPre){
+        //     $("#modal-btn").trigger('click')
+        // }
+        document.getElementById("sum").value=sum;
+
+    })
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>

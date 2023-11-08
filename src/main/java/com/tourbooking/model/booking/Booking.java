@@ -12,21 +12,21 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "booking_id")
-    private Integer id;
+    private int id;
     @Column(name = "customer_name")
     private String name;
     @Column(name = "customer_phone", columnDefinition = "varchar(10)")
     private String phone;
     @Column(name = "customer_email")
     private String email;
+
     @Column(name = "booking_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @FutureOrPresent
     private Date date;
     @Column(name = "adult_quantity")
-    private Integer adultQuantity;
+    private int adultQuantity;
     @Column(name = "children_quantity")
-    private Integer childrenQuantity;
+    private int childrenQuantity;
 
     @Column(columnDefinition = "varchar(12)")
     private String customerIdCard;
@@ -43,15 +43,6 @@ public class Booking {
 
     public Booking() {
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -84,19 +75,27 @@ public class Booking {
         this.date = date;
     }
 
-    public Integer getAdultQuantity() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getAdultQuantity() {
         return adultQuantity;
     }
 
-    public void setAdultQuantity(Integer adultQuantity) {
+    public void setAdultQuantity(int adultQuantity) {
         this.adultQuantity = adultQuantity;
     }
 
-    public Integer getChildrenQuantity() {
+    public int getChildrenQuantity() {
         return childrenQuantity;
     }
 
-    public void setChildrenQuantity(Integer childrenQuantity) {
+    public void setChildrenQuantity(int childrenQuantity) {
         this.childrenQuantity = childrenQuantity;
     }
 
@@ -116,19 +115,19 @@ public class Booking {
         this.promotion = promotion;
     }
 
-    public String getCustomerIdCard() {
-        return customerIdCard;
-    }
-
-    public void setCustomerIdCard(String customerIdCard) {
-        this.customerIdCard = customerIdCard;
-    }
-
     public Tour getTour() {
         return tour;
     }
 
     public void setTour(Tour tour) {
         this.tour = tour;
+    }
+
+    public String getCustomerIdCard() {
+        return customerIdCard;
+    }
+
+    public void setCustomerIdCard(String customerIdCard) {
+        this.customerIdCard = customerIdCard;
     }
 }

@@ -50,15 +50,14 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
-
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="https://cdn.ckeditor.com/4.17.0/standard/ckeditor.js"></script>
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.ckeditor.com/4.17.0/standard/ckeditor.js"></script>
+
     <link rel="stylesheet" href="/libs/vanloan.css">
 
 </head>
@@ -83,7 +82,6 @@
                         <a th:href="@{/}"><img style="margin-top: 16px" src="assets/images/welcome-hero/LogoVivu.png"
                                                width="200px" height="200px" alt="LOGO"></a>
 
-
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                             <i class="fa fa-bars"></i>
                         </button>
@@ -96,18 +94,51 @@
                         <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                             <li class=" scroll active"><a href="#home">Trang Chủ</a></li>
                             <li class="scroll"><a href="#explore">Chuyến Đi</a></li>
-                            <li class="scroll"><a href="#explore">Về Chúng Tôi</a></li>
+                            <li class="scroll"><a href="#contact">Về Chúng Tôi</a></li>
                             <li class="scroll"><a href="#contact">Liên Hệ</a></li>
-<!--                            <li><a id="login" th:href="@{/account/login}"><span>Đăng nhập</span></a></li>-->
-                            <div sec:authorize="!isAuthenticated()">
-                                <li><a id="login" th:href="@{/account/login}"><span>Đăng nhập</span></a></li>
-                            </div>
+                            <li sec:authorize="!isAuthenticated()"><a id="login" th:href="@{/account/login}"><span>Đăng nhập</span></a></li>
 <!--                            <div sec:authorize="isAuthenticated()">-->
 <!--                                -->
 <!--                                <div sec:authorize="hasRole('ADMIN')" style="color: black">-->
 <!--                                    -->
 <!--                                </div>-->
 <!--                            </div>-->
+<!--                            <li><a id="login" th:href="@{/login}"><span>Đăng nhập</span></a></li>-->
+                            <li >
+                                <button id="infor" onclick="toggleMenu()">
+                                    <i class='bx bx-menu'></i>
+                                    <img th:src="@{https://i.pinimg.com/564x/a2/66/ec/a266ec4ddcfa4457156a1711d9519920.jpg}" alt="ava"/>
+                                </button>
+                                <div class="member-func" id="member-func">
+                                <div class="sub-menu">
+                                    <a th:href="@{/}">
+                                        <i class='bx bxl-trip-advisor'></i>
+                                        <p> Xem chuyến đi</p>
+                                    </a>
+                                    <a th:href="@{/tour/create}">
+                                        <i class='bx bxs-add-to-queue'></i>
+                                        <p> Thêm mới chuyến đi</p>
+                                    </a>
+                                    <a th:href="@{/booking/list}">
+                                        <i class='bx bxs-cart-alt'></i>
+                                        <p> Xem đơn đặt chỗ</p>
+                                    </a>
+                                    <a th:href="@{/}">
+                                        <i class='bx bxs-user-detail'></i>
+                                        <p> Xem thành viên</p>
+                                    </a>
+                                    <a th:href="@{/}">
+                                        <i class='bx bxs-user'></i>
+                                        <p> Thêm mới tài khoản</p>
+                                    </a>
+                                    <hr>
+                                    <a th:href="@{/}">
+                                        <i class='bx bx-log-out' ></i>
+                                        <p> Đăng xuất</p>
+                                    </a>
+                                </div>
+                            </div>
+                            </li>
                         </ul><!--/.nav -->
                     </div><!-- /.navbar-collapse -->
                 </div><!--/.container-->
@@ -122,58 +153,65 @@
 
 <!--footer start-->
 <div id="footer" class="footer" th:fragment="footer">
+<!--    <div>-->
+<!--        <img th:src="@{https://img-9gag-fun.9cache.com/photo/aKDz4jN_700bwp.webp}" alt="footer-img">-->
+<!--    </div>-->
     <div class="container">
         <div class="footer-menu">
             <div class="row">
                 <div class="col-sm-3">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html"><img src="assets/images/welcome-hero/LogoVivu.png"
+                        <a class="navbar-brand" href="index.html"><img src="/assets/images/welcome-hero/LogoVivu.png"
                                                                        alt="LOGO"></a>
+                        <p>Công ty TNHH VIVU Việt Nam.</p>
+                        <p>Địa chỉ 280 Trần Hưng Đạo, An Hải Bắc, Sơn Trà, TP Đà Nẵng.</p>
+                        <div class="footer-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                        </div>
                     </div><!--/.navbar-header-->
                 </div>
-                <div class="col-sm-9">
-                    <ul class="footer-menu-item">
-                        <li class="scroll"><a href="#works">about us</a></li>
-                        <li class="scroll"><a href="#reviews">tour</a></li>
-                        <li class="scroll"><a href="#contact">contact</a></li>
-                        <li class=" scroll"><a href="#contact">my account</a></li>
-                    </ul><!--/.nav -->
+                <div class="col-sm-3">
+                    <a href="#works">Về chúng tôi</a>
+                    <p>Cách đặt vé</p>
+                    <p>Liên hệ</p>
+                    <p>Trợ giúp</p>
+                    <p>Tuyển dụng</p>
+                </div>
+                <div class="col-sm-3">
+                    <a href="#works">Liên hệ</a>
+                    <p><i class='bx bxs-phone' style='color:#141313'></i> + (84) 777 8888</p>
+                    <p><i class='bx bxl-gmail' style='color:#141313'></i> VivuCo@gmail.com</p>
+                </div>
+                <div class="col-sm-3">
+                    <a href="#works">Khác</a>
+                    <p>VIVU blog</p>
+                    <p>Chính sách quyền riêng tư</p>
+                    <p>Điều khoản & Điều kiện</p>
+                    <p>Quy chế hoạt động</p>
                 </div>
             </div>
         </div>
         <div class="hm-footer-copyright">
             <div class="row">
-                <div class="col-sm-5">
-                    <p>
-                        &copy;copyright. designed and developed by C06T1
-                    </p><!--/p-->
-                </div>
-                <div class="col-sm-7">
-                    <div class="footer-social">
-                        <span><i class="fa fa-phone"> +1  (222) 777 8888</i></span>
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                    </div>
-                </div>
+                <!--                <div class="col-sm-5">-->
+                <p>
+                    Copyright © 2023 VIVU
+                </p><!--/p-->
             </div>
 
         </div><!--/.hm-footer-copyright-->
     </div><!--/.container-->
 
-    <!--    <div id="scroll-Top">-->
-    <!--        <div class="return-to-top">-->
-    <!--            <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title=""-->
-    <!--               data-original-title="Back to Top" aria-hidden="true"></i>-->
-    <!--        </div>-->
-
-    <!--    </div>&lt;!&ndash;/.scroll-Top&ndash;&gt;-->
 </div><!--/.footer-->
 <!--footer end-->
 
 
 <footer th:fragment="footer-libs">
+
+    <script src="/libs/dropdown-menu.js"></script>
 
     <!-- Include all js compiled plugins (below), or include individual files as needed -->
 
@@ -204,10 +242,5 @@
     <script src="/assets/js/custom.js"></script>
 
 </footer>
-<script>
-    function doSth() {
-        alert("a");
-    }
-</script>
 </body>
 </html>
