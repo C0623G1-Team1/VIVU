@@ -1,5 +1,7 @@
 package com.tourbooking.service.booking.impl;
 
+import com.tourbooking.dto.booking.BookingDto;
+import com.tourbooking.model.booking.Booking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,21 +19,19 @@ public class EmailSenderService {
 
     public void sendEmail(String toEmail,
                           String subject,
-                          String body){
+                          String body, Booking booking, String sumMoney){
         MimeMessage message = mailSender.createMimeMessage();
 
         boolean multipart = true;
 
         MimeMessageHelper helper = null;
         try {
-            helper = new MimeMessageHelper(message, multipart);
+            helper = new MimeMessageHelper(message, "UTF-8");
             helper.setTo(toEmail);
             helper.setSubject(subject);
-            helper.setText(body);
-            String path1 = "E:\\Case_Module_4\\VIVU\\src\\main\\resources\\static\\TICKET.txt";
-            FileSystemResource file1 = new FileSystemResource(new File(path1));
-            helper.addAttachment("VIVU TICKET", file1);
-            mailSender.send(message);
+            String htmlMsg = Email.sendContentEmail(booking,sumMoney);
+            message.setContent(htmlMsg, "text/html; charset=utf-8");
+            this.mailSender.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
