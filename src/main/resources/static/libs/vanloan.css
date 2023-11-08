@@ -1,7 +1,20 @@
+/*home-page*/
 #tour_detail * {
     padding: 0;
     margin: 0;
 
+}
+
+#pagination span {
+    font-size: 1.7em;
+    font-weight: 500;
+    border: 1px solid;
+    border-radius: 100%;
+}
+
+#pagination span:hover {
+    background-color: #FF3B5F;
+    color: white;
 }
 
 #tour {
@@ -26,6 +39,8 @@
     border-radius: 20px;
 }
 
+
+/**/
 #tour-name {
     font-weight: bold;
     font-size: 30px;
@@ -297,3 +312,4 @@
     border-radius: 20px 0 0 20px;
     width: 100%;
 }
+

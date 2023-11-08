@@ -1,0 +1,9 @@
+.table-one{
+    width: 100%;
+    height: fit-content;
+    background: white;
+    border-radius: 10px;
+}
+.table-list{
+    margin: 20px 50px;
+}

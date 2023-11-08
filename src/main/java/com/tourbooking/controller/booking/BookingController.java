@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
@@ -41,16 +42,16 @@ public class BookingController {
     @Autowired
     EmailSenderService emailSenderService;
 
-    @GetMapping("")
-    public String showFormBooking(@RequestParam("idTour") int idTour, Model model){
-        TourTruongDto tourDto=convertTourToTourDto(idTour);
+    @GetMapping("/{id}")
+    public String showFormBooking(@PathVariable ("id") int id, Model model){
+        TourTruongDto tourDto=convertTourToTourDto(id);
         BookingDto bookingDto=new BookingDto();
-        bookingDto.setTourId(idTour);
+        bookingDto.setTourId(id);
         bookingDto.setAdultQuantity(1);
         bookingDto.setChildrenQuantity(0);
         model.addAttribute("tourDto",tourDto);
         model.addAttribute("bookingDto", bookingDto);
-        return "/booking/booking";
+        return "/booking/booking-two";
     }
     public TourTruongDto convertTourToTourDto(int idTour){
         Tour tour=tourService.findById(idTour).get();
@@ -76,8 +77,8 @@ public class BookingController {
             TourTruongDto tourDto=convertTourToTourDto(bookingDto.getTourId());
             model.addAttribute("tourDto",tourDto);
             model.addAttribute("booking", bookingDto);
-            model.addAttribute("link",linkPay);
-            return "/booking/booking";
+            model.addAttribute("link",null);
+            return "/booking/booking-two";
         } else {
             String time= String.valueOf(LocalDate.now());
             bookingDto.setDate(time);
@@ -99,12 +100,15 @@ public class BookingController {
             TourTruongDto tourDto=convertTourToTourDto(bookingDto.getTourId());
             model.addAttribute("tourDto",tourDto);
             model.addAttribute("booking", bookingDto);
-            return "/booking/booking";
+            return "/booking/booking-two";
         }
 
     }
     @GetMapping("/pay")
-    public String resultBooking(@RequestParam("vnp_ResponseCode") String vnp_ResponseCode,@SessionAttribute("bookingDto") BookingDto newBookingDto, Model model){
+    public String resultBooking(@RequestParam("vnp_ResponseCode") String vnp_ResponseCode,
+                                @SessionAttribute("bookingDto") BookingDto newBookingDto,
+                                RedirectAttributes redirectAttributes,
+                                Model model){
         if(vnp_ResponseCode.equals("00")){
             Booking booking=new Booking();
             booking.setAdultQuantity(newBookingDto.getAdultQuantity());
@@ -116,18 +120,17 @@ public class BookingController {
             booking.setName(newBookingDto.getName());
             booking.setPhone(newBookingDto.getPhone());
             booking.setPromotion(promotionService.findByCode(newBookingDto.getPromotionCode()));
-            Booking booking1=booking;
             bookingService.createBooking(booking);
-            model.addAttribute("result","Thanh toán thành công");
+//            redirectAttributes.addFlashAttribute("result","THANH TOÁN THÀNH CÔNG");
             emailSenderService.sendEmail(newBookingDto.getEmail(),"VIVU","Cảm ơn bạn đã đặt tour");
         } else {
-            model.addAttribute("result","Thanh toán thất bại");
+            model.addAttribute("result","THANH TOÁN THẤT BẠI! VUI LÒNG THỬ LẠI");
         }
-        return "result";
+        return "/booking/email";
     }
 
     @GetMapping("/list")
-    public ModelAndView showListBooking(@PageableDefault(value = 2, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+    public ModelAndView showListBooking(@PageableDefault(value = 11, sort = "date", direction = Sort.Direction.DESC) Pageable pageable){
         return new ModelAndView("/booking/bookingManager","list",bookingService.showListBooking(pageable));
     }
     @GetMapping("{id}/detail")
@@ -138,7 +141,7 @@ public class BookingController {
         model.addAttribute("booking",booking);
         long total=tour.getAdultPrice()*booking.getAdultQuantity()+tour.getChildPrice()* booking.getChildrenQuantity();
         model.addAttribute("total",total+"");
-        return "/booking/bookingDetail";
+        return "/booking/booking-detail";
     }
     @GetMapping("/delete")
     public String deleteBooking(@RequestParam int id){
