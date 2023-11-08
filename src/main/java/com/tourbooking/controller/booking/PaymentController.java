@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class PaymentController {
-    @GetMapping
+
     public String getPay(long price) throws UnsupportedEncodingException {
 
         String orderType = "other";
