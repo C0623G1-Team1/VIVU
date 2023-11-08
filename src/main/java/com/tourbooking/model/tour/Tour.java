@@ -6,10 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.FutureOrPresent;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -35,13 +33,9 @@ public class Tour {
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     private List<Image> imageUrls;
 
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @FutureOrPresent
     @Column(columnDefinition = "DATE")
     private Date startDate;
 
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @FutureOrPresent
     @Column(columnDefinition = "DATE")
     private Date endDate;
 
