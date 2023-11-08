@@ -16,4 +16,9 @@ public interface IBookingRepository extends JpaRepository<Booking, Integer> {
     @Modifying
     @Query("update Booking set isDeleted = true where id= :id")
     void deleteBlog(@Param("id") int id);
+    @Query("select sum(b.adultQuantity) from Booking b where b.tour.id =:id")
+    Integer countQuantityAdult(@Param("id") int id);
+
+    @Query("select sum(b.childrenQuantity) from Booking b where b.tour.id =:id")
+    Integer countQuantityChildren(@Param("id") int id);
 }

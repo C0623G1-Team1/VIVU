@@ -43,7 +43,7 @@
 <body>
 <div class="container">
     <div  class="row">
-        <div  class="col-12" >
+        <div  class="col-12" style="margin-left: 10px">
             <div class="header-content mt-5">
                 <div class="card">
                     <div style="margin: 30px 30px">
@@ -77,10 +77,18 @@
                         </div>
                         <div style="display: flex">
                             <div style="min-width: 180px">
+                                <h5 >Số căn cước công dân</h5>
+                            </div>
+                            <div>
+                                <h5 class="infor" th:text="${booking.customerIdCard}">0847211345</h5>
+                            </div>
+                        </div>
+                        <div style="display: flex">
+                            <div style="min-width: 180px">
                                 <h5>Ngày đặt</h5>
                             </div>
                             <div>
-                                <h5 class="infor" th:text="${booking.date}">0847211345</h5>
+                                <h5 class="infor" th:text="${#dates.format(booking.date, 'dd/MM/yyyy')}">0847211345</h5>
                             </div>
                         </div>
                         <div style="display: flex">
@@ -126,7 +134,7 @@
                                     <h3 style="font-size: 30px; ">Tổng tiền</h3>
                                 </div>
                                 <div>
-                                    <h3 style="font-weight: bold" th:text="${total}+' VND'">100000000 </h3>
+                                    <h3 style="font-weight: bold" th:text="${total}">100000000 </h3>
                                 </div>
                             </div>
                         </div>

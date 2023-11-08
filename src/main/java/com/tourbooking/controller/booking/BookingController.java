@@ -23,7 +23,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.Currency;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/booking")
@@ -45,14 +49,35 @@ public class BookingController {
     @GetMapping("/{id}")
     public String showFormBooking(@PathVariable ("id") int id, Model model){
         TourTruongDto tourDto=convertTourToTourDto(id);
+
+        Integer remain = getInteger(id, tourDto);
+        model.addAttribute("amoutRemain",remain);
+
         BookingDto bookingDto=new BookingDto();
         bookingDto.setTourId(id);
-        bookingDto.setAdultQuantity(1);
+        bookingDto.setAdultQuantity(0);
         bookingDto.setChildrenQuantity(0);
+        model.addAttribute("sumBooking",0);
         model.addAttribute("tourDto",tourDto);
         model.addAttribute("bookingDto", bookingDto);
         return "/booking/booking-two";
     }
+
+    private Integer getInteger(int id, TourTruongDto tourDto) {
+        Integer adult=bookingService.sumAdultQuantity(id);
+        if(adult==null){
+            adult=0;
+        }
+        Integer children=bookingService.sumChildrenQuantity(id);
+        if(children==null){
+            children=0;
+        }
+        Integer sum=adult+children;
+        Integer remain= tourDto.getTourAvailableSeat()-sum;
+        return remain;
+    }
+
+
     public TourTruongDto convertTourToTourDto(int idTour){
         Tour tour=tourService.findById(idTour).get();
         TourTruongDto tourDto=new TourTruongDto();
@@ -61,20 +86,25 @@ public class BookingController {
         tourDto.setChildPrice(tour.getChildPrice());
         String startDate= String.valueOf(tour.getStartDate());
         tourDto.setStartDate(startDate);
+        tourDto.setTourAvailableSeat(tour.getTourAvailableSeat());
         String endDate= String.valueOf(tour.getEndDate());
         tourDto.setEndDate(endDate);
-//        tourDto.setTourImage(tour.getTourImage());
+        tourDto.setTourImage(tour.getImageUrls().get(0).getUrl());
         tourDto.setTourName(tour.getTourName());
         return tourDto;
     }
     @PostMapping("/add")
     public String addBooking(@Validated @ModelAttribute BookingDto bookingDto,
-                             BindingResult bindingResult, Model model,@SessionAttribute("bookingDto")
-                                 BookingDto newBookingDto){
+                             BindingResult bindingResult,Model model,@SessionAttribute("bookingDto")
+                                 BookingDto newBookingDto, @RequestParam("amount") String sum){
         new BookingDto().validate(bookingDto, bindingResult);
+        TourTruongDto tourDto=convertTourToTourDto(bookingDto.getTourId());
+        Integer remain = getInteger(tourDto.getId(), tourDto);
+        Integer number= Integer.parseInt(sum);
         String linkPay=null;
-        if(bindingResult.hasFieldErrors()){
-            TourTruongDto tourDto=convertTourToTourDto(bookingDto.getTourId());
+        if(bindingResult.hasFieldErrors()||remain<number){
+            model.addAttribute("sumBooking",number);
+            model.addAttribute("amoutRemain",remain);
             model.addAttribute("tourDto",tourDto);
             model.addAttribute("booking", bookingDto);
             model.addAttribute("link",null);
@@ -96,8 +126,8 @@ public class BookingController {
                 total=total(bookingDto,tour);
             }
             linkPay=payment(total);
+            model.addAttribute("amoutRemain",remain);
             model.addAttribute("link",linkPay);
-            TourTruongDto tourDto=convertTourToTourDto(bookingDto.getTourId());
             model.addAttribute("tourDto",tourDto);
             model.addAttribute("booking", bookingDto);
             return "/booking/booking-two";
@@ -107,7 +137,6 @@ public class BookingController {
     @GetMapping("/pay")
     public String resultBooking(@RequestParam("vnp_ResponseCode") String vnp_ResponseCode,
                                 @SessionAttribute("bookingDto") BookingDto newBookingDto,
-                                RedirectAttributes redirectAttributes,
                                 Model model){
         if(vnp_ResponseCode.equals("00")){
             Booking booking=new Booking();
@@ -119,10 +148,11 @@ public class BookingController {
             booking.setDate(date);
             booking.setName(newBookingDto.getName());
             booking.setPhone(newBookingDto.getPhone());
+            booking.setCustomerIdCard(newBookingDto.getCustomerIdCard());
             booking.setPromotion(promotionService.findByCode(newBookingDto.getPromotionCode()));
             bookingService.createBooking(booking);
-//            redirectAttributes.addFlashAttribute("result","THANH TOÁN THÀNH CÔNG");
-            emailSenderService.sendEmail(newBookingDto.getEmail(),"VIVU","Cảm ơn bạn đã đặt tour");
+            String total=getTotal(booking,tourService.findById(newBookingDto.getTourId()).get());
+            emailSenderService.sendEmail(newBookingDto.getEmail(),"ĐẶT TOUR THÀNH CÔNG","Cảm ơn bạn đã đặt tour", booking, total);
         } else {
             model.addAttribute("result","THANH TOÁN THẤT BẠI! VUI LÒNG THỬ LẠI");
         }
@@ -137,12 +167,25 @@ public class BookingController {
     public String showBookingDetail(Model model, @PathVariable int id){
         Booking booking=bookingService.findById(id);
         Tour tour=tourService.findById(booking.getTour().getId()).get();
-//        model.addAttribute("img",tour.getTourImage());
+        model.addAttribute("img",tour.getImageUrls().get(0).getUrl());
         model.addAttribute("booking",booking);
-        long total=tour.getAdultPrice()*booking.getAdultQuantity()+tour.getChildPrice()* booking.getChildrenQuantity();
-        model.addAttribute("total",total+"");
+        model.addAttribute("total",getTotal(booking,tour));
         return "/booking/booking-detail";
     }
+
+    private static String getTotal(Booking booking, Tour tour) {
+        long total= tour.getAdultPrice()* booking.getAdultQuantity()+ tour.getChildPrice()* booking.getChildrenQuantity();
+        Locale locale = new Locale("vi", "VN");
+        Currency currency = Currency.getInstance("VND");
+
+        DecimalFormatSymbols df = DecimalFormatSymbols.getInstance(locale);
+        df.setCurrency(currency);
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+        numberFormat.setCurrency(currency);
+        String sum=numberFormat.format(total);
+        return sum;
+    }
+
     @GetMapping("/delete")
     public String deleteBooking(@RequestParam int id){
         bookingService.delete(id);
