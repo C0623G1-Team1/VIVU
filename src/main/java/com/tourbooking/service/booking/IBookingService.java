@@ -12,4 +12,8 @@ public interface IBookingService {
     void delete(int id);
 
     Page<Booking> findByPhone(String phone,Pageable pageable);
+
+    Integer sumAdultQuantity(int id);
+
+    Integer sumChildrenQuantity(int id);
 }

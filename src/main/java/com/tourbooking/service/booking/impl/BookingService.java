@@ -39,5 +39,13 @@ public class BookingService implements IBookingService {
         return repository.findByPhone(phone, pageable);
     }
 
+    @Override
+    public Integer sumAdultQuantity(int id) {
+        return repository.countQuantityAdult(id);
+    }
 
+    @Override
+    public Integer sumChildrenQuantity(int id) {
+        return repository.countQuantityChildren(id);
+    }
 }

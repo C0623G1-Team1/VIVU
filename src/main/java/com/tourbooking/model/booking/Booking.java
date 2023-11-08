@@ -19,6 +19,7 @@ public class Booking {
     private String phone;
     @Column(name = "customer_email")
     private String email;
+
     @Column(name = "booking_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
@@ -27,6 +28,8 @@ public class Booking {
     @Column(name = "children_quantity")
     private int childrenQuantity;
 
+    @Column(columnDefinition = "varchar(12)")
+    private String customerIdCard;
     @ManyToOne
     @JoinColumn(name = "promotion_id", referencedColumnName = "promotion_id")
     private Promotion promotion;
@@ -118,5 +121,13 @@ public class Booking {
 
     public void setTour(Tour tour) {
         this.tour = tour;
+    }
+
+    public String getCustomerIdCard() {
+        return customerIdCard;
+    }
+
+    public void setCustomerIdCard(String customerIdCard) {
+        this.customerIdCard = customerIdCard;
     }
 }
