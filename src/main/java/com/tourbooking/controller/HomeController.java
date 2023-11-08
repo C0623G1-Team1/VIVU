@@ -3,6 +3,9 @@ package com.tourbooking.controller;
 import com.tourbooking.model.tour.Tour;
 import com.tourbooking.service.tour.ITourService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +20,8 @@ public class HomeController {
     private ITourService tourService;
 
     @GetMapping()
-    public ModelAndView showTour() {
-        List<Tour> tourList = tourService.showList();
+    public ModelAndView showTour(@PageableDefault (value = 6) Pageable pageable) {
+        Page<Tour> tourList = tourService.showList(pageable);
         return new ModelAndView("home-page", "tourList", tourList);
     }
 

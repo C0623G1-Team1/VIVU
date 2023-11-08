@@ -1,5 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="header">
     <!-- meta data -->
@@ -62,11 +63,12 @@
 <body>
 <div class="header" th:fragment="nav">
     <!--[if lte IE 9]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a
+            href="https://browsehappy.com/">upgrade
         your browser</a> to improve your experience and security.</p>
     <![endif]-->
     <!-- top-area Start -->
-    <section class="top-area" >
+    <section class="top-area">
         <div class="header-area">
             <!-- Start Navigation -->
             <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy" data-minus-value-desktop="70"
@@ -76,7 +78,8 @@
 
                     <!-- Start Header Navigation -->
                     <div class="navbar-header">
-                        <a th:href="@{/}"><img style="margin-top: 16px" src="/assets/images/welcome-hero/LogoVivu.png" width="200px" height="200px" alt="LOGO"></a>
+                        <a th:href="@{/}"><img style="margin-top: 16px" src="/assets/images/welcome-hero/LogoVivu.png"
+                                               width="200px" height="200px" alt="LOGO"></a>
 
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                             <i class="fa fa-bars"></i>
@@ -90,7 +93,7 @@
                         <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                             <li class=" scroll active"><a href="#home">Trang Chủ</a></li>
                             <li class="scroll"><a href="#explore">Chuyến Đi</a></li>
-                            <li class="scroll"><a href="#explore">Về Chúng Tôi</a></li>
+                            <li class="scroll"><a href="#contact">Về Chúng Tôi</a></li>
                             <li class="scroll"><a href="#contact">Liên Hệ</a></li>
                             <li><a id="login" th:href="@{/login}"><span>Đăng nhập</span></a></li>
                         </ul><!--/.nav -->
@@ -107,52 +110,82 @@
 
 <!--footer start-->
 <div id="footer" class="footer" th:fragment="footer">
+<!--    <div>-->
+<!--        <img th:src="@{https://img-9gag-fun.9cache.com/photo/aKDz4jN_700bwp.webp}" alt="footer-img">-->
+<!--    </div>-->
     <div class="container">
         <div class="footer-menu">
             <div class="row">
                 <div class="col-sm-3">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html"><img src="assets/images/welcome-hero/LogoVivu.png" alt="LOGO"></a>
+                        <a class="navbar-brand" href="index.html"><img src="/assets/images/welcome-hero/LogoVivu.png"
+                                                                       alt="LOGO"></a>
+                        <p>Công ty TNHH VIVU Việt Nam.</p>
+                        <p>Địa chỉ 280 Trần Hưng Đạo, An Hải Bắc, Sơn Trà, TP Đà Nẵng.</p>
+                        <div class="footer-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                        </div>
                     </div><!--/.navbar-header-->
                 </div>
-                <div class="col-sm-9">
-                    <ul class="footer-menu-item">
-                        <li class="scroll"><a href="#works">about us</a></li>
-                        <li class="scroll"><a href="#reviews">tour</a></li>
-                        <li class="scroll"><a href="#contact">contact</a></li>
-                        <li class=" scroll"><a href="#contact">my account</a></li>
-                    </ul><!--/.nav -->
+                <div class="col-sm-3">
+                    <a href="#works">Về chúng tôi</a>
+                    <p>Cách đặt vé</p>
+                    <p>Liên hệ</p>
+                    <p>Trợ giúp</p>
+                    <p>Tuyển dụng</p>
                 </div>
+                <div class="col-sm-3">
+                    <a href="#works">Liên hệ</a>
+                    <p><i class='bx bxs-phone' style='color:#141313'></i> + (84) 777 8888</p>
+                    <p><i class='bx bxl-gmail' style='color:#141313'></i> VivuCo@gmail.com</p>
+                </div>
+                <div class="col-sm-3">
+                    <a href="#works">Khác</a>
+                    <p>VIVU blog</p>
+                    <p>Chính sách quyền riêng tư</p>
+                    <p>Điều khoản & Điều kiện</p>
+                    <p>Quy chế hoạt động</p>
+                </div>
+                <!--                <div class="col-sm-9">-->
+                <!--                    <ul class="footer-menu-item">-->
+                <!--                        <li class="scroll"><a href="#works">Về chúng tôi</a></li>-->
+                <!--                        <li class="scroll"><a href="#contact">Liên hệ</a></li>-->
+                <!--                        <li class=" scroll"><a href="#contact">Khác</a></li>-->
+                <!--                    </ul>&lt;!&ndash;/.nav &ndash;&gt;-->
+                <!--                </div>-->
             </div>
         </div>
         <div class="hm-footer-copyright">
             <div class="row">
-                <div class="col-sm-5">
-                    <p>
-                        &copy;copyright. designed and developed by C06T1
-                    </p><!--/p-->
-                </div>
-                <div class="col-sm-7">
-                    <div class="footer-social">
-                        <span><i class="fa fa-phone"> +1  (222) 777 8888</i></span>
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                    </div>
-                </div>
+                <!--                <div class="col-sm-5">-->
+                <p>
+                    Copyright © 2023 VIVU
+                </p><!--/p-->
+                <!--                </div>-->
+                <!--                <div class="col-sm-7">-->
+                <!--                    <div class="footer-social">-->
+                <!--                        <span><i class="fa fa-phone"> +1  (222) 777 8888</i></span>-->
+                <!--                        <a href="#"><i class="fa fa-facebook"></i></a>-->
+                <!--                        <a href="#"><i class="fa fa-twitter"></i></a>-->
+                <!--                        <a href="#"><i class="fa fa-linkedin"></i></a>-->
+                <!--                        <a href="#"><i class="fa fa-google-plus"></i></a>-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </div>
 
         </div><!--/.hm-footer-copyright-->
     </div><!--/.container-->
 
-<!--    <div id="scroll-Top">-->
-<!--        <div class="return-to-top">-->
-<!--            <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title=""-->
-<!--               data-original-title="Back to Top" aria-hidden="true"></i>-->
-<!--        </div>-->
+    <!--    <div id="scroll-Top">-->
+    <!--        <div class="return-to-top">-->
+    <!--            <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title=""-->
+    <!--               data-original-title="Back to Top" aria-hidden="true"></i>-->
+    <!--        </div>-->
 
-<!--    </div>&lt;!&ndash;/.scroll-Top&ndash;&gt;-->
+    <!--    </div>&lt;!&ndash;/.scroll-Top&ndash;&gt;-->
 </div><!--/.footer-->
 <!--footer end-->
 
@@ -188,10 +221,5 @@
     <script src="/assets/js/custom.js"></script>
 
 </footer>
-<script>
-    function doSth() {
-        alert("a");
-    }
-</script>
 </body>
 </html>

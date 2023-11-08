@@ -1,7 +1,20 @@
+/*home-page*/
 #tour_detail * {
     padding: 0;
     margin: 0;
 
+}
+
+#pagination span {
+    font-size: 1.7em;
+    font-weight: 500;
+    border: 1px solid;
+    border-radius: 100%;
+}
+
+#pagination span:hover {
+    background-color: #FF3B5F;
+    color: white;
 }
 
 #tour {
@@ -10,8 +23,24 @@
 
 #tour img {
     height: 250px;
+    border-radius: 20px 20px 0 0;
 }
 
+. element.style {
+}
+#tour {
+    height: 500px;
+}
+.single-explore-img {
+    border-radius: 20px 20px 0 0;
+}
+
+.single-explore-item {
+    border-radius: 20px;
+}
+
+
+/**/
 #tour-name {
     font-weight: bold;
     font-size: 30px;
@@ -21,7 +50,7 @@
 }
 
 #tour_detail p {
-    margin-bottom: 22px;
+    /*margin-bottom: 22px;*/
 }
 
 #tour_detail {
@@ -106,8 +135,8 @@
     transition: 1s;
 }
 
-.input-box input:focus~label,
-.input-box input:valid~label {
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
     top: -5px;
 }
 
@@ -142,7 +171,7 @@
     margin-right: 3px;
 }
 
-#login-btn button{
+#login-btn button {
     width: 60%;
     height: 40px;
     color: white;
@@ -162,24 +191,27 @@
     border: none;
     outline: none;
 }
-
+.row.tour_description.d-flex {
+    display: flex;
+}
 #tour-information {
     margin-top: 20px;
     padding: 45px;
-}
-
-#tour_description #board{
-    position: sticky;
-    top: 50px;
+    position: relative !important;
 }
 
 #board {
     border: 1px solid rgb(221, 221, 221);
     border-radius: 20px;
-    padding: 47px;
+    padding: 40px;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    position: sticky;
+    top: 125px !important;
 }
 
+#board hr {
+    margin: 15px 0;
+}
 .tour-name {
     color: #FF3B5F;
     font-weight: bold;
@@ -208,3 +240,76 @@
 #book a:hover {
     box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 }
+
+/*create-tour*/
+.form-text {
+    margin-top: 5px;
+}
+
+#create-btn button {
+    width: 30%;
+    height: 40px;
+    color: #413f3f;
+    background-color: transparent;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1.4em;
+    font-weight: 700;
+    transition: 0.5s ease;
+    margin-top: 30px;
+    letter-spacing: 3px;
+    border: 2px solid rgba(161, 161, 161, 0.3);
+}
+
+#create-btn button:hover {
+    background-color: #FF3B5F;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    border: none;
+    outline: none;
+    color: white;
+}
+#create-tour h1 {
+    font-size: 1.7em;
+    font-weight: bold;
+    margin: 25px 0;
+    letter-spacing: 2px;
+}
+
+.in-one-line {
+    display: flex;
+    /*align-items: center;*/
+    justify-content: space-between;
+}
+
+.in-one-line input {
+    width: 100%;
+}
+
+#date input {
+    width: 500px;
+}
+
+#price input {
+    width: 325px;
+}
+
+.div-element {
+    margin-bottom: 20px;
+}
+
+.div-element label {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#board form {
+    padding: 15px;
+}
+
+
+/*img tour view*/
+#first-col-img {
+    border-radius: 20px 0 0 20px;
+    width: 100%;
+}
+
