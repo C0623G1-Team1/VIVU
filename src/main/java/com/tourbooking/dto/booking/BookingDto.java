@@ -3,6 +3,9 @@ package com.tourbooking.dto.booking;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class BookingDto implements Validator {
     private int id;
     private String name;
@@ -11,6 +14,7 @@ public class BookingDto implements Validator {
     private String date;
     private int adultQuantity;
     private int childrenQuantity;
+    private String customerIdCard;
     private String promotionCode;
     private boolean isDeleted;
     private int tourId;
@@ -51,6 +55,8 @@ public class BookingDto implements Validator {
     }
 
     public String getDate() {
+//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+//        return LocalDate.parse(date,dateTimeFormatter).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         return date;
     }
 
@@ -98,6 +104,14 @@ public class BookingDto implements Validator {
         this.tourId = tourId;
     }
 
+    public String getCustomerIdCard() {
+        return customerIdCard;
+    }
+
+    public void setCustomerIdCard(String customerIdCard) {
+        this.customerIdCard = customerIdCard;
+    }
+
     @Override
     public boolean supports(Class<?> clazz) {
         return false;
@@ -111,6 +125,9 @@ public class BookingDto implements Validator {
         }
         if(!bookingDto.getPhone().matches("(84|0[3|5|7|8|9])+([0-9]{8})\\b")){
             errors.rejectValue("phone",null,"Số điện thoại không đúng");
+        }
+        if(!bookingDto.getCustomerIdCard().matches("^[0-9]{12}$")){
+            errors.rejectValue("customerIdCard",null,"Số căn cước công dân không đúng");
         }
     }
 }

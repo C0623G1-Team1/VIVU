@@ -43,7 +43,7 @@
 <body>
 <div class="container">
     <div  class="row">
-        <div  class="col-12" >
+        <div  class="col-12" style="margin-left: 180px">
             <div class="header-content mt-5">
                 <div class="card">
                     <div style="margin: 30px 30px">
@@ -80,7 +80,7 @@
                                 <h5>Ngày đặt</h5>
                             </div>
                             <div>
-                                <h5 class="infor" th:text="${booking.date}">0847211345</h5>
+                                <h5 class="infor" th:text="${#dates.format(booking.date, 'dd/MM/yyyy')}">0847211345</h5>
                             </div>
                         </div>
                         <div style="display: flex">

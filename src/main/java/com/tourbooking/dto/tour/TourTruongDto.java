@@ -1,5 +1,8 @@
 package com.tourbooking.dto.tour;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class TourTruongDto {
     private int id;
     private String tourName;
@@ -64,7 +67,8 @@ public class TourTruongDto {
     }
 
     public String getStartDate() {
-        return startDate;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+        return LocalDate.parse(startDate,dateTimeFormatter).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public void setStartDate(String startDate) {
@@ -72,7 +76,8 @@ public class TourTruongDto {
     }
 
     public String getEndDate() {
-        return endDate;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+        return LocalDate.parse(endDate,dateTimeFormatter).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public void setEndDate(String endDate) {
