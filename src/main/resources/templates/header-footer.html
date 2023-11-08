@@ -95,7 +95,42 @@
                             <li class="scroll"><a href="#explore">Chuyến Đi</a></li>
                             <li class="scroll"><a href="#contact">Về Chúng Tôi</a></li>
                             <li class="scroll"><a href="#contact">Liên Hệ</a></li>
-                            <li><a id="login" th:href="@{/login}"><span>Đăng nhập</span></a></li>
+<!--                            <li><a id="login" th:href="@{/login}"><span>Đăng nhập</span></a></li>-->
+                            <li>
+                                <button id="infor" onclick="toggleMenu()">
+                                    <i class='bx bx-menu'></i>
+                                    <img th:src="@{https://i.pinimg.com/564x/a2/66/ec/a266ec4ddcfa4457156a1711d9519920.jpg}" alt="ava"/>
+                                </button>
+                                <div class="member-func" id="member-func">
+                                <div class="sub-menu">
+                                    <a th:href="@{/}">
+                                        <i class='bx bxl-trip-advisor'></i>
+                                        <p> Xem chuyến đi</p>
+                                    </a>
+                                    <a th:href="@{/tour/create}">
+                                        <i class='bx bxs-add-to-queue'></i>
+                                        <p> Thêm mới chuyến đi</p>
+                                    </a>
+                                    <a th:href="@{/booking/list}">
+                                        <i class='bx bxs-cart-alt'></i>
+                                        <p> Xem đơn đặt chỗ</p>
+                                    </a>
+                                    <a th:href="@{/}">
+                                        <i class='bx bxs-user-detail'></i>
+                                        <p> Xem thành viên</p>
+                                    </a>
+                                    <a th:href="@{/}">
+                                        <i class='bx bxs-user'></i>
+                                        <p> Thêm mới tài khoản</p>
+                                    </a>
+                                    <hr>
+                                    <a th:href="@{/}">
+                                        <i class='bx bx-log-out' ></i>
+                                        <p> Đăng xuất</p>
+                                    </a>
+                                </div>
+                            </div>
+                            </li>
                         </ul><!--/.nav -->
                     </div><!-- /.navbar-collapse -->
                 </div><!--/.container-->
@@ -191,6 +226,8 @@
 
 
 <footer th:fragment="footer-libs">
+
+    <script src="/libs/dropdown-menu.js"></script>
 
     <!-- Include all js compiled plugins (below), or include individual files as needed -->
 
