@@ -16,7 +16,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
     private int accountId;
-    @Email(message = "Vui lòng nhập đúng email." )
+
     @Column(unique = true)
     private String accountEmail;
     private String accountPassword;
@@ -31,13 +31,13 @@ public class Account {
     @Column(columnDefinition = "bit(1) default 1")
     private boolean isEnabled;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     @Column(columnDefinition = "int default 2")
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private Set<Tour> tour;
 
     public Account() {

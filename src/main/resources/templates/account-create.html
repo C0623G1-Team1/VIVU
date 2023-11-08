@@ -16,6 +16,9 @@
 
 
 <div class="container" style="background-color: #e0e5e9">
+    <button type="button" class="btn btn-primary">
+        <a th:href="@{/account/navigation}" style="color: white">Quay lại</a>
+    </button>
     <div style="display: flex;align-items: center" class="inner row">
         <div class="col-lg-5">
             <div class="image-holder">
@@ -23,6 +26,7 @@
             </div>
         </div>
         <div class="col-lg-7">
+
             <div>
                 <h3 style="margin-top: 20px; margin-bottom: 20px; text-align: center" >Tạo tài khoản nhân viên</h3>
             </div>
@@ -35,19 +39,18 @@
                        th:errors="*{employeeName}" style="color: red">Name error</p>
                 </div>
                 <div class="form-wrapper">
-                    <select name="" id="" class="form-control">
-                        <option value="" disabled selected>Giới tính</option>
-                        <option th:if="*{employeeGender == 0}" value="0">Nữ</option>
-                        <option th:if="*{employeeGender == 1}" value="1">Nam</option>
-                        <option th:if="*{employeeGender == 2}" value="2">LGBT</option>
-                    </select>
-<!--                    <fieldset>-->
-<!--                        <h3>Gender</h3>-->
-<!--                        <input th:type="radio" th:name="gender" th:value="0" label="Male"-->
-<!--                               th:field="*{employeeGender}"/>Nam<br>-->
-<!--                        <input th:type="radio" th:name="gender" th:value="1" label="Female" th:field="*{employeeGender}"/>Nữ<br>-->
-<!--                        <input th:type="radio" th:name="gender" th:value="2" label="LGBT" th:field="*{employeeGender}"/>LGBT<br>-->
-<!--                    </fieldset>-->
+<!--                    <select name="" id="" class="form-control">-->
+<!--                        <option value="" disabled selected>Giới tính</option>-->
+<!--                        <option th:if="*{employeeGender == 0}" value="0">Nữ</option>-->
+<!--                        <option th:if="*{employeeGender == 1}" value="1">Nam</option>-->
+<!--                        <option th:if="*{employeeGender == 2}" value="2">LGBT</option>-->
+<!--                    </select>-->
+                    <fieldset>
+                        <label>Giới tính</label><br>
+                        <input th:type="radio" value="0" th:field="*{employeeGender}"/>Nữ<br>
+                        <input th:type="radio" value="1" th:field="*{employeeGender}"/>Nam<br>
+                        <input th:type="radio" value="2" th:field="*{employeeGender}"/>LGBT<br>
+                    </fieldset>
                     <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
                 </div>
                 <div class="form-group">
@@ -58,26 +61,27 @@
                 <div class="form-group">
                     <input type="text" placeholder="Số điện thoại..." class="form-control" th:field="*{employeePhone}">
                     <p th:if="${#fields.hasErrors('employeePhone')}"
-                       th:errors="*{employeePhone}">Name error</p>
+                       th:errors="*{employeePhone}" style="color: red">Name error</p>
                 </div>
                 <div class="form-group">
                     <input type="text" placeholder="Email nhân viên (tên tài khoản)..." class="form-control"
                            th:field="*{accountEmail}">
                     <p th:if="${#fields.hasErrors('accountEmail')}"
-                       th:errors="*{accountEmail}">Name error</p>
+                       th:errors="*{accountEmail}" style="color: red">Name error</p>
+                    <p th:text="${message}" style="color: red"></p>
                     <i class="zmdi zmdi-email"></i>
                 </div>
                 <div class="form-group">
                     <input type="text" placeholder="Mật khẩu..." class="form-control" th:field="*{accountPassword}">
                     <p th:if="${#fields.hasErrors('accountPassword')}"
-                       th:errors="*{accountPassword}">Name error</p>
+                       th:errors="*{accountPassword}" style="color: red">Name error</p>
                     <i class="zmdi zmdi-lock"></i>
                 </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Link ảnh chân dung..." class="form-control" th:field="*{employeeImg}">
-                    <p th:if="${#fields.hasErrors('employeeImg')}"
-                       th:errors="*{employeeImg}">Name error</p>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <input type="text" placeholder="Link ảnh chân dung..." class="form-control" th:field="*{employeeImg}">-->
+<!--                    <p th:if="${#fields.hasErrors('employeeImg')}"-->
+<!--                       th:errors="*{employeeImg}" style="color: red">Name error</p>-->
+<!--                </div>-->
                 <button type="submit" style="background-color: #ff545a" class="btn btn-outline-danger">Tạo tài khoản
                     <i class="zmdi zmdi-arrow-right"></i>
                 </button>

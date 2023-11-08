@@ -14,23 +14,25 @@ public class AccountDto implements Validator {
     @Email(message = "Thông tin email không tồn tại.")
     private String accountEmail;
     @Pattern(regexp = "^[0-9a-zA-Z]+$", message = "Mật khẩu chỉ chứa số, chữ thường, và chữ hoa, không chứa kí tự đặc biệt.")
-    @Size(min=3, max=8)
+    @Size(min=3, max=8, message = "Mật khẩu tối thiểu 3 kí tự, tối đa 8 kí tự")
+//    @Column(columnDefinition = "varchar(8) default '123'")
     private String accountPassword;
     @NotEmpty(message = "Vui lòng nhập họ và tên")
-    @NotBlank(message = "Vui lòng bỏ khoảng trắng")
+//    @NotBlank(message = "Vui lòng không nhập khoảng trắng 2 đầu")
     @Size(min=5, max=45, message = "Số lượng kí tự tối thiểu là 5, tối đa 45")
-    @Pattern(regexp = "^[A-Za-z, ]+$",message = "Tên không chứa các số và các kí tự đặc biệt (@,#,$,^,&,*,<,>,...)")
+    @Pattern(regexp = "^[aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ ]+$",
+            message = "Tên không chứa các số và các kí tự đặc biệt (@,#,$,^,&,*,<,>,...)")
     private String employeeName;
     @NotEmpty(message = "Vui lòng nhập số điện thoại")
-    @NotBlank
+//    @NotBlank(message = "Vui lòng không nhập khoảng trắng 2 đầu")
     @Pattern(regexp = "^(0[3|5|7|8|9])+([0-9]{8})$", message = "Vui lòng nhập đúng định dạng số điện thoại (10 chữ số).")
     private String employeePhone;
 
     private int employeeGender;
     private String employeeImg;
     @NotEmpty(message = "Vui lòng nhập số Căn cước công dân.")
-    @NotBlank
-    @Pattern(regexp = "^([0-9]){12}$" , message = "Day la validate cua chi Ly")
+//    @NotBlank(message = "Vui lòng không nhập khoảng trắng 2 đầu")
+    @Pattern(regexp = "^([0-9]){12}$" , message = "Vui lòng nhập đúng định dạng căn cước công dân")
     private String employeeIdCard;
     public AccountDto(){}
 
@@ -112,4 +114,5 @@ public class AccountDto implements Validator {
     public void validate(Object target, Errors errors) {
 
     }
+
 }

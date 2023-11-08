@@ -35,14 +35,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .and()
                 .formLogin()
-//                .loginPage("/login")
-                .defaultSuccessUrl("/account/read").permitAll()
+                .loginPage("/account/login")
+                .defaultSuccessUrl("/account/navigation").permitAll()
+                .failureUrl("/account/login?error=true")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/")
                 .and().authorizeRequests()
                 .antMatchers("/", "/tour/view", "booking/create").permitAll()
-                .antMatchers("/tour/yourTour", "/account/view").hasRole("EMPLOYEE")
-                .antMatchers("/account/creat", "/account/read", "/account/delete", "/account/update",
+                .antMatchers("/tour/yourTour", "/account/view", "/account/password", "account/update").hasRole("EMPLOYEE")
+                .antMatchers("/account/navigation").hasAnyRole("EMPLOYEE", "ADMIN")
+                .antMatchers("/account/create", "/account/read", "/account/delete",
                         "/tour/create", "/tour/read", "/tour/update", "/tour/delete",
-                        "/booking/read", "/booking/delete", "/booking/view").hasRole("ADMIN");
+                        "/booking/read", "/booking/delete", "/booking/view").hasRole("ADMIN")
+                .anyRequest().permitAll();
 
 
         http.authorizeRequests().and().rememberMe()
