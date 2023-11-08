@@ -169,6 +169,7 @@ public class BookingController {
         Tour tour=tourService.findById(booking.getTour().getId()).get();
         model.addAttribute("img",tour.getImageUrls().get(0).getUrl());
         model.addAttribute("booking",booking);
+        String total=getTotal(booking,tour);
         model.addAttribute("total",getTotal(booking,tour));
         return "/booking/booking-detail";
     }
