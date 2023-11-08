@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -96,20 +97,26 @@ public class TourController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@ModelAttribute TourDTO tour, RedirectAttributes redirectAttributes) {
-        iImageService.deleteById(tour.getId());
-        Tour tour1 = new Tour();
-        BeanUtils.copyProperties(tour, tour1);
-        List<Image> list = new ArrayList<>();
-        for (String s : tour.getImageUrls()) {
-            if (!"undefined".equals(s)) {
-                list.add(new Image(s, tour1));
+    public String update(@Validated @ModelAttribute("tour") TourDTO tour, BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes, @PathVariable Integer id) {
+        if (bindingResult.hasFieldErrors()) {
+            return "admin-update-tour";
+        } else {
+            iImageService.deleteById(tour.getId());
+            Tour tour1 = new Tour();
+            tour1 = tourService.findById(id).get();
+            BeanUtils.copyProperties(tour, tour1);
+            List<Image> list = new ArrayList<>();
+            for (String s : tour.getImageUrls()) {
+                if (!"undefined".equals(s)) {
+                    list.add(new Image(s, tour1));
+                }
             }
+            tour1.setImageUrls(list);
+            tourService.create(tour1);
+            redirectAttributes.addFlashAttribute("mess", "Cập nhật thành công");
+            return "redirect:/";
         }
-        tour1.setImageUrls(list);
-        tourService.create(tour1);
-        redirectAttributes.addFlashAttribute("mess", "Cập nhật thành công");
-        return "redirect:/";
     }
 
     @GetMapping("/delete/{id}")

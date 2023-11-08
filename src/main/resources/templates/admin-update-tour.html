@@ -13,47 +13,64 @@
         <form class="mx-4" method="post" th:object="${tour}" id="submit-form">
             <div class="mb-3">
                 <!--        <label for="id" class="form-label">Product ID: </label>-->
-                <input type="hidden" class="form-control" placeholder="Enter ID" id="id" th:field="*{id}">
+                <!--                <input type="hidden" class="form-control" placeholder="Enter ID" id="id" th:field="*{id}">-->
                 <!--            <input type="hidden" class="form-control" placeholder="" id="date" th:field="*{date}" th:text="${localDate}">-->
             </div>
 
             <div class="div-element">
                 <label for="name" class="form-label">Điểm tham quan: </label>
                 <input type="text" class="form-control" id="name" th:field="*{tourName}">
+                <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('tourName')}"
+                     th:errors="*{tourName}">Tour name
+                </div>
             </div>
 
-            <div class="div-element in-one-line">
+            <div id="date" class="div-element in-one-line">
                 <div>
                     <label for="startDate" class="form-label">Ngày khởi hành:</label>
                     <input type="date" class="form-control" id="startDate" th:field="*{startDate}">
+                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('startDate')}"
+                         th:errors="*{startDate}"></div>
                 </div>
                 <div>
                     <label for="endDate" class="form-label">Ngày kết thúc:</label>
                     <input type="date" class="form-control" id="endDate" th:field="*{endDate}">
+                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('endDate')}"
+                         th:errors="*{endDate}"></div>
                 </div>
+            </div>
+            <div id="price" class="div-element in-one-line">
                 <div>
                     <label for="seat" class="form-label">Số lượng (người):</label>
                     <input type="number" class="form-control" id="seat" th:field="*{tourAvailableSeat}">
+                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('tourAvailableSeat')}"
+                         th:errors="*{tourAvailableSeat}"></div>
                 </div>
                 <div>
                     <label for="adultPrice" class="form-label"> Giá vé người lớn: </label>
                     <input type="number" class="form-control" id="adultPrice" th:field="*{adultPrice}">
+                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('adultPrice')}"
+                         th:errors="*{adultPrice}"></div>
                 </div>
 
                 <div>
                     <label for="childPrice" class="form-label">Giá vé trẻ em:</label>
                     <input type="number" class="form-control" id="childPrice" th:field="*{childPrice}">
+                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('childPrice')}"
+                         th:errors="*{childPrice}"></div>
                 </div>
             </div>
 
             <div class="div-element">
                 <label for="description" class="form-label">Mô tả chi tiết: </label>
                 <textarea class="form-control" id="description" th:field="*{tourDescription}"></textarea>
+                <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('tourDescription')}"
+                     th:errors="*{tourDescription}"></div>
             </div>
 
             <!--            Upload ảnh-->
             <div class="mb-3">
-                <div hidden  th:each="book, itemStat : *{imageUrls}">
+                <div hidden th:each="book, itemStat : *{imageUrls}">
                     <input th:field="*{imageUrls[__${itemStat.index}__]}" th:id="'image-' + ${itemStat.index}"/>
                 </div>
 
@@ -67,12 +84,14 @@
                     <!--                <input class="form-control" type="file" id="input-ref" multiple onchange="handlePreviewImage(this)"/>-->
                 </div>
                 <div id="preview-root"></div>
+                <!--                <div style="color: darkred" class="form-text" th:if="${#fields.hasErrors('imageUrls')}" th:errors="*{imageUrls}"></div>-->
             </div>
             <div id="create-btn" class="text-center">
                 <button type="submit" id="btn-upload" class="btn btn-outline-dark my-3">LƯU THAY ĐỔI</button>
             </div>
         </form>
     </div>
+
 </div>
 
 <script>

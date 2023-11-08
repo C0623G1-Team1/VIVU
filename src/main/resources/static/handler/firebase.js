@@ -66,11 +66,11 @@ const previewImages = (fileArr) => {
                   />
                     <figcaption class="figure-caption">${file && file.name ? file.name : ""}</figcaption>
                 </figure>
-                <button id="preview-${index}" onclick="handleDeleteImage(${index})" type="button" class="btn btn-danger btn-floating btn-sm" style="position: absolute; top: 0; right: 15px" >
+                <button id="preview-${index}" onclick="handleDeleteImage(${index})" type="button" class="btn btn-floating btn-sm" style="position: absolute; top: 0; right: 15px" >
                 
 <!--                Icon delete-->
-                    <i class="fas fa-lg fa-circle-xmark"></i>
-                    
+                    <i class='bx bxs-x-square'></i>
+                   
                 </button>
             </span>`
         }
