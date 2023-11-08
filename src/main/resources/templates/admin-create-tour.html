@@ -37,14 +37,31 @@
                     <input type="date" class="form-control" id="startDate" th:field="*{startDate}">
                     <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('startDate')}"
                          th:errors="*{startDate}"></div>
+                    <div style="color: #d81212e8" id="start" class="form-text"></div>
                 </div>
                 <div>
                     <label for="endDate" class="form-label">Ngày kết thúc:</label>
                     <input type="date" class="form-control" id="endDate" th:field="*{endDate}">
                     <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('endDate')}"
                          th:errors="*{endDate}"></div>
+
+                    <div style="color: #d81212e8" id="end" class="form-text"></div>
+                </div>
+                <button onclick="checkDate()" type="button">Click</button>
+            </div>
+
+            <!--            Binding Value Employee-->
+            <div class="div-element in-one-line">
+                <div>
+                    <label for="startDate" class="form-label">Tên nhân viên:</label>
+                    <input type="text" class="form-control" readonly id="employeeName">
+                    <input type="text" class="form-control" readonly th:field="*{accountId}" id="accountId">
+                    <!--                    <div style="color: #d81212e8" class="form-text" th:if="${#fields.hasErrors('startDate')}"-->
+                    <!--                         th:errors="*{startDate}"></div>-->
+                    <!--                    <div style="color: #d81212e8" id="start" class="form-text"></div>-->
                 </div>
             </div>
+
             <div id="price" class="div-element in-one-line">
                 <div>
                     <label for="seat" class="form-label">Số lượng (người):</label>
@@ -95,24 +112,125 @@
             <div id="create-btn" class="text-center">
                 <button type="submit" id="btn-upload" class="btn btn-outline-dark my-3">LƯU</button>
             </div>
+            <hr>
+
+            <div style="display: none" id="modal-btn"
+                 class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Launch demo modalabc
+            </div>
         </form>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <table border="1" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Số thứ tự</th>
+                        <th>Tên nhân viên</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     CKEDITOR.replace("description")
 </script>
-<!--<form action="/ckeditor/save" method="post">-->
-<!--    <textarea id="editor" name="content" th:value="${content}"></textarea>-->
 
-<!--    <button type="submit">Save</button>-->
-<!--</form>-->
-<!--<div th:utext="${content}"></div>-->
 <div th:replace="/header-footer::footer"></div>
 <footer th:replace="/header-footer::footer-libs"></footer>
 <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
 <script src="../handler/firebase.js"></script>
 <script type="module" src="../handler/upload.js"></script>
+<script>
+    function checkDate() {
+        let startDate = document.getElementById("startDate").value;
+        let endDate = document.getElementById("endDate").value;
+        let curDate = new Date();
+        curDate = curDate.toISOString().split('T')[0];
+        console.log(curDate);
+        let startDateError = document.getElementById("start");
+        let endDateError = document.getElementById("end");
+        let stringStartError = "Vui lòng nhập ngày khởi hành";
+        let stringEndError = "Vui lòng nhập ngày kết thúc";
+        startDateError.innerText = "";
+        endDateError.innerText = "";
 
+        switch (true) {
+            case !startDate && !endDate:
+                startDateError.innerText = "Vui lòng nhập ngày khơi hành";
+                endDateError.innerText = "Vui lòng nhập ngày kết thúc";
+                return;
+            case !startDate && endDate < curDate:
+                startDateError.innerText = "Vui lòng nhập ngày khơi hành";
+                endDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
+                return;
+            case !endDate && startDate < curDate:
+                startDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
+                endDateError.innerText = "Vui lòng nhập ngày kết thúc";
+                return;
+            case  startDate < curDate && endDate < curDate:
+                startDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
+                endDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
+                return;
+            case startDate < curDate:
+                startDateError.innerText = "Vui lòng không nhập ngày ở quá khứ";
+                return;
+            case startDate > endDate:
+                endDateError.innerText = "Vui lòng nhập ngày khởi hành lớn hơn ngày kết thúc";
+                return;
+        }
+        showEmployeeList(startDate, endDate);
+    }
+
+    function showEmployeeList(startDate, endDate) {
+        $.ajax({
+            url: `http://localhost:8080/show-list-employee?startDate=${startDate}&endDate=${endDate}`,
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                $("tbody").empty();
+                let tr = [];
+                for (let i = 0; i < data.length; i++) {
+                    tr.push("<tr>");
+                    tr.push("<td>" + (i + 1) + "</td>");
+                    // tr.push("<td>" + data[i].accountId + "</td>");
+                    tr.push("<td>" + data[i].employeeName + "</td>");
+                    tr.push("<td>" + data[i].phoneNumber + "</td>");
+                    tr.push("<td>" + data[i].email + "</td>");
+                    tr.push(`<td><button type="button" class="btn btn-default" data-dismiss="modal" onclick="bindingValue(${data[i].accountId},'${data[i].employeeName}')">Chọn</button></td>`);
+                    tr.push("</tr>");
+                }
+                $("table").append(tr.join(""));
+            }
+        })
+        document.getElementById("modal-btn").click();
+    }
+
+    function bindingValue(id, name) {
+        document.getElementById("employeeName").value = name;
+        document.getElementById("accountId").value = id;
+    }
+</script>
 </body>
 </html>

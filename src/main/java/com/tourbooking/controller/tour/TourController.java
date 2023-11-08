@@ -1,5 +1,6 @@
 package com.tourbooking.controller.tour;
 
+import com.tourbooking.model.account.Account;
 import com.tourbooking.model.tour.Image;
 import com.tourbooking.model.tour.Tour;
 import com.tourbooking.model.tour.TourDTO;
@@ -53,6 +54,9 @@ public class TourController {
         } else {
             Tour tour1 = new Tour();
             BeanUtils.copyProperties(tour, tour1);
+            Account account = new Account();
+            account.setAccountId(tour.getAccountId());
+            tour1.setAccount(account);
             List<Image> list = new ArrayList<>();
             for (String s : tour.getImageUrls()) {
                 if (!"undefined".equals(s)) {

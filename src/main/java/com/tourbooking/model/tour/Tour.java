@@ -51,7 +51,7 @@ public class Tour {
     private Long adultPrice;
     private Long childPrice;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
 
