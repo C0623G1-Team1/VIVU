@@ -4,6 +4,7 @@ import com.tourbooking.model.tour.Tour;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,4 +18,7 @@ public interface ITourService {
     Optional<Tour> findById(Integer id);
 
     void delete(Integer id);
+
+    Page<Tour> search(Pageable pageable,String name, Date startDate, Date endDate);
+
 }
