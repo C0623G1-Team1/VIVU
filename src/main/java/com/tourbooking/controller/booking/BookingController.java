@@ -60,7 +60,7 @@ public class BookingController {
         model.addAttribute("sumBooking",0);
         model.addAttribute("tourDto",tourDto);
         model.addAttribute("bookingDto", bookingDto);
-        return "/booking/booking-two";
+        return "/booking/booking";
     }
 
     private Integer getInteger(int id, TourTruongDto tourDto) {
@@ -96,19 +96,32 @@ public class BookingController {
     @PostMapping("/add")
     public String addBooking(@Validated @ModelAttribute BookingDto bookingDto,
                              BindingResult bindingResult,Model model,@SessionAttribute("bookingDto")
-                                 BookingDto newBookingDto, @RequestParam("amount") String sum){
+                                 BookingDto newBookingDto, @RequestParam("amount") String sum, @RequestParam("reduce") String reduce){
         new BookingDto().validate(bookingDto, bindingResult);
         TourTruongDto tourDto=convertTourToTourDto(bookingDto.getTourId());
         Integer remain = getInteger(tourDto.getId(), tourDto);
         Integer number= Integer.parseInt(sum);
+        if(reduce==""){
+            reduce="0";
+        }
+        Integer redu= Integer.valueOf(reduce);
         String linkPay=null;
+
+        long adultMoney=bookingDto.getAdultQuantity()*tourDto.getAdultPrice();
+        long childrenMoney=bookingDto.getChildrenQuantity()*tourDto.getChildPrice();
+        long totalMoney=adultMoney+childrenMoney-redu;
         if(bindingResult.hasFieldErrors()||remain<number){
+            model.addAttribute("adultMoney",getFormatMoney(adultMoney));
+            model.addAttribute("childrenMoney",getFormatMoney(childrenMoney));
+            model.addAttribute("totalMoney",getFormatMoney(totalMoney));
+
+            model.addAttribute("reduce",getFormatMoney(redu));
             model.addAttribute("sumBooking",number);
             model.addAttribute("amoutRemain",remain);
             model.addAttribute("tourDto",tourDto);
             model.addAttribute("booking", bookingDto);
             model.addAttribute("link",null);
-            return "/booking/booking-two";
+            return "/booking/booking";
         } else {
             String time= String.valueOf(LocalDate.now());
             bookingDto.setDate(time);
@@ -126,11 +139,15 @@ public class BookingController {
                 total=total(bookingDto,tour);
             }
             linkPay=payment(total);
+            model.addAttribute("reduce",getFormatMoney(redu));
+            model.addAttribute("adultMoney",getFormatMoney(adultMoney));
+            model.addAttribute("childrenMoney",getFormatMoney(childrenMoney));
+            model.addAttribute("totalMoney",getFormatMoney(totalMoney));
             model.addAttribute("amoutRemain",remain);
             model.addAttribute("link",linkPay);
             model.addAttribute("tourDto",tourDto);
             model.addAttribute("booking", bookingDto);
-            return "/booking/booking-two";
+            return "/booking/booking";
         }
 
     }
@@ -160,8 +177,8 @@ public class BookingController {
     }
 
     @GetMapping("/list")
-    public ModelAndView showListBooking(@PageableDefault(value = 11, sort = "date", direction = Sort.Direction.DESC) Pageable pageable){
-        return new ModelAndView("/booking/bookingManager","list",bookingService.showListBooking(pageable));
+    public ModelAndView showListBooking(@PageableDefault(value = 4, sort = "date", direction = Sort.Direction.DESC) Pageable pageable){
+        return new ModelAndView("/booking/booking-manager","list",bookingService.showListBooking(pageable));
     }
     @GetMapping("{id}/detail")
     public String showBookingDetail(Model model, @PathVariable int id){
@@ -171,7 +188,7 @@ public class BookingController {
         model.addAttribute("booking",booking);
         String total=getTotal(booking,tour);
         model.addAttribute("total",getTotal(booking,tour));
-        return "/booking/booking-detail";
+        return "/booking/booking-detail-ver2";
     }
 
     private static String getTotal(Booking booking, Tour tour) {
@@ -186,6 +203,17 @@ public class BookingController {
         String sum=numberFormat.format(total);
         return sum;
     }
+    private static String getFormatMoney(long number) {
+        Locale locale = new Locale("vi", "VN");
+        Currency currency = Currency.getInstance("VND");
+
+        DecimalFormatSymbols df = DecimalFormatSymbols.getInstance(locale);
+        df.setCurrency(currency);
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+        numberFormat.setCurrency(currency);
+        String sum=numberFormat.format(number);
+        return sum;
+    }
 
     @GetMapping("/delete")
     public String deleteBooking(@RequestParam int id){
@@ -193,8 +221,8 @@ public class BookingController {
         return "redirect:/booking/list";
     }
     @GetMapping("/findCustomer")
-    public ModelAndView findByCustomer(@RequestParam("phone") String phone, Model model, @PageableDefault(value = 5, sort = "date", direction = Sort.Direction.DESC) Pageable pageable){
-        return new ModelAndView("/booking/bookingManager","list",bookingService.findByPhone(phone, pageable));
+    public ModelAndView findByCustomer(@RequestParam("phone") String phone, Model model, @PageableDefault(value = 4, sort = "date", direction = Sort.Direction.DESC) Pageable pageable){
+        return new ModelAndView("/booking/booking-manager","list",bookingService.findByPhone(phone, pageable));
     }
     public String payment(long price){
         PaymentController paymentController=new PaymentController();

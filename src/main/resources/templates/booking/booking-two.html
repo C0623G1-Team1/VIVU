@@ -172,7 +172,7 @@
                                         <div class="infor-2">Họ và tên</div>
                                     </label>
                                     <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{name}"
-                                           placeholder="Nhập họ và tên" required>
+                                           placeholder="Nhập họ và tên" >
                                 </div>
                                 <span style="color: red" th:if="${#fields.hasErrors('name')}"
                                       th:errors="*{name}"></span>
@@ -182,7 +182,9 @@
                                     </label>
                                     <input type="email" class="form-control" id="exampleInputPassword1"
                                            th:field="*{email}"
-                                           placeholder="Nhập email" required>
+                                           placeholder="Nhập email" >
+                                    <span style="color: red" th:if="${#fields.hasErrors('email')}"
+                                          th:errors="*{email}"></span>
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPassword2" class="form-label">
@@ -190,7 +192,7 @@
                                     </label>
                                     <input type="number" class="form-control" id="exampleInputPassword2"
                                            th:field="*{phone}"
-                                           placeholder="Nhập số điện thoại" required>
+                                           placeholder="Nhập số điện thoại" >
                                     <span style="color: red" th:if="${#fields.hasErrors('phone')}"
                                           th:errors="*{phone}"></span>
                                 </div>
@@ -200,7 +202,7 @@
                                     </label>
                                     <input type="number" class="form-control" id="idCard"
                                            th:field="*{customerIdCard}"
-                                           placeholder="Nhập số căn cước công dân" required>
+                                           placeholder="Nhập số căn cước công dân" >
                                     <span style="color: red" th:if="${#fields.hasErrors('customerIdCard')}"
                                           th:errors="*{customerIdCard}"></span>
                                 </div>

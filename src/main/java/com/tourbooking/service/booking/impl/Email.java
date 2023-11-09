@@ -2,9 +2,13 @@ package com.tourbooking.service.booking.impl;
 
 import com.tourbooking.model.booking.Booking;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 public class Email {
-    public static String sendContentEmail(Booking booking, String sumMoney){
-        String content= "<!DOCTYPE html>\n" +
+    public static String sendContentEmail(Booking booking, String sumMoney) {
+        String content = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
                 "    <meta charset=\"UTF-8\">\n" +
@@ -63,7 +67,7 @@ public class Email {
                 "            </tr>\n" +
                 "            <tr style=\"text-align:center\">\n" +
                 "                <td style=\"padding-left:24px;padding-right:24px\">\n" +
-                "                    <p style=\"margin:0;padding:0\">Thân gửi "+booking.getName()+",</p>\n" +
+                "                    <p style=\"margin:0;padding:0\">Thân gửi " + booking.getName() + ",</p>\n" +
                 "                </td>\n" +
                 "            </tr>\n" +
                 "            <tr>\n" +
@@ -142,7 +146,7 @@ public class Email {
                 "                                    </tr>\n" +
                 "                                    <tr>\n" +
                 "                                        <td align=\"left\" style=\"padding:0;Margin:0;text-align:left;padding-top:8px\" id=\"m_5737924533930551651m_-5597251490349479428checkin-date\">\n" +
-                "                                            <p style=\"margin:0;padding:0\">\n" +booking.getTour().getStartDate()+
+                "                                            <p style=\"margin:0;padding:0\">\n" + booking.getTour().getStartDate() +
                 "                                            </p>\n" +
                 "                                        </td>\n" +
                 "                                    </tr>\n" +
@@ -161,7 +165,7 @@ public class Email {
                 "                                    </tr>\n" +
                 "                                    <tr>\n" +
                 "                                        <td align=\"right\" style=\"padding:0;Margin:0;padding-top:8px;text-align:right\" id=\"m_5737924533930551651m_-5597251490349479428checkout-date\">\n" +
-                "                                            <p style=\"margin:0;padding:0\">\n" +booking.getTour().getEndDate() +
+                "                                            <p style=\"margin:0;padding:0\">\n" + booking.getTour().getEndDate() +
                 "                                            </p>\n" +
                 "                                        </td>\n" +
                 "                                    </tr>\n" +
@@ -251,14 +255,14 @@ public class Email {
                 "                <td colspan=\"1\" style=\"width:160px;padding:10px 18px 10px 24px;color:#737373;line-height:25px;vertical-align:top\">\n" +
                 "                    Tên tour\n" +
                 "                </td>\n" +
-                "                <td colspan=\"2\" style=\"padding:10px 18px 10px 0;line-height:25px;color:#2a2a2e;vertical-align:top\" id=\"m_5737924533930551651m_-5597251490349479428booking-roomtype\">\n" +booking.getTour().getTourName()+
+                "                <td colspan=\"2\" style=\"padding:10px 18px 10px 0;line-height:25px;color:#2a2a2e;vertical-align:top\" id=\"m_5737924533930551651m_-5597251490349479428booking-roomtype\">\n" + booking.getTour().getTourName() +
                 "                </td>\n" +
                 "            </tr>\n" +
                 "            <tr>\n" +
                 "                <td colspan=\"1\" style=\"width:160px;padding:10px 18px 10px 24px;color:#737373;line-height:25px;vertical-align:top\">\n" +
                 "                    Số người ở\n" +
                 "                </td>\n" +
-                "                <td colspan=\"2\" style=\"padding:10px 18px 10px 0;line-height:25px;color:#2a2a2e;vertical-align:top\" id=\"m_5737924533930551651m_-5597251490349479428booking-occupancy\">\n" + booking.getAdultQuantity() + "người lớn\n" + + booking.getChildrenQuantity() + "trẻ em\n"+
+                "                <td colspan=\"2\" style=\"padding:10px 18px 10px 0;line-height:25px;color:#2a2a2e;vertical-align:top\" id=\"m_5737924533930551651m_-5597251490349479428booking-occupancy\">\n" + booking.getAdultQuantity() + " người lớn\n " + booking.getChildrenQuantity() + " trẻ em\n " +
                 "                </td>\n" +
                 "            </tr>\n" +
                 "            <tr style=\"border-collapse:collapse\">\n" +
@@ -390,12 +394,11 @@ public class Email {
                 "                    Tổng Tiền\n" +
                 "                </td>\n" +
                 "                <td style=\"padding:0 24px 0 0;line-height:25px;color:#2a2a2e;vertical-align:top;font-weight:bold;text-align:right\" id=\"m_5737924533930551651m_-5597251490349479428payment-totalcharge-amount\">\n" +
-                "                   "+sumMoney+"\n" +
+                "                   " + sumMoney + "\n" +
                 "                </td>\n" +
                 "            </tr>\n" +
                 "            <tr>\n" +
                 "                <td colspan=\"2\" style=\"margin:0;padding:0;padding-top:6px;padding-left:24px;padding-right:24px;color:#737373;font-size:12px\" id=\"\">\n" +
-                "                    Bao gồm : Thuế và phí"+sumMoney+
                 "                </td>\n" +
                 "            </tr>\n" +
                 "            <tr>\n" +
@@ -553,4 +556,5 @@ public class Email {
                 "</html>";
         return content;
     }
+
 }
