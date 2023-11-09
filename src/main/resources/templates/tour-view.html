@@ -5,26 +5,31 @@
     <title>Title</title>
 </head>
 <body>
+<style>
+    img:hover{
+        cursor: pointer;
+    }
+</style>
 <div th:include="/header-footer::nav"></div>
 <div style=" position: relative; left:30%">
-    <h1 style="color: #00c61c!important; font-size: 50px; font-weight: bold" th:if="${result!=null}" th:text="${result}">Thanh toán thành công</h1>
+    <h1 style="color: #00c61c!important; font-size: 50px; font-weight: bold" th:if="${result!=null}"
+        th:text="${result}">Thanh toán thành công</h1>
 </div>
 <div id="tour_detail" class="container">
     <h1 id="tour-name" th:text="${tour.tourName}"></h1>
-    <p><i class='bx bxs-star' style='color:#f8b300'  ></i><i class='bx bxs-star' style='color:#f8b300'  ></i><i class='bx bxs-star' style='color:#f8b300'  ></i><i class='bx bxs-star' style='color:#f8b300'  ></i> 4.9/5 trong 295 Đánh Giá</p>
-    <div class="tour_img" style="text-align: center">
-<!--        <div id="first-col-img" class="col-lg-6">-->
-<!--            <img th:src="@{${tour.imageUrls.get(0).getUrl}}" alt="explore image">-->
-<!--        </div>-->
-<!--        <div id="second-col-img" class="col-lg-3">-->
+    <p><i class='bx bxs-star' style='color:#f8b300'></i><i class='bx bxs-star' style='color:#f8b300'></i><i
+            class='bx bxs-star' style='color:#f8b300'></i><i class='bx bxs-star' style='color:#f8b300'></i> 4.9/5 trong
+        295 Đánh Giá</p>
+    <th:block th:if="${!tour.getImageUrls().isEmpty()}">
+        <div class="tour_img" style="text-align: center" data-toggle="modal"
+             data-target="#myModal">
+            <img th:src="@{${tour.imageUrls.get(0).getUrl}}" alt="explore image">
+        </div>
+    </th:block>
 
-<!--        </div>-->
-<!--        <div id="third-col-img" class="col-lg-3">-->
+    <!--Show Image-->
 
-<!--        </div>-->
 
-        <img th:src="@{${tour.imageUrls.get(0).getUrl}}" alt="explore image">
-    </div>
     <div class="row tour_description d-flex">
         <div id="overview" class=" col-lg-7">
             <p id="hight-light">Điểm nhấn hành trình</p>
@@ -39,15 +44,16 @@
                 <hr>
                 <p>Ngày kết thúc: <span th:text="${#dates.format(tour.endDate, 'dd-MM-yyyy')}"></span></p>
                 <hr>
-                <p>Hướng dẫn viên: <span th:text="${tour.tourAvailableSeat}"></span></p>
-                <hr>
                 <p>Số lượng còn trống: <span th:text="${tour.tourAvailableSeat}"></span> chỗ</p>
                 <hr>
                 <p>Giá người lớn: <span th:text="${#numbers.formatInteger(tour.adultPrice, 3,'COMMA')}"></span> VNĐ</p>
                 <hr>
                 <p>Giá trẻ em: <span th:text="${#numbers.formatInteger(tour.childPrice, 3, 'COMMA')}"></span> VNĐ</p>
                 <hr>
-<!--                <h2>Giá từ <span th:text="${#numbers.formatInteger(tour.adultPrice, 3, 'COMMA')}"></span></h2>-->
+                <p>Hướng dẫn viên: <span th:text="${tour.account.employeeName}"></span></p>
+                <hr>
+                <p>SĐT liên hệ: <span th:text="${tour.account.employeePhone}"></span></p>
+                <hr>
                 <div id="book">
                     <a th:href="@{/booking/{id}(id=${tour.id})}">ĐẶT VÉ</a>
                 </div>
@@ -55,6 +61,24 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" style="width: 70%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <th:block th:each="img : ${tour.getImageUrls()}">
+                    <img th:src="@{${img.getUrl()}}" style="margin: 10px" alt="explore image">
+                </th:block>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <div th:replace="/header-footer::footer"></div>
 <footer th:replace="/header-footer::footer-libs"></footer>
 </body>

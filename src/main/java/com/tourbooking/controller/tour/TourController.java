@@ -123,13 +123,14 @@ public class TourController {
         }
     }
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id) {
-        int count = tourService.showBookedTour(id);
+    @GetMapping("/delete")
+    public String delete(@RequestParam Integer idDel,RedirectAttributes redirectAttributes) {
+        int count = tourService.showBookedTour(idDel);
         if (count>0) {
-
+            redirectAttributes.addFlashAttribute("error", "Tour đang được đặt không thể xóa");
         } else {
-            tourService.delete(id);
+            tourService.delete(idDel);
+            redirectAttributes.addFlashAttribute("mess", "Xóa thành công");
         }
         return "redirect:/";
     }

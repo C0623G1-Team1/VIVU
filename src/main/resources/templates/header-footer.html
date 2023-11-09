@@ -91,45 +91,63 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
                         <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                            <li class=" scroll active"><a href="#home">Trang Chủ</a></li>
-                            <li class="scroll"><a href="#explore">Chuyến Đi</a></li>
+                            <li class=" scroll active"><a th:href="@{/}">Trang Chủ</a></li>
+                            <li class="scroll"><a href="#tour-page" >Chuyến Đi</a></li>
                             <li class="scroll"><a href="#contact">Về Chúng Tôi</a></li>
                             <li class="scroll"><a href="#contact">Liên Hệ</a></li>
-<!--                            <li><a id="login" th:href="@{/login}"><span>Đăng nhập</span></a></li>-->
+                            <!--                            <li><a id="login" th:href="@{/login}"><span>Đăng nhập</span></a></li>-->
                             <li>
                                 <button id="infor" onclick="toggleMenu()">
                                     <i class='bx bx-menu'></i>
-                                    <img th:src="@{https://i.pinimg.com/564x/a2/66/ec/a266ec4ddcfa4457156a1711d9519920.jpg}" alt="ava"/>
+                                    <img th:src="@{https://i.pinimg.com/564x/a2/66/ec/a266ec4ddcfa4457156a1711d9519920.jpg}"
+                                         alt="ava"/>
                                 </button>
                                 <div class="member-func" id="member-func">
-                                <div class="sub-menu">
-                                    <a th:href="@{/}">
-                                        <i class='bx bxl-trip-advisor'></i>
-                                        <p> Xem chuyến đi</p>
-                                    </a>
-                                    <a th:href="@{/tour/create}">
-                                        <i class='bx bxs-add-to-queue'></i>
-                                        <p> Thêm mới chuyến đi</p>
-                                    </a>
-                                    <a th:href="@{/booking/list}">
-                                        <i class='bx bxs-cart-alt'></i>
-                                        <p> Xem đơn đặt chỗ</p>
-                                    </a>
-                                    <a th:href="@{/}">
-                                        <i class='bx bxs-user-detail'></i>
-                                        <p> Xem thành viên</p>
-                                    </a>
-                                    <a th:href="@{/}">
-                                        <i class='bx bxs-user'></i>
-                                        <p> Thêm mới tài khoản</p>
-                                    </a>
-                                    <hr>
-                                    <a th:href="@{/}">
-                                        <i class='bx bx-log-out' ></i>
-                                        <p> Đăng xuất</p>
-                                    </a>
+<!--                                    Admin-->
+                                    <div class="sub-menu">
+                                        <a th:href="@{/}">
+                                            <i class='bx bxl-trip-advisor'></i>
+                                            <p> Xem chuyến đi</p>
+                                        </a>
+                                        <a th:href="@{/tour/create}">
+                                            <i class='bx bxs-add-to-queue'></i>
+                                            <p> Thêm mới chuyến đi</p>
+                                        </a>
+                                        <a th:href="@{/booking/list}">
+                                            <i class='bx bxs-cart-alt'></i>
+                                            <p> Xem đơn đặt chỗ</p>
+                                        </a>
+                                        <a th:href="@{/}">
+                                            <i class='bx bxs-user-detail'></i>
+                                            <p> Xem thành viên</p>
+                                        </a>
+                                        <a th:href="@{/}">
+                                            <i class='bx bxs-user'></i>
+                                            <p> Thêm mới tài khoản</p>
+                                        </a>
+                                        <hr>
+                                        <a th:href="@{/}">
+                                            <i class='bx bx-log-out'></i>
+                                            <p> Đăng xuất</p>
+                                        </a>
+                                    </div>
+                                    <!--                                    Tour Guide-->
+<!--                                    <div class="sub-menu">-->
+<!--                                        <a th:href="@{/}">-->
+<!--                                            <i class='bx bxl-trip-advisor'></i>-->
+<!--                                            <p> Xem chuyến đi của bạn</p>-->
+<!--                                        </a>-->
+<!--                                        <a th:href="@{/}">-->
+<!--                                            <i class='bx bxs-user-detail'></i>-->
+<!--                                            <p> Chỉnh sửa thông tin cá nhân</p>-->
+<!--                                        </a>-->
+<!--                                        <hr>-->
+<!--                                        <a th:href="@{/}">-->
+<!--                                            <i class='bx bx-log-out'></i>-->
+<!--                                            <p> Đăng xuất</p>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
                                 </div>
-                            </div>
                             </li>
                         </ul><!--/.nav -->
                     </div><!-- /.navbar-collapse -->
@@ -145,24 +163,22 @@
 
 <!--footer start-->
 <div id="footer" class="footer" th:fragment="footer">
-<!--    <div>-->
-<!--        <img th:src="@{https://img-9gag-fun.9cache.com/photo/aKDz4jN_700bwp.webp}" alt="footer-img">-->
-<!--    </div>-->
+    <!--    <div>-->
+    <!--        <img th:src="@{https://img-9gag-fun.9cache.com/photo/aKDz4jN_700bwp.webp}" alt="footer-img">-->
+    <!--    </div>-->
     <div class="container">
         <div class="footer-menu">
             <div class="row">
                 <div class="col-sm-3">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html"><img src="/assets/images/welcome-hero/LogoVivu.png"
-                                                                       alt="LOGO"></a>
-                        <p>Công ty TNHH VIVU Việt Nam.</p>
-                        <p>Địa chỉ 280 Trần Hưng Đạo, An Hải Bắc, Sơn Trà, TP Đà Nẵng.</p>
-                        <div class="footer-social">
+                        <p class="navbar-brand" href="index.html"><img src="/assets/images/welcome-hero/LogoVivu.png"
+                                                                       alt="LOGO"></p>
+                        <p class="footer-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
                             <a href="#"><i class="fa fa-linkedin"></i></a>
                             <a href="#"><i class="fa fa-google-plus"></i></a>
-                        </div>
+                        </p>
                     </div><!--/.navbar-header-->
                 </div>
                 <div class="col-sm-3">
@@ -176,10 +192,10 @@
                     <a href="#works">Liên hệ</a>
                     <p><i class='bx bxs-phone' style='color:#141313'></i> + (84) 777 8888</p>
                     <p><i class='bx bxl-gmail' style='color:#141313'></i> VivuCo@gmail.com</p>
+                    <p>VIVU blog</p>
                 </div>
                 <div class="col-sm-3">
                     <a href="#works">Khác</a>
-                    <p>VIVU blog</p>
                     <p>Chính sách quyền riêng tư</p>
                     <p>Điều khoản & Điều kiện</p>
                     <p>Quy chế hoạt động</p>
@@ -196,6 +212,7 @@
         <div class="hm-footer-copyright">
             <div class="row">
                 <!--                <div class="col-sm-5">-->
+                <p>Công ty TNHH VIVU Việt Nam. Địa chỉ 280 Trần Hưng Đạo, An Hải Bắc, Sơn Trà, TP Đà Nẵng.</p>
                 <p>
                     Copyright © 2023 VIVU
                 </p><!--/p-->

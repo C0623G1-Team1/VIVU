@@ -8,14 +8,14 @@
 #pagination span {
     font-size: 1.7em;
     font-weight: 500;
-    border: 1px solid;
-    border-radius: 100%;
+    /*border: 1px solid;*/
+    /*border-radius: 100%;*/
 }
 
-#pagination span:hover {
-    background-color: #FF3B5F;
-    color: white;
-}
+/*#pagination span:hover {*/
+/*    background-color: #FF3B5F;*/
+/*    color: white;*/
+/*}*/
 
 #tour {
     height: 500px;
@@ -28,9 +28,11 @@
 
 . element.style {
 }
+
 #tour {
     height: 500px;
 }
+
 .single-explore-img {
     border-radius: 20px 20px 0 0;
 }
@@ -39,6 +41,55 @@
     border-radius: 20px;
 }
 
+/*search-box*/
+.search-box {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: black;
+}
+
+.search-form {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 40px;
+    border: 1px solid rgba(221, 221, 221, 0.5);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    background-color: #f8fafb;
+}
+
+.search-form input {
+    border: none;
+    background-color: #f8fafb;
+}
+
+.search-form div {
+    box-sizing: border-box;
+    height: 60px;
+    font-size: 1em;
+    /*border-right: 1px solid rgba(0, 0, 0, 0.15);*/
+}
+
+.search-form div:hover {
+    border-radius: 40px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    background-color: white;
+}
+
+.search-form button {
+    font-size: 1em;
+}
+
+.search-form button:hover {
+    border-radius: 40px;
+    background-color: #FF3B5F;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+
+}
 
 /**/
 #tour-name {
@@ -191,9 +242,11 @@
     border: none;
     outline: none;
 }
+
 .row.tour_description.d-flex {
     display: flex;
 }
+
 #tour-information {
     margin-top: 20px;
     padding: 45px;
@@ -212,6 +265,7 @@
 #board hr {
     margin: 15px 0;
 }
+
 .tour-name {
     color: #FF3B5F;
     font-weight: bold;
@@ -268,6 +322,7 @@
     outline: none;
     color: white;
 }
+
 #create-tour h1 {
     font-size: 1.7em;
     font-weight: bold;
@@ -371,7 +426,7 @@
     right: 0;
     position: absolute;
     /*padding: 10px;*/
-    width: 250px;
+    width: 290px;
     max-height: 0;
     /*border: 1px solid rgb(221, 221, 221);*/
     box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
@@ -415,6 +470,7 @@
     transform: translateX(5px);
     font-weight: 700;
 }
+
 .sub-menu a p {
     color: black;
     font-size: 1em;

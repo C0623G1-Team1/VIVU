@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -43,5 +44,10 @@ public class TourService implements ITourService {
     @Override
     public int showBookedTour(Integer id) {
         return tourRepository.showBookedTour(id);
+    }
+
+    @Override
+    public Page<Tour> search(Pageable pageable, String name, Date startDate, Date endDate) {
+        return tourRepository.search(pageable, name, startDate, endDate);
     }
 }
