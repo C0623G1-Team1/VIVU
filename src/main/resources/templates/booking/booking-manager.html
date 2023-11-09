@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header-footer::header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
+</head>
+<body>
+<style>
+    input[type="file"] {
+        display: none;
+    }
+    /*th{*/
+    /*    color: black;*/
+    /*}*/
+    /*td{*/
+    /*    color: rgba(0, 0, 0, 0.91);*/
+    /*}*/
+</style>
+<div th:include="/header-footer::nav"></div>
+
+<div id="create-tour" class="container mt-3 border border-3 rounded p-2">
+    <h1>Danh sách tour</h1>
+    <div class="header-content mt-2">
+        <div>
+            <form th:action="@{/booking/findCustomer}">
+                <div>
+                    <div class="mb-3" style="width: 300px">
+                        <label for="exampleInputPassword30" class="form-label" style="font-weight: bold">Tìm kiếm khách hàng</label>
+                        <div  style="display: flex">
+                            <div>
+                                <input type="text" class="form-control" id="exampleInputPassword30" name="phone" placeholder="Nhập số điện thoại">
+                            </div>
+                            <div style="margin-left: 10px">
+                                <input class="btn btn-primary" type="submit" value="Tìm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="board" style="margin-top: 20px ">
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th >#</th>
+                    <th >Khách hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Thao tác</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="l, loop:${list}">
+                    <td th:text="${loop.count}">Cell</td>
+                    <td th:text="${l.name}">Cell</td>
+                    <td th:text="${l.phone}" >Cell</td>
+                    <td>
+                        <div class="row" style="display: flex">
+                            <div class="col-6">
+                                <a th:href="@{/booking/{id}/detail(id=${l.id})}" class="btn btn-primary" role="button">XEM</a>
+                            </div>
+                            <div class="col-6" style="margin-left: 20px">
+                                <a th:attr="onclick=|sendInfor('${l.id}')|" data-toggle="modal" data-target="#flipFlop" class="btn btn-warning" role="button">Hủy</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <div style="color: black; margin-left: 380px" >
+                <a role="button" class="btn btn-primary" th:href="@{/booking/list(page=${list.number - 1})}"
+                   th:if="${list.hasPrevious()}">Trước</a>
+
+                <span th:text="${list.number + 1}"></span>
+                <span th:text="${list.totalPages}"></span>
+
+                <a role="button" class="btn btn-primary" th:href="@{/booking/list(page=${list.number+1})}"
+                   th:if="${list.hasNext()}">Sau</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/booking/delete">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><b>HỦY TOUR</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn hủy không
+                        <span style="color: red" id="name"></span></p>
+                    <input type="text" hidden="hidden" name="id" id="id">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" >KHÔNG</button>
+                    <button type="submit" class="btn btn-primary">CÓ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function sendInfor(id){
+        document.getElementById("id").value=id;
+    }
+</script>
+<script>
+    CKEDITOR.replace("description")
+</script>
+<div th:replace="/header-footer::footer"></div>
+<footer th:replace="/header-footer::footer-libs"></footer>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+<script src="../handler/firebase.js"></script>
+<script type="module" src="../handler/upload.js"></script>
+
+</body>
+</html>

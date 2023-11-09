@@ -3,6 +3,9 @@ package com.tourbooking.dto.booking;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -120,13 +123,38 @@ public class BookingDto implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         BookingDto bookingDto=(BookingDto) target;
-        if(!bookingDto.getName().matches("^[aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ ]+$")){
-            errors.rejectValue("name", null,"Tên không có ký tự đặc biệt hoặc số");
+        if((bookingDto.getAdultQuantity()+ bookingDto.getChildrenQuantity())<=0){
+            errors.rejectValue("adultQuantity",null, "Chưa nhập số lượng");
+            errors.rejectValue("childrenQuantity",null, "Chưa nhập số lượng");
         }
-        if(!bookingDto.getPhone().matches("(84|0[3|5|7|8|9])+([0-9]{8})\\b")){
+
+        if(bookingDto.getName()==null||bookingDto.getName().equals("")||bookingDto.getName().matches("^[ ]*$")){
+            errors.rejectValue("name", null,"Không được để trống");
+        } else if(bookingDto.getName().matches("[0-9]*")){
+            errors.rejectValue("name", null,"Tên không chứa số");
+        }else if(!bookingDto.getName().matches("^[aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ ]+$")){
+            errors.rejectValue("name", null,"Tên không chứa ký tự đặc biệt");
+        }
+
+        if(bookingDto.getEmail()==null||bookingDto.getEmail().equals("")||bookingDto.getEmail().matches("^[ ]*$")){
+            errors.rejectValue("email", null,"Không được để trống");
+        } else if(!bookingDto.getEmail().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
+            errors.rejectValue("email",null,"Email không đúng");
+        }
+
+        if(bookingDto.getPhone()==null||bookingDto.getPhone().equals("")||bookingDto.getPhone().matches("^[ ]*$")){
+            errors.rejectValue("phone", null,"Không được để trống");
+        } else if(bookingDto.getPhone().matches("[aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]*")){
+            errors.rejectValue("phone",null,"Số điện thoại không có chữ");
+        } else if(!bookingDto.getPhone().matches("(84|0[3|5|7|8|9])+([0-9]{8})\\b")){
             errors.rejectValue("phone",null,"Số điện thoại không đúng");
         }
-        if(!bookingDto.getCustomerIdCard().matches("^[0-9]{12}$")){
+
+        if(bookingDto.getCustomerIdCard()==null||bookingDto.getCustomerIdCard().equals("")||bookingDto.getCustomerIdCard().matches("^[ ]*$")){
+            errors.rejectValue("customerIdCard", null,"Không được để trống");
+        } else if(bookingDto.getCustomerIdCard().matches("[aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]*")){
+            errors.rejectValue("customerIdCard",null,"Số căn cước công dân không có chữ");
+        } else if(!bookingDto.getCustomerIdCard().matches("^[0-9]{12}$")){
             errors.rejectValue("customerIdCard",null,"Số căn cước công dân không đúng");
         }
     }
