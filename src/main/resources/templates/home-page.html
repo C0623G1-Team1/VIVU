@@ -98,7 +98,7 @@
                     <input type="date" name="startDate" id="startDate"/>
                 </div>
                 <div class="single-welcome-hero-form">
-                   <label for="endDate">Ngày kết thúc:</label>
+                    <label for="endDate">Ngày kết thúc:</label>
                     <input type="date" name="endDate" id="endDate"/>
                 </div>
                 <div class="single-welcome-hero-form">
@@ -112,122 +112,96 @@
                 </div>
             </form>
         </div>
-<!--        <div class="search-box">-->
-<!--            <form class="search-form" th:action="@{/}" method="get" >-->
-<!--                <div class="search-by-des">-->
-<!--                    <label for="destination">-->
-<!--                        <i class='bx bxs-map'></i> Điểm đến:-->
-<!--                        <input type="text" name="name" id="destination"/>-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="search-by-start-date">-->
-<!--                    <label for="startDate"> Ngày khởi hành: <input type="date" name="startDate" id="startDate"/></label>-->
-<!--                </div>-->
-<!--                <div class="search-by-end-date">-->
-<!--                    <label for="endDate"> Ngày kết thúc: <input type="date" name="endDate" id="endDate"/></label>-->
-<!--                </div>-->
-<!--                <button class="search-btn" onclick="window.location.href='#'">-->
-<!--                    Tìm kiếm <i data-feather="search"></i>-->
-<!--                </button>-->
-<!--            </form>-->
-<!--        </div>-->
 
         <div class="section-header" id="tour-page">
             <h2>Danh sách chuyến đi</h2>
         </div><!--/.section-header-->
 
         <div class="explore-content">
-            <th:block th:if="${tourList.isEmpty()}">
-                <h1 style="text-align: center;color: red">Hiện tại không có chuyến đi nào như bạn mong muốn.<br>Hãy thử với các lựa chọn khác hoặc để lại số điện thoại để chúng tôi liên hệ lại sau.</h1>
-            </th:block>
-            <th:block th:unless="${tourList.isEmpty()}">
-                <div class="row">
-                    <th:block th:each="tour : ${tourList}">
-                        <div class=" col-md-4 col-sm-6" th:unless="${tourList.isEmpty()}">
-                            <a th:href="@{/tour/view/{id}(id=${tour.id})}">
-                                <div id="tour" class="single-explore-item">
+            <div class="row">
+                <th:block th:each="tour : ${tourList}">
+                    <div class=" col-md-4 col-sm-6" th:unless="${tourList.isEmpty()}">
+                        <a th:href="@{/tour/view/{id}(id=${tour.id})}">
 
-                                    <!--                                image-->
-                                    <div class="single-explore-img">
-                                        <th:block th:unless="${tour.imageUrls.isEmpty()}">
-                                            <img th:src="@{${tour.imageUrls.get(0).getUrl()}}" alt="explore image">
-                                        </th:block>
+                            <div id="tour" class="single-explore-item">
 
-                                        <div class="single-explore-img-info">
-                                            <button onclick="window.location.href='#'">đánh giá cao</button>
-                                            <div class="single-explore-image-icon-box">
-                                                <ul>
-                                                    <li>
-                                                        <div class="single-explore-image-icon">
-                                                            <i class="fa fa-arrows-alt"></i>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="single-explore-image-icon">
-                                                            <i class="fa fa-bookmark-o"></i>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                <!--                                image-->
+                                <div class="single-explore-img">
+                                    <th:block th:unless="${tour.imageUrls.isEmpty()}">
+                                        <img th:src="@{${tour.imageUrls.get(0).getUrl()}}" alt="explore image">
+                                    </th:block>
+
+                                    <div class="single-explore-img-info">
+                                        <button onclick="window.location.href='#'">đánh giá cao</button>
+                                        <div class="single-explore-image-icon-box">
+                                            <ul>
+                                                <li>
+                                                    <div class="single-explore-image-icon">
+                                                        <i class="fa fa-arrows-alt"></i>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="single-explore-image-icon">
+                                                        <i class="fa fa-bookmark-o"></i>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <!-- Tour name -->
-                                    <div class="single-explore-txt bg-theme-1">
-                                        <h2 style="height: 8rem" th:text="${tour.tourName}"></h2>
+                                <!--                                Tour name -->
+                                <div class="single-explore-txt bg-theme-1">
+                                    <h2 style="height: 8rem" th:text="${tour.tourName}"></h2>
 
-                                        <!--seats + price-->
-                                        <p class="explore-rating-price">
-                                            <th:block th:if="${tour.tourAvailableSeat} <= 10">
-                                                <a>Số lượng còn trống: </a>
-                                                <a style="color: red" th:text="${tour.tourAvailableSeat} + ' chỗ'"></a>
-                                            </th:block>
-                                            <th:block th:if="${tour.tourAvailableSeat} > 10">
-                                                <a>Số lượng còn trống: </a>
-                                                <a th:text="${tour.tourAvailableSeat} + ' chỗ'"></a>
-                                            </th:block>
-                                            <span class="explore-price-box">
-											Giá từ
-											<span class="explore-price"
-                                                  th:text="${#numbers.formatInteger(tour.childPrice, 3, 'COMMA')} + ' VNĐ - ' + ${#numbers.formatInteger(tour.adultPrice, 3,'COMMA')} + ' VNĐ'"></span>
-                                    </span>
-                                        </p>
-                                        <div class="explore-open-close-part">
-                                            <div class="row">
-                                                <div class="col-sm-5">
-                                                    <button class="close-btn open-btn" onclick="window.location.href='#'">
-                                                        Đặt vé ngay
-                                                    </button>
+
+                                    <!--                                    seats + price-->
+                                    <p class="explore-rating-price">
+                                        <th:block th:if="${tour.tourAvailableSeat} <= 10">
+                                            <a>Số lượng còn trống: </a>
+                                            <a style="color: red" th:text="${tour.tourAvailableSeat} + ' chỗ'"></a>
+                                        </th:block>
+                                        <th:block th:if="${tour.tourAvailableSeat} > 10">
+                                            <a>Số lượng còn trống: </a>
+                                            <a th:text="${tour.tourAvailableSeat} + ' chỗ'"></a>
+                                        </th:block>
+                                        <span class="explore-price-box">
+         Giá từ
+         <span class="explore-price"
+               th:text="${#numbers.formatInteger(tour.childPrice, 3, 'COMMA')} + ' VNĐ - ' + ${#numbers.formatInteger(tour.adultPrice, 3,'COMMA')} + ' VNĐ'"></span>
+                            </span>
+                                    </p>
+                                    <div class="explore-open-close-part">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <button class="close-btn open-btn" onclick="window.location.href='#'">
+                                                    Đặt vé ngay
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <!--                                                Chua dang nhap-->
+                                                <div class="explore-map-icon" sec:authorize="!isAuthenticated()">
+                                                    <a href="#"><i data-feather="map-pin"></i></a>
+                                                    <a href="#"><i data-feather="upload"></i></a>
+                                                    <a href="#"><i data-feather="heart"></i></a>
                                                 </div>
-                                                <div class="col-sm-7">
-                                                    <!--                                                <div class="explore-map-icon">-->
-                                                    <!--                                                    <a href="#"><i data-feather="map-pin"></i></a>-->
-                                                    <!--                                                    <a href="#"><i data-feather="upload"></i></a>-->
-                                                    <!--                                                    <a href="#"><i data-feather="heart"></i></a>-->
-                                                    <!--                                                </div>-->
-                                                    <div class="explore-map-admin-icon">
-                                                        <a th:href="@{/tour/update/{id}(id=${tour.id})}">
-                                                            <i class='bx bxs-edit'></i>
-                                                        </a>
-                                                        <div id="modal-btn"
-                                                             class="btn" data-toggle="modal"
-                                                             data-target="#myModal"
-                                                             th:attr="onclick=|sendInf('${tour.id}','${tour.tourName}')|">
-                                                            <i class='bx bx-message-square-x'></i>
-                                                        </div>
-                                                        <!--                                                    <a th:href="@{/tour/delete/{id}(id=${tour.id})}"><i class='bx bx-message-square-x'></i></a>-->
-                                                    </div>
+                                                <!--
+                                                                                             sua, xoa cua admin-->
+                                                <th:block sec:authorize="isAuthenticated()"></th:block>
+                                                <div class="explore-map-admin-icon" sec:authorize="hasRole('ADMIN')">
+                                                    <a th:href="@{/tour/update/{id}(id=${tour.id})}">
+                                                        <i class='bx bxs-edit'></i></a>
+                                                    <a th:href="@{/}"><i class='bx bx-message-square-x'></i></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                    </th:block>
-
-                </div>
-            </th:block>
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
         </div>
     </div>
 
@@ -240,7 +214,6 @@
     </div>
 </section><!--/.explore-->
 <!--explore end -->
-
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

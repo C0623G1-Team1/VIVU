@@ -6,14 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -45,10 +46,12 @@ public class Tour {
     private Long adultPrice;
     private Long childPrice;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
 
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     private Set<Booking> booking;
+    @Column(columnDefinition = "LONGTEXT")
+    private String tourImage;
 }

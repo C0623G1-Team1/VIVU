@@ -50,4 +50,11 @@ public class TourService implements ITourService {
     public Page<Tour> search(Pageable pageable, String name, Date startDate, Date endDate) {
         return tourRepository.search(pageable, name, startDate, endDate);
     }
+
+    @Override
+    public List<Tour> searchTourByEmployee(int id) {
+        return tourRepository.searchTourByEmployee(id);
+    }
+
+
 }

@@ -22,6 +22,8 @@ public interface ITourService {
 
     int showBookedTour(Integer id);
 
-    Page<Tour> search(Pageable pageable,String name, Date startDate, Date endDate);
+    Page<Tour> search(Pageable pageable, String name, Date startDate, Date endDate);
+
+    List<Tour> searchTourByEmployee(int id);
 
 }
