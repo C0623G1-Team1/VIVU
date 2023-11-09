@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:replace="header-footer::header">
     <!-- meta data -->
     <meta charset="utf-8">
@@ -8,12 +10,15 @@
     <title></title>
 
 </head>
+
 <body>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
 <div th:include="/header-footer::nav"></div>
 <div class="container">
-    <button type="button" class="btn btn-primary">
-        <a th:href="@{/account/navigation}" style="color: white">Quay lại</a>
-    </button>
+<!--    <button type="button" class="btn btn-primary">-->
+<!--        <a th:href="@{/account/navigation}" style="color: white">Quay lại</a>-->
+<!--    </button>-->
     <div style="margin-top: 10px; margin-bottom: 10px">
         <form th:action="@{/account/search}" method="get">
             <input type="text" name="name" placeholder="Nhập tên để tìm kiếm"/>

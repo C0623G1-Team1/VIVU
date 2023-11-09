@@ -112,19 +112,6 @@
                     <div class=" col-md-4 col-sm-6" th:unless="${tourList.isEmpty()}">
                         <a th:href="@{/tour/view/{id}(id=${tour.id})}">
 
-<!--                                    đăng nhập-->
-                                    <div class="row">
-                                        <div sec:authorize="isAuthenticated()">
-                                            <div sec:authorize="hasRole('ADMIN')" style="color: black">
-                                                <a th:href="@{/tour/update/{id}(id=${tour.id})}">Chỉnh sửa</a>
-                                                <a th:href="@{/tour/delete/{id}(id=${tour.id})}">Xoá</a>
-                                            </div>
-                                            <div sec:authorize="hasRole('EMPLOYEE')" style="color: black">
-                                                <a th:href="@{/tour/view/{id}(id=${tour.id})}">Chi tiết</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
                             <div id="tour" class="single-explore-item">
 
                                 <!--                                image-->
@@ -181,14 +168,16 @@
                                                 </button>
                                             </div>
                                             <div class="col-sm-7">
-<!--                                                Chua dang nhap-->
-                                                <!--                                                <div class="explore-map-icon">-->
-                                                <!--                                                    <a href="#"><i data-feather="map-pin"></i></a>-->
-                                                <!--                                                    <a href="#"><i data-feather="upload"></i></a>-->
-                                                <!--                                                    <a href="#"><i data-feather="heart"></i></a>-->
-                                                <!--                                                </div>-->
-<!--                                                sua, xoa cua admin-->
-                                                <div class="explore-map-admin-icon">
+                                                <!--                                                Chua dang nhap-->
+                                                <div class="explore-map-icon" sec:authorize="!isAuthenticated()">
+                                                    <a href="#"><i data-feather="map-pin"></i></a>
+                                                    <a href="#"><i data-feather="upload"></i></a>
+                                                    <a href="#"><i data-feather="heart"></i></a>
+                                                </div>
+                                                <!--
+                                                                                             sua, xoa cua admin-->
+                                                <th:block sec:authorize="isAuthenticated()"></th:block>
+                                                <div class="explore-map-admin-icon" sec:authorize="hasRole('ADMIN')">
                                                     <a th:href="@{/tour/update/{id}(id=${tour.id})}">
                                                         <i class='bx bxs-edit'></i></a>
                                                     <a th:href="@{/}"><i class='bx bx-message-square-x'></i></a>
@@ -209,12 +198,10 @@
            th:href="@{/(page=${tourList.number - 1})}"><i class='bx bx-left-arrow-alt'></i></a>
         <span th:text="${tourList.number + 1}"></span>
         <a class="text-decoration-none text-dark" th:if="${tourList.hasNext()}"
-           th:href="@{/(page=${tourList.number + 1})}"><i class='bx bx-right-arrow-alt' ></i></a>
+           th:href="@{/(page=${tourList.number + 1})}"><i class='bx bx-right-arrow-alt'></i></a>
     </div>
 </section><!--/.explore-->
 <!--explore end -->
-
-
 
 
 <!--subscription strat -->

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="header-footer::header">
+    <!-- meta data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+</head>
+
+<body>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
+<div th:include="/header-footer::nav"></div>
+<div class="container row">
+    <div class="col col-lg-3 container">
+        <div class="container">
+            <button type="button" class="btn btn-primary" style="margin: 10px">
+                <a th:href="@{/account/navigation}" style="color: white">Quay lại</a>
+            </button>
+        </div>
+
+        <div class="container">
+            <button type="button" class="btn btn-primary" style="margin: 10px">
+                <a th:href="@{/account/{id}/password(id=${account.accountId})}" style="color: white">Cập nhật mật
+                    khẩu</a>
+            </button>
+        </div>
+
+        <div class="container">
+            <button type="button" class="btn btn-primary" style="margin: 10px">
+                <a  th:href="@{/account/{id}/update(id=${account.accountId})}" style="color: white">Cập nhật thông tin cá nhân</a>
+            </button>
+        </div>
+
+    </div>
+
+    <div class="col col-lg-3 image-holder mt-10px mb-10px">
+        <img src="/images/hlb.jpg" alt="">
+    </div>
+    <div class="col col-lg-4">
+        <div>
+            <h3 style="margin-top: 20px; margin-bottom: 20px; text-align: center">Thông tin cá nhân</h3>
+        </div>
+        <fieldset>
+            <div>
+                <label>Họ và tên:</label>
+                <label th:text="${account.employeeName}"></label>
+            </div>
+            <div>
+                <label>Email:</label>
+                <label th:text="${account.accountEmail}"></label>
+            </div>
+            <div>
+                <label>Giới tính:</label>
+                <label th:if="${account.employeeGender == 0}">Nữ</label>
+                <label th:if="${account.employeeGender == 1}">Nam</label>
+                <label th:if="${account.employeeGender == 2}">LGBT</label>
+            </div>
+            <div>
+                <label>Căn cước công dân:</label>
+                <label th:text="${account.employeeIdCard}"></label>
+            </div>
+            <div>
+                <label>Số điện thoại:</label>
+                <label th:text="${account.employeePhone}"></label>
+            </div>
+
+            <div class="container">
+                <p th:text="${message}" style="color: #286090"></p>
+            </div>
+        </fieldset>
+    </div>
+    <div class="col col-lg-2 image-holder">
+        <img th:src="${account.employeeImg}" class="img-fluid" th:alt="${account.employeeName}">
+    </div>
+
+</div>
+<div th:replace="/header-footer::footer"></div>
+<footer th:replace="/header-footer::footer-libs"></footer>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:replace="header-footer::header">
     <!-- meta data -->
     <meta charset="utf-8">
@@ -9,54 +10,11 @@
     <title></title>
 
 </head>
+
 <body>
-<div class="header">
-    <!--[if lte IE 9]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a
-            href="https://browsehappy.com/">upgrade
-        your browser</a> to improve your experience and security.</p>
-    <![endif]-->
-    <!-- top-area Start -->
-    <section class="top-area">
-        <div class="header-area">
-            <!-- Start Navigation -->
-            <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy" data-minus-value-desktop="70"
-                 data-minus-value-mobile="55" data-speed="1000">
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
-                <div class="container">
-
-                    <!-- Start Header Navigation -->
-                    <div class="navbar-header">
-                        <a href="index.html"><img style="margin-top: 16px" src="assets/images/welcome-hero/LogoVivu.png"
-                                                  width="200px" height="200px" alt="LOGO"></a>
-
-
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                            <i class="fa fa-bars"></i>
-                        </button>
-
-                    </div><!--/.navbar-header-->
-                    <!-- End Header Navigation -->
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-                        <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                            <li class=" scroll active"><a href="#home">Trang Chủ</a></li>
-                            <li class="scroll"><a href="#explore">Chuyến Đi</a></li>
-                            <li class="scroll"><a href="#explore">Về Chúng Tôi</a></li>
-                            <li class="scroll"><a href="#contact">Liên Hệ</a></li>
-                            <!--                            <li><a id="login" th:href="@{/logout}"><span>Đăng xuất</span></a></li>-->
-                        </ul><!--/.nav -->
-                    </div><!-- /.navbar-collapse -->
-                </div><!--/.container-->
-            </nav><!--/nav-->
-            <!-- End Navigation -->
-        </div><!--/.header-area-->
-        <div class="clearfix"></div>
-
-    </section><!-- /.top-area-->
-    <!-- top-area End -->
-</div>
+<div th:include="/header-footer::nav"></div>
 <div class="container">
     <!--Chưa xác thực-->
     <div sec:authorize="!isAuthenticated()">
