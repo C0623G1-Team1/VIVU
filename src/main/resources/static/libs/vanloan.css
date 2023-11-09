@@ -241,6 +241,25 @@
     box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 }
 
+
+#book input {
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    background-color: #FF3B5F;
+    letter-spacing: 2px;
+}
+
+#book input:hover {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+}
+
 /*create-tour*/
 .form-text {
     margin-top: 5px;

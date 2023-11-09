@@ -36,7 +36,7 @@ public class BookingService implements IBookingService {
 
     @Override
     public Page<Booking> findByPhone(String phone, Pageable pageable) {
-        return repository.findByPhone(phone, pageable);
+        return repository.findByPhoneContains(phone, pageable);
     }
 
     @Override

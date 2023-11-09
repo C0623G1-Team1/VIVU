@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface IBookingRepository extends JpaRepository<Booking, Integer> {
-    Page<Booking> findByPhone(String phone, Pageable pageable);
+    Page<Booking> findByPhoneContains(String phone, Pageable pageable);
     @Query("select b from Booking b where b.isDeleted= false")
     Page<Booking> showList(Pageable pageable);
     @Transactional
