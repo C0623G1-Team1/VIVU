@@ -1,5 +1,6 @@
 package com.tourbooking.model.tour;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

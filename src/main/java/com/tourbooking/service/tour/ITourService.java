@@ -17,4 +17,5 @@ public interface ITourService {
     Optional<Tour> findById(Integer id);
 
     void delete(Integer id);
+    List<Tour> searchTourByEmployee(int id);
 }

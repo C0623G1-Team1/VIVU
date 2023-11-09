@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +18,20 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
+
 
 @Controller
 @RequestMapping("/tour")
 public class TourController {
     @Autowired
     private ITourService tourService;
+
     @Autowired
     private IImageService iImageService;
+
 
     @GetMapping("/create")
     public ModelAndView showCreateForm() {
@@ -74,11 +77,7 @@ public class TourController {
 
     @GetMapping("/view/{id}")
     public ModelAndView showDetail(@PathVariable Integer id, Model model) {
-        Locale locale = new Locale("vi", "VN");
-        NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
-        model.addAttribute(numberFormat);
-        Tour tour = tourService.findById(id).get();
-        return new ModelAndView("tour-view", "tour", tour);
+        return new ModelAndView("tour-view", "tour", tourService.findById(id).get());
     }
 
     @GetMapping("/update/{id}")

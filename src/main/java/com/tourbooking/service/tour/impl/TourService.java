@@ -39,4 +39,11 @@ public class TourService implements ITourService {
     public void delete(Integer id) {
         tourRepository.deleteById(id);
     }
+
+    @Override
+    public List<Tour> searchTourByEmployee(int id) {
+        return tourRepository.searchTourByEmployee(id);
+    }
+
+
 }

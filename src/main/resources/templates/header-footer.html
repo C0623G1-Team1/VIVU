@@ -57,6 +57,7 @@
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.ckeditor.com/4.17.0/standard/ckeditor.js"></script>
+
     <link rel="stylesheet" href="/libs/vanloan.css">
 
 </head>
@@ -78,7 +79,7 @@
 
                     <!-- Start Header Navigation -->
                     <div class="navbar-header">
-                        <a th:href="@{/}"><img style="margin-top: 16px" src="/assets/images/welcome-hero/LogoVivu.png"
+                        <a th:href="@{/}"><img style="margin-top: 16px" src="assets/images/welcome-hero/LogoVivu.png"
                                                width="200px" height="200px" alt="LOGO"></a>
 
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
@@ -95,41 +96,70 @@
                             <li class="scroll"><a href="#explore">Chuyến Đi</a></li>
                             <li class="scroll"><a href="#contact">Về Chúng Tôi</a></li>
                             <li class="scroll"><a href="#contact">Liên Hệ</a></li>
-<!--                            <li><a id="login" th:href="@{/login}"><span>Đăng nhập</span></a></li>-->
-                            <li>
+<!--                            Chua dang nhap-->
+                            <li sec:authorize="!isAuthenticated()">
+                                <a id="login" th:href="@{/account/login}"><span>Đăng nhập</span></a>
+                            </li>
+                            <!--                            <div sec:authorize="isAuthenticated()">-->
+                            <!--                                -->
+                            <!--                                <div sec:authorize="hasRole('ADMIN')" style="color: black">-->
+                            <!--                                    -->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                            <!--                            <li><a id="login" th:href="@{/login}"><span>Đăng nhập</span></a></li>-->
+<!--                            dang nhap-->
+                            <li sec:authorize="isAuthenticated()">
                                 <button id="infor" onclick="toggleMenu()">
                                     <i class='bx bx-menu'></i>
-                                    <img th:src="@{https://i.pinimg.com/564x/a2/66/ec/a266ec4ddcfa4457156a1711d9519920.jpg}" alt="ava"/>
+<!--                                    <img th:src="@{https://i.pinimg.com/564x/a2/66/ec/a266ec4ddcfa4457156a1711d9519920.jpg}"-->
+<!--                                         alt="ava"/>-->
+                                    <span style="color: #286090" sec:authentication="principal.username"></span>
                                 </button>
-                                <div class="member-func" id="member-func">
-                                <div class="sub-menu">
-                                    <a th:href="@{/}">
-                                        <i class='bx bxl-trip-advisor'></i>
-                                        <p> Xem chuyến đi</p>
-                                    </a>
-                                    <a th:href="@{/tour/create}">
-                                        <i class='bx bxs-add-to-queue'></i>
-                                        <p> Thêm mới chuyến đi</p>
-                                    </a>
-                                    <a th:href="@{/booking/list}">
-                                        <i class='bx bxs-cart-alt'></i>
-                                        <p> Xem đơn đặt chỗ</p>
-                                    </a>
-                                    <a th:href="@{/}">
-                                        <i class='bx bxs-user-detail'></i>
-                                        <p> Xem thành viên</p>
-                                    </a>
-                                    <a th:href="@{/}">
-                                        <i class='bx bxs-user'></i>
-                                        <p> Thêm mới tài khoản</p>
-                                    </a>
-                                    <hr>
-                                    <a th:href="@{/}">
-                                        <i class='bx bx-log-out' ></i>
-                                        <p> Đăng xuất</p>
-                                    </a>
+                                <div class="member-func" id="member-func" >
+                                    <div class="sub-menu" sec:authorize="hasRole('ADMIN')" >
+                                        <a th:href="@{/}">
+                                            <i class='bx bxl-trip-advisor'></i>
+                                            <p> Xem chuyến đi</p>
+                                        </a>
+                                        <a th:href="@{/tour/create}">
+                                            <i class='bx bxs-add-to-queue'></i>
+                                            <p> Thêm mới chuyến đi</p>
+                                        </a>
+                                        <a th:href="@{/booking/list}">
+                                            <i class='bx bxs-cart-alt'></i>
+                                            <p> Xem đơn đặt chỗ</p>
+                                        </a>
+                                        <a th:href="@{/account}">
+                                            <i class='bx bxs-user-detail'></i>
+                                            <p> Xem thành viên</p>
+                                        </a>
+                                        <a th:href="@{/account/create}">
+                                            <i class='bx bxs-user'></i>
+                                            <p> Thêm mới tài khoản</p>
+                                        </a>
+                                        <hr>
+                                        <a th:href="@{/logout}">
+                                            <i class='bx bx-log-out'></i>
+                                            <p> Đăng xuất</p>
+                                        </a>
+                                    </div>
+                                    <!--                                                                        Tour Guide-->
+                                    <div class="sub-menu" sec:authorize="hasRole('EMPLOYEE')">
+                                        <a th:href="@{/account/tour}">
+                                            <i class='bx bxl-trip-advisor'></i>
+                                            <p> Xem chuyến đi của bạn</p>
+                                        </a>
+                                        <a th:href="@{/account/view}">
+                                            <i class='bx bxs-user-detail'></i>
+                                            <p>Thông tin cá nhân</p>
+                                        </a>
+                                        <hr>
+                                        <a th:href="@{/logout}">
+                                            <i class='bx bx-log-out'></i>
+                                            <p> Đăng xuất</p>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
                             </li>
                         </ul><!--/.nav -->
                     </div><!-- /.navbar-collapse -->
@@ -145,9 +175,9 @@
 
 <!--footer start-->
 <div id="footer" class="footer" th:fragment="footer">
-<!--    <div>-->
-<!--        <img th:src="@{https://img-9gag-fun.9cache.com/photo/aKDz4jN_700bwp.webp}" alt="footer-img">-->
-<!--    </div>-->
+    <!--    <div>-->
+    <!--        <img th:src="@{https://img-9gag-fun.9cache.com/photo/aKDz4jN_700bwp.webp}" alt="footer-img">-->
+    <!--    </div>-->
     <div class="container">
         <div class="footer-menu">
             <div class="row">
@@ -182,13 +212,6 @@
                     <p>Điều khoản & Điều kiện</p>
                     <p>Quy chế hoạt động</p>
                 </div>
-                <!--                <div class="col-sm-9">-->
-                <!--                    <ul class="footer-menu-item">-->
-                <!--                        <li class="scroll"><a href="#works">Về chúng tôi</a></li>-->
-                <!--                        <li class="scroll"><a href="#contact">Liên hệ</a></li>-->
-                <!--                        <li class=" scroll"><a href="#contact">Khác</a></li>-->
-                <!--                    </ul>&lt;!&ndash;/.nav &ndash;&gt;-->
-                <!--                </div>-->
             </div>
         </div>
         <div class="hm-footer-copyright">
@@ -197,28 +220,11 @@
                 <p>
                     Copyright © 2023 VIVU
                 </p><!--/p-->
-                <!--                </div>-->
-                <!--                <div class="col-sm-7">-->
-                <!--                    <div class="footer-social">-->
-                <!--                        <span><i class="fa fa-phone"> +1  (222) 777 8888</i></span>-->
-                <!--                        <a href="#"><i class="fa fa-facebook"></i></a>-->
-                <!--                        <a href="#"><i class="fa fa-twitter"></i></a>-->
-                <!--                        <a href="#"><i class="fa fa-linkedin"></i></a>-->
-                <!--                        <a href="#"><i class="fa fa-google-plus"></i></a>-->
-                <!--                    </div>-->
-                <!--                </div>-->
             </div>
 
         </div><!--/.hm-footer-copyright-->
     </div><!--/.container-->
 
-    <!--    <div id="scroll-Top">-->
-    <!--        <div class="return-to-top">-->
-    <!--            <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title=""-->
-    <!--               data-original-title="Back to Top" aria-hidden="true"></i>-->
-    <!--        </div>-->
-
-    <!--    </div>&lt;!&ndash;/.scroll-Top&ndash;&gt;-->
 </div><!--/.footer-->
 <!--footer end-->
 

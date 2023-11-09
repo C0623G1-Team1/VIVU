@@ -21,9 +21,7 @@
     <div class="container">
         <div class="welcome-hero-txt">
             <h2>best place to find and explore <br> that all you need </h2>
-            <!--            <p>-->
-            <!--                Find Best Place, Restaurant, Hotel, Real State and many more think in just One click-->
-            <!--            </p>-->
+
         </div>
         <div class="welcome-hero-serch-box">
             <div class="welcome-hero-form">
@@ -113,6 +111,7 @@
                 <th:block th:each="tour : ${tourList}">
                     <div class=" col-md-4 col-sm-6" th:unless="${tourList.isEmpty()}">
                         <a th:href="@{/tour/view/{id}(id=${tour.id})}">
+
                             <div id="tour" class="single-explore-item">
 
                                 <!--                                image-->
@@ -169,14 +168,18 @@
                                                 </button>
                                             </div>
                                             <div class="col-sm-7">
-                                                <!--                                                <div class="explore-map-icon">-->
-                                                <!--                                                    <a href="#"><i data-feather="map-pin"></i></a>-->
-                                                <!--                                                    <a href="#"><i data-feather="upload"></i></a>-->
-                                                <!--                                                    <a href="#"><i data-feather="heart"></i></a>-->
-                                                <!--                                                </div>-->
-                                                <div class="explore-map-admin-icon">
-                                                    <a th:href="@{/tour/update/{id}(id=${tour.id})}"><i
-                                                            class='bx bxs-edit'></i></a>
+                                                <!--                                                Chua dang nhap-->
+                                                <div class="explore-map-icon" sec:authorize="!isAuthenticated()">
+                                                    <a href="#"><i data-feather="map-pin"></i></a>
+                                                    <a href="#"><i data-feather="upload"></i></a>
+                                                    <a href="#"><i data-feather="heart"></i></a>
+                                                </div>
+                                                <!--
+                                                                                             sua, xoa cua admin-->
+                                                <th:block sec:authorize="isAuthenticated()"></th:block>
+                                                <div class="explore-map-admin-icon" sec:authorize="hasRole('ADMIN')">
+                                                    <a th:href="@{/tour/update/{id}(id=${tour.id})}">
+                                                        <i class='bx bxs-edit'></i></a>
                                                     <a th:href="@{/}"><i class='bx bx-message-square-x'></i></a>
                                                 </div>
                                             </div>
@@ -195,12 +198,10 @@
            th:href="@{/(page=${tourList.number - 1})}"><i class='bx bx-left-arrow-alt'></i></a>
         <span th:text="${tourList.number + 1}"></span>
         <a class="text-decoration-none text-dark" th:if="${tourList.hasNext()}"
-           th:href="@{/(page=${tourList.number + 1})}"><i class='bx bx-right-arrow-alt' ></i></a>
+           th:href="@{/(page=${tourList.number + 1})}"><i class='bx bx-right-arrow-alt'></i></a>
     </div>
 </section><!--/.explore-->
 <!--explore end -->
-
-
 
 
 <!--subscription strat -->

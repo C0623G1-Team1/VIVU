@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header-footer::header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
+</head>
+<body>
+<style>
+    input[type="file"] {
+        display: none;
+    }
+</style>
+<div th:include="/header-footer::nav"></div>
+
+<div id="create-tour" class="container mt-3 border border-3 rounded p-2">
+    <h1>THÔNG TIN CÁ NHÂN</h1>
+    <div id="board">
+        <form class="mx-4" method="get" th:object="${account}" id="submit-form">
+            <div class="mb-3">
+                <!--        <label for="id" class="form-label">Product ID: </label>-->
+                <!--                <input type="hidden" class="form-control" placeholder="Enter ID" id="id" th:field="*{id}">-->
+                <!--            <input type="hidden" class="form-control" placeholder="" id="date" th:field="*{date}" th:text="${localDate}">-->
+            </div>
+
+            <div class="div-element">
+                <label class="form-label">Họ và tên: </label>
+                <input style="font-size: 1.1em" type="text" readonly class="form-control" th:field="*{employeeName}">
+            </div>
+            <div class="div-element">
+                <label class="form-label">Email: </label>
+                <input style="font-size: 1.1em" type="text" readonly class="form-control" th:field="*{accountEmail}">
+            </div>
+            <div class="div-element">
+                <label class="form-label">Giới tính:</label>
+                <label style="font-size: 1.1em; color: black" th:if="${account.employeeGender == 0}">Nữ</label>
+                <label style="font-size: 1.1em; color: black" th:if="${account.employeeGender == 1}">Nam</label>
+                <label style="font-size: 1.1em; color: black" th:if="${account.employeeGender == 2}">LGBT</label>
+            </div>
+            <div class="div-element">
+                <label class="form-label">Số điện thoại: </label>
+                <input style="font-size: 1.1em" type="text" readonly class="form-control" th:field="*{employeeName}">
+            </div>
+            <div class="div-element">
+                <label class="form-label">Căn cước công dân: </label>
+                <input style="font-size: 1.1em" type="text" readonly class="form-control" th:field="*{employeeIdCard}">
+            </div>
+
+
+            <div class="container">
+                <button type="button" class="btn update-account" style="margin-top: 10px; color: black">
+                    <a th:href="@{/account/{id}/password(id=${account.accountId})}">Cập nhật mật
+                        khẩu</a>
+                </button>
+            </div>
+
+            <div class="container">
+                <button   type="button" class="btn update-account" style="margin-top: 10px; color: black">
+                    <a  th:href="@{/account/{id}/update(id=${account.accountId})}">Cập nhật thông tin cá nhân</a>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <table border="1" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Số thứ tự</th>
+                        <th>Tên nhân viên</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Chon</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    CKEDITOR.replace("description")
+</script>
+
+<div th:replace="/header-footer::footer"></div>
+<footer th:replace="/header-footer::footer-libs"></footer>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+<script src="../handler/firebase.js"></script>
+<script type="module" src="../handler/upload.js"></script>
+<script src="../libs/loan.js"></script>
+</body>
+</html>

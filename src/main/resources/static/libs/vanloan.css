@@ -443,4 +443,18 @@
     transition: 0.5s ease;
 }
 
+.update-account {
+    background-color: #eeeeee;
+    margin-left: 0;
+    color: black;
+    /*background-color: transparent;*/
+    border-radius: 40px;
+    cursor: pointer;
+    /*border: 2px solid rgba(161, 161, 161, 0.3);*/
+    transition: 0.5s ease;
+}
 
+.update-account:hover {
+    background-color: #FF3B5F;
+    color: white;
+}
